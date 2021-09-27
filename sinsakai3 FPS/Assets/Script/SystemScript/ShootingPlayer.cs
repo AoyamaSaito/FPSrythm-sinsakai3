@@ -13,6 +13,8 @@ public class ShootingPlayer : MonoBehaviour
     bool isShot1 = false;
     bool isShot2 = false;
 
+    [SerializeField] ScoreManager scoreMn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,23 +42,24 @@ public class ShootingPlayer : MonoBehaviour
     {
         //Debug.Log(count);
         count += Time.deltaTime;
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Fire1"))
         {
             //リズムのインターバルの間だけ射撃できる
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 Debug.Log("shot");
-
+                scoreMn.Score();
                 isShot1 = true;
             }
             else if(count >= rythm - interval / 2 && isShot2 == false)
             {
                 Debug.Log("shot");
-
+                scoreMn.Score();
                 isShot2 = true;
             }
             else
             {
+                scoreMn.Miss();
                 Debug.Log("miss");
             }
         }
