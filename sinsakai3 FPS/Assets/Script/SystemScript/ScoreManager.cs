@@ -8,14 +8,18 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] int magnification = 5;
     [SerializeField] int addScore = 100;
+
     [SerializeField] Text scoreText;
+    [SerializeField] Text magText;
+
     Magnification state = Magnification.actual;
+
     int scoreCount = 0;
     int firstScore = 0;
     int currentScore = 0;
     void Start()
     {
-        firstScore = addScore;
+        firstScore = addScore;　//最初の加点スコアを保存する
     }
 
     // Update is called once per frame
@@ -24,23 +28,27 @@ public class ScoreManager : MonoBehaviour
         //stateごとの処理
         switch(state)
         {
-            case Magnification.actual:
+            case Magnification.actual:　//等倍の時の処理
                 addScore = firstScore;
+                magText.text = "✕" + 1;
                 break;
 
-            case Magnification.twice:
+            case Magnification.twice:   //二倍の時の処理
                 addScore = firstScore;
                 addScore *= 2;
+                magText.text = "✕" + 2;
                 break;
 
-            case Magnification.thrice:
+            case Magnification.thrice:  //三倍の時の処理
                 addScore = firstScore;
                 addScore *= 3;
+                magText.text = "✕" + 3;
                 break;
 
-            case Magnification.fourTimes:
+            case Magnification.fourTimes:   //四倍の時の処理
                 addScore = firstScore;
                 addScore *= 4;
+                magText.text = "✕" + 4;
                 break;
         }
     }

@@ -7,13 +7,12 @@ public class ShootingPlayer : MonoBehaviour
     [SerializeField] float rythm = 0.8f;    //リズム
     [SerializeField] float interval = 0.3f;     //譜面の猶予時間
     [SerializeField] Material cube;
+    [SerializeField] ScoreManager scoreMn;
 
     float count;
 
     bool isShot1 = false;
     bool isShot2 = false;
-
-    [SerializeField] ScoreManager scoreMn;
 
     // Start is called before the first frame update
     void Start()
