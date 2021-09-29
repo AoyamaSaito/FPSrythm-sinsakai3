@@ -25,31 +25,39 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //stateごとの処理
-        switch(state)
+        if (magText)
         {
-            case Magnification.actual:　//等倍の時の処理
-                addScore = firstScore;
-                magText.text = "✕" + 1;
-                break;
 
-            case Magnification.twice:   //二倍の時の処理
-                addScore = firstScore;
-                addScore *= 2;
-                magText.text = "✕" + 2;
-                break;
+            //stateごとの処理
+            switch (state)
+            {
+                case Magnification.actual: //等倍の時の処理
+                    addScore = firstScore;
+                    magText.text = "✕" + 1;
+                    break;
 
-            case Magnification.thrice:  //三倍の時の処理
-                addScore = firstScore;
-                addScore *= 3;
-                magText.text = "✕" + 3;
-                break;
+                case Magnification.twice:   //二倍の時の処理
+                    addScore = firstScore;
+                    addScore *= 2;
+                    magText.text = "✕" + 2;
+                    break;
 
-            case Magnification.fourTimes:   //四倍の時の処理
-                addScore = firstScore;
-                addScore *= 4;
-                magText.text = "✕" + 4;
-                break;
+                case Magnification.thrice:  //三倍の時の処理
+                    addScore = firstScore;
+                    addScore *= 3;
+                    magText.text = "✕" + 3;
+                    break;
+
+                case Magnification.fourTimes:   //四倍の時の処理
+                    addScore = firstScore;
+                    addScore *= 4;
+                    magText.text = "✕" + 4;
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogError("null");
         }
     }
     /// <summary>
@@ -58,30 +66,33 @@ public class ScoreManager : MonoBehaviour
     public void Score()
     {
         scoreCount++;
-        if(scoreCount >= 0)
-        {
-            state = Magnification.actual;
-            Debug.Log("actual");
-        }
-        if (scoreCount >= magnification)
-        {
-            state = Magnification.twice;
-            Debug.Log("twice");
-        }
-        if (scoreCount >= magnification * 2)
-        {
-            state = Magnification.thrice;
-            Debug.Log("thrice");
-        }
+
         if (scoreCount >= magnification * 3)
         {
             state = Magnification.fourTimes;
             Debug.Log("fourTimes");
         }
+        else if (scoreCount >= magnification * 2)
+        {
+            state = Magnification.thrice;
+            Debug.Log("thrice");
+        }
+        else if (scoreCount >= magnification)
+        {
+            state = Magnification.twice;
+            Debug.Log("twice");
+        }
+        else if (scoreCount >= 0)
+        {
+            state = Magnification.actual;
+            Debug.Log("actual");
+        }
 
         currentScore += addScore;
-
-        scoreText.text = $"{currentScore}";
+        if (scoreText)
+        {
+            scoreText.text = $"{currentScore}";
+        }
     }
 
     public void Miss()

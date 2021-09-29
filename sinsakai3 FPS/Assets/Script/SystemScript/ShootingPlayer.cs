@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] float rythm = 0.8f;    //リズム
+    [SerializeField] public float rythm = 0.8f;    //リズム
     [SerializeField] float interval = 0.3f;     //譜面の猶予時間
     [SerializeField] Material cube;
     [SerializeField] ScoreManager scoreMn;
@@ -24,13 +24,20 @@ public class ShootingPlayer : MonoBehaviour
     void Update()
     {
         Fire();
-        if(count <= interval / 2 || count >= rythm - interval / 2)
+        if (cube && scoreMn)
         {
-            cube.color = new Color(1, 0, 0);
+            if (count <= interval / 2 || count >= rythm - interval / 2)
+            {
+                cube.color = new Color(1, 0, 0);
+            }
+            else
+            {
+                cube.color = new Color(0, 0, 0);
+            }
         }
         else
         {
-            cube.color = new Color(0, 0, 0);
+            Debug.LogError("null");
         }
     }
 
