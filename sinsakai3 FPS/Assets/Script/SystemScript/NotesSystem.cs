@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NotesSystem : MonoBehaviour
 {
-    [SerializeField] public float speed = 2;
 
     [SerializeField] public GameObject target1;
 

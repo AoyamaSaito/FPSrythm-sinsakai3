@@ -98,6 +98,7 @@ public class ScoreManager : MonoBehaviour
     public void Miss()
     {
         scoreCount = 0;
+        state = Magnification.actual;
         Debug.Log("Reset");
     }
 
