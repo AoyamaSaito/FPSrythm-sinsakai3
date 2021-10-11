@@ -27,7 +27,6 @@ public class ScoreManager : MonoBehaviour
     {
         if (magText)
         {
-
             //stateごとの処理
             switch (state)
             {

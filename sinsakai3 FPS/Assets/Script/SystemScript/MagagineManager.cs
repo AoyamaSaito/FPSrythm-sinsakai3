@@ -14,36 +14,48 @@ public class MagagineManager : MonoBehaviour
 
     [SerializeField] int reloadCount = 2;
     int currentReloadCount = 0;
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
-        fullMagagineText.text = ""+ firstBulletCount;
+        //if (fullMagagineText)
+        //{
+        fullMagagineText.text = firstBulletCount.ToString(); //マガジンの総数をテキストに表示する
+        //}
+
         currrentBulletCount = firstBulletCount;
+        //if (currentMagagineText)
+        //{
+        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する
+        //}
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Shot()
     {
-        if(currrentBulletCount > 0)
+        if (currrentBulletCount > 0)
         {
             currrentBulletCount--;
+            currentMagagineText.text = currrentBulletCount.ToString();
         }
     }
 
     public void Reload()
     {
-        if (Input.GetKeyDown("Fire2"))
+        if (currrentBulletCount != firstBulletCount)
         {
+            Debug.Log("Reload");
             currentReloadCount++;
-            if(currentReloadCount == reloadCount)
+
+            if (currentReloadCount == reloadCount)
             {
-                currrentBulletCount = firstBulletCount;
+                currrentBulletCount = firstBulletCount; //残弾をMAXにする
+
+                currentReloadCount = 0;
+
+                currentMagagineText.text = currrentBulletCount.ToString();
             }
         }
     }

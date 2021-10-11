@@ -9,6 +9,8 @@ public class ShootingPlayer : MonoBehaviour
     [SerializeField] Material cube;
     [SerializeField] ScoreManager scoreMn;
 
+    MagagineManager mm;
+
     float count;
 
     bool isShot1 = false;
@@ -17,7 +19,7 @@ public class ShootingPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mm = GameObject.Find("MagagineManager").GetComponent<MagagineManager>();
     }
 
     // Update is called once per frame
@@ -54,13 +56,40 @@ public class ShootingPlayer : MonoBehaviour
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 Debug.Log("shot");
+
                 scoreMn.Score();
+                mm.Shot();
+
                 isShot1 = true;
             }
             else if(count >= rythm - interval / 2 && isShot2 == false)
             {
                 Debug.Log("shot");
+
                 scoreMn.Score();
+                mm.Shot();
+                isShot2 = true;
+            }
+            else
+            {
+                scoreMn.Miss();
+                Debug.Log("miss");
+            }
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            //リズムのインターバルの間だけ射撃できる
+            if (count <= interval / 2 && isShot1 == false && isShot2 == false)
+            {
+                mm.Reload();
+
+                isShot1 = true;
+            }
+            else if (count >= rythm - interval / 2 && isShot2 == false)
+            {
+                mm.Reload();
+
                 isShot2 = true;
             }
             else
@@ -71,7 +100,7 @@ public class ShootingPlayer : MonoBehaviour
         }
 
         //リズムごとにカウントをリセットする
-        if(count >= rythm)
+        if (count >= rythm)
         {
             count = 0f;
         }
