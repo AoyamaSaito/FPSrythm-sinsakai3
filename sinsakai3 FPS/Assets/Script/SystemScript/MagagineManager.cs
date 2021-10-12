@@ -10,7 +10,7 @@ public class MagagineManager : MonoBehaviour
     [SerializeField] Text reloadText; //リロードの文字のテキスト
 
     [SerializeField] int firstBulletCount = 6;
-    int currrentBulletCount = 0;
+    [System.NonSerialized]public int currrentBulletCount = 0;
 
     [SerializeField] int reloadCount = 2;
     int currentReloadCount = 0;
@@ -36,6 +36,9 @@ public class MagagineManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// リロードの処理
+    /// </summary>
     public void Reload()
     {
         if (currrentBulletCount != firstBulletCount)
@@ -54,6 +57,9 @@ public class MagagineManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// リロードをミスしたときはカウントをゼロに
+    /// </summary>
     public void ReloadMiss()
     {
         currentReloadCount = 0;

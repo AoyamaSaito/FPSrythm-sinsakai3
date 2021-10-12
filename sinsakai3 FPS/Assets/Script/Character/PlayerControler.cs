@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5;
+    [SerializeField] float jumpPower = 5f;
+    [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
 
     Vector3 dir;
     Rigidbody rb;
@@ -25,6 +27,11 @@ public class PlayerControler : MonoBehaviour
 
     void FixedUpdate()
     {
+        Move();
+    }
+
+    void Move()
+    {
         if (dir == Vector3.zero)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
@@ -41,5 +48,21 @@ public class PlayerControler : MonoBehaviour
             velo.y = rb.velocity.y;
             rb.velocity = velo;
         }
+    }
+    public void Jump()
+    {
+        if (isGround())
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        }
+    }
+    bool isGround()
+    {
+        CapsuleCollider capcol = GetComponent<CapsuleCollider>();
+        Vector3 start = this.transform.position + capcol.center;
+        Vector3 end = start + Vector3.down * isGroundLength;
+        Debug.DrawLine(start, end); 
+        bool isGrounded = Physics.Linecast(start, end);
+        return isGrounded;
     }
 }

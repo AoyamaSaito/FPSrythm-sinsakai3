@@ -9,6 +9,7 @@ public class ShootingPlayer : MonoBehaviour
     [SerializeField] ScoreManager scoreMn;
 
     MagagineManager mm;
+    PlayerControler pc;
 
     float count;
 
@@ -18,7 +19,10 @@ public class ShootingPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false; //マウスカーソルを非表示に
+
         mm = GameObject.Find("MagagineManager").GetComponent<MagagineManager>();
+        pc = GetComponent<PlayerControler>();
     }
 
     // Update is called once per frame
@@ -52,6 +56,7 @@ public class ShootingPlayer : MonoBehaviour
 
                 scoreMn.Score();
                 mm.Shot();
+
                 isShot2 = true;
             }
             else
@@ -81,6 +86,27 @@ public class ShootingPlayer : MonoBehaviour
                 scoreMn.Miss();
                 mm.ReloadMiss();
 
+                Debug.Log("miss");
+            }
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            //リズムのインターバルの間だけジャンプできる
+            if (count <= interval / 2 && isShot1 == false && isShot2 == false)
+            {
+                pc.Jump();
+
+                isShot1 = true;
+            }
+            else if (count >= rythm - interval / 2 && isShot2 == false)
+            {
+                pc.Jump();
+
+                isShot2 = true;
+            }
+            else
+            {
                 Debug.Log("miss");
             }
         }

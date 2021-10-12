@@ -17,9 +17,12 @@ public class ScoreManager : MonoBehaviour
     int scoreCount = 0;
     int firstScore = 0;
     int currentScore = 0;
+
+    MagagineManager mm;
     void Start()
     {
         firstScore = addScore;　//最初の加点スコアを保存する
+        mm = GameObject.Find("MagagineManager").GetComponent<MagagineManager>();
     }
 
     // Update is called once per frame
@@ -64,30 +67,34 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void Score()
     {
-        scoreCount++;
+        if (mm.currrentBulletCount != 0)
+        {
+            scoreCount++;
 
-        if (scoreCount >= magnification * 3)
-        {
-            state = Magnification.fourTimes;
-            Debug.Log("fourTimes");
-        }
-        else if (scoreCount >= magnification * 2)
-        {
-            state = Magnification.thrice;
-            Debug.Log("thrice");
-        }
-        else if (scoreCount >= magnification)
-        {
-            state = Magnification.twice;
-            Debug.Log("twice");
-        }
-        else if (scoreCount >= 0)
-        {
-            state = Magnification.actual;
-            Debug.Log("actual");
+            if (scoreCount >= magnification * 3)
+            {
+                state = Magnification.fourTimes;
+                Debug.Log("fourTimes");
+            }
+            else if (scoreCount >= magnification * 2)
+            {
+                state = Magnification.thrice;
+                Debug.Log("thrice");
+            }
+            else if (scoreCount >= magnification)
+            {
+                state = Magnification.twice;
+                Debug.Log("twice");
+            }
+            else if (scoreCount >= 0)
+            {
+                state = Magnification.actual;
+                Debug.Log("actual");
+            }
+
+            currentScore += addScore;
         }
 
-        currentScore += addScore;
         if (scoreText)
         {
             scoreText.text = $"{currentScore}";

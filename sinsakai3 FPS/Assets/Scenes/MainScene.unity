@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rythm: 0.8
-  interval: 0.4
+  interval: 0.3
   scoreMn: {fileID: 1377981483}
 --- !u!114 &993337141
 MonoBehaviour:
@@ -1340,6 +1340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpPower: 5
+  isGroundLength: 1.1
 --- !u!136 &993337142
 CapsuleCollider:
   m_ObjectHideFlags: 0
