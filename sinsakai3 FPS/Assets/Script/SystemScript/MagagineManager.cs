@@ -18,17 +18,11 @@ public class MagagineManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        //if (fullMagagineText)
-        //{
+    {        
         fullMagagineText.text = firstBulletCount.ToString(); //マガジンの総数をテキストに表示する
-        //}
-
-        currrentBulletCount = firstBulletCount;
-        //if (currentMagagineText)
-        //{
-        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する
-        //}
+        
+        currrentBulletCount = firstBulletCount;        
+        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する      
     }
 
     // Update is called once per frame
@@ -37,7 +31,7 @@ public class MagagineManager : MonoBehaviour
     {
         if (currrentBulletCount > 0)
         {
-            currrentBulletCount--;
+            currrentBulletCount--;　//弾を消費する
             currentMagagineText.text = currrentBulletCount.ToString();
         }
     }
@@ -53,10 +47,15 @@ public class MagagineManager : MonoBehaviour
             {
                 currrentBulletCount = firstBulletCount; //残弾をMAXにする
 
-                currentReloadCount = 0;
+                currentReloadCount = 0; //カウントをリセットする
 
                 currentMagagineText.text = currrentBulletCount.ToString();
             }
         }
+    }
+
+    public void ReloadMiss()
+    {
+        currentReloadCount = 0;
     }
 }

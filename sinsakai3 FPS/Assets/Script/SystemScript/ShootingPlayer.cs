@@ -6,7 +6,6 @@ public class ShootingPlayer : MonoBehaviour
 {
     [SerializeField] public float rythm = 0.8f;    //リズム
     [SerializeField] float interval = 0.3f;     //譜面の猶予時間
-    [SerializeField] Material cube;
     [SerializeField] ScoreManager scoreMn;
 
     MagagineManager mm;
@@ -26,21 +25,6 @@ public class ShootingPlayer : MonoBehaviour
     void Update()
     {
         Fire();
-        if (cube && scoreMn)
-        {
-            if (count <= interval / 2 || count >= rythm - interval / 2)
-            {
-                cube.color = new Color(1, 0, 0);
-            }
-            else
-            {
-                cube.color = new Color(0, 0, 0);
-            }
-        }
-        else
-        {
-            Debug.LogError("null");
-        }
     }
 
     /// <summary>
@@ -79,7 +63,7 @@ public class ShootingPlayer : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            //リズムのインターバルの間だけ射撃できる
+            //リズムのインターバルの間だけリロードできる
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 mm.Reload();
@@ -95,6 +79,8 @@ public class ShootingPlayer : MonoBehaviour
             else
             {
                 scoreMn.Miss();
+                mm.ReloadMiss();
+
                 Debug.Log("miss");
             }
         }
