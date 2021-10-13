@@ -29,6 +29,9 @@ public class ShootingPlayer : MonoBehaviour
     void Update()
     {
         Fire();
+        //Vector3 start = Camera.main.transform.position;
+        //Vector3 end = start + Camera.main.transform.forward * 50;
+        //Debug.DrawLine(start, end, Color.red);
     }
 
     /// <summary>
@@ -39,7 +42,7 @@ public class ShootingPlayer : MonoBehaviour
         //Debug.Log(count);
         count += Time.deltaTime;
         if (Input.GetButtonDown("Fire1"))　//リズムのインターバルの間だけ射撃できる
-        {           
+        {
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 Debug.Log("shot");
@@ -50,7 +53,7 @@ public class ShootingPlayer : MonoBehaviour
 
                 isShot1 = true;
             }
-            else if(count >= rythm - interval / 2 && isShot2 == false)
+            else if (count >= rythm - interval / 2 && isShot2 == false)
             {
                 Debug.Log("shot");
 
@@ -135,7 +138,7 @@ public class ShootingPlayer : MonoBehaviour
         {
             count = 0f;
         }
-        else if(count >= interval / 2)
+        else if (count >= interval / 2)
         {
             isShot1 = false;
             isShot2 = false;

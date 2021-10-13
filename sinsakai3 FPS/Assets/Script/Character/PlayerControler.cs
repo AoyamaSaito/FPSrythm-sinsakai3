@@ -111,6 +111,7 @@ public class PlayerControler : MonoBehaviour
     /// <returns></returns>
     bool isHit()
     {
+
         if (enemyLayer == 0)
         {
             Debug.LogError("LayerにEnemyを設定してください");
@@ -119,6 +120,10 @@ public class PlayerControler : MonoBehaviour
         Vector3 end = start + Camera.main.transform.forward * isHitLength;
         Debug.DrawLine(start, end, Color.red);
         bool isHit = Physics.Linecast(start, end , enemyLayer);
+        if(isHit)
+        {
+            Debug.Log("HIT!");
+        }
         return isHit;
     }
 
