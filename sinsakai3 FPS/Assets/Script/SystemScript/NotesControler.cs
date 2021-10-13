@@ -38,7 +38,7 @@ public class NotesControler : MonoBehaviour
     }
  
     /// <summary>
-    /// target1からtarget2まで動かす
+    /// Notesの動作の処理
     /// </summary>
     public void NotesControl()
     {

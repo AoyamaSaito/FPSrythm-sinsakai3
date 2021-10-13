@@ -27,6 +27,9 @@ public class MagagineManager : MonoBehaviour
 
     // Update is called once per frame
 
+    /// <summary>
+    /// 弾を射撃で消費する処理
+    /// </summary>
     public void Shot()
     {
         if (currrentBulletCount > 0)

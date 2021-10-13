@@ -32,19 +32,19 @@ public class ShootingPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// クリックで射撃する処理
+    /// リズムの各動作の処理
     /// </summary>
     void Fire()
     {
         //Debug.Log(count);
         count += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1"))
-        {
-            //リズムのインターバルの間だけ射撃できる
+        if (Input.GetButtonDown("Fire1"))　//リズムのインターバルの間だけ射撃できる
+        {           
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 Debug.Log("shot");
 
+                pc.Shot();
                 scoreMn.Score();
                 mm.Shot();
 
@@ -54,6 +54,7 @@ public class ShootingPlayer : MonoBehaviour
             {
                 Debug.Log("shot");
 
+                pc.Shot();
                 scoreMn.Score();
                 mm.Shot();
 
@@ -66,9 +67,8 @@ public class ShootingPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2"))　//リズムのインターバルの間だけリロードできる
         {
-            //リズムのインターバルの間だけリロードできる
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 mm.Reload();
@@ -90,9 +90,8 @@ public class ShootingPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))　//リズムのインターバルの間だけジャンプできる
         {
-            //リズムのインターバルの間だけジャンプできる
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
                 pc.Jump();
@@ -102,6 +101,26 @@ public class ShootingPlayer : MonoBehaviour
             else if (count >= rythm - interval / 2 && isShot2 == false)
             {
                 pc.Jump();
+
+                isShot2 = true;
+            }
+            else
+            {
+                Debug.Log("miss");
+            }
+        }
+
+        if (Input.GetKeyDown("left shift"))　//リズムのインターバルの間だけ回避できる
+        {
+            if (count <= interval / 2 && isShot1 == false && isShot2 == false)
+            {
+                pc.Dodge();
+
+                isShot1 = true;
+            }
+            else if (count >= rythm - interval / 2 && isShot2 == false)
+            {
+                pc.Dodge();
 
                 isShot2 = true;
             }

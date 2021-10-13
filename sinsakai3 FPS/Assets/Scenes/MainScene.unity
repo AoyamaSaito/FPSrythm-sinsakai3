@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: 0}
+  m_FollowOffset: {x: 0, y: 0.48, z: 0}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 427400604}
   - component: {fileID: 427400603}
   - component: {fileID: 427400602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 903931231}
   - component: {fileID: 903931230}
   - component: {fileID: 903931229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1250,7 +1250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.09, z: 0}
+  m_LocalPosition: {x: 0, y: 1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1324,8 +1324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9967b0d7f93c2e148b22cfe9aebf4671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rythm: 0.8
-  interval: 0.3
+  rythm: 0.4
+  interval: 0.2
   scoreMn: {fileID: 1377981483}
 --- !u!114 &993337141
 MonoBehaviour:
@@ -1341,7 +1341,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpPower: 5
+  dodgePower: 50
   isGroundLength: 1.1
+  isHitLength: 50
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!136 &993337142
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1794,7 +1799,7 @@ GameObject:
   - component: {fileID: 1508585620}
   - component: {fileID: 1508585619}
   - component: {fileID: 1508585618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1935,7 +1940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824431922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.09, z: 0}
+  m_LocalPosition: {x: 0, y: 1.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 209835248}
@@ -1954,7 +1959,7 @@ GameObject:
   - component: {fileID: 1896913078}
   - component: {fileID: 1896913077}
   - component: {fileID: 1896913076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

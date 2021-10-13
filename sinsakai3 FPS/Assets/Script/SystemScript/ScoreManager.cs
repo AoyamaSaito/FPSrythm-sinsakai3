@@ -101,6 +101,9 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ミスをしたとき倍率をリセットする
+    /// </summary>
     public void Miss()
     {
         scoreCount = 0;
