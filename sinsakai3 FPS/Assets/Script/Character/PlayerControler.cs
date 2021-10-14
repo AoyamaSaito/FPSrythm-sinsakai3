@@ -30,10 +30,7 @@ public class PlayerControler : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         dir = Vector3.forward * v + Vector3.right * h;
-    }
 
-    void FixedUpdate()
-    {
         Move();
     }
 

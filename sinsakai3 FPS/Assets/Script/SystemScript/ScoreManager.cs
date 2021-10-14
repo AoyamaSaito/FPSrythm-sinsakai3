@@ -97,7 +97,7 @@ public class ScoreManager : MonoBehaviour
 
         if (scoreText)
         {
-            scoreText.text = $"{currentScore}";
+            scoreText.text = currentScore.ToString("D10");
         }
     }
 
