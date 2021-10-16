@@ -9,11 +9,13 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] float dodgePower = 20f;
     [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
     [SerializeField] float isHitLength = 50f;
+    [SerializeField] GameObject hitEffect;
     [SerializeField] LayerMask enemyLayer;
  
     float firstSpeed = 0;
     Vector3 dir;
     Rigidbody rb;
+    Vector3 hitPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -122,6 +124,32 @@ public class PlayerControler : MonoBehaviour
             Debug.Log("HIT!");
         }
         return isHit;
+    }
+
+    /// <summary>
+    /// 着弾点にエフェクトを出す処理
+    /// </summary>
+    void HitEffect()
+    {
+        RaycastHit hit;
+        Vector3 start = Camera.main.transform.position;
+        Vector3 end = Camera.main.transform.forward * isHitLength;
+        if(Physics.Raycast(start, end, out hit, isHitLength))
+        {
+            hitPoint = hit.point;
+        }
+        else
+        {
+            hitPoint = Vector3.zero;
+        }
+
+        if(hitPoint != Vector3.zero)
+        {
+            if(hitEffect)
+            {
+                Instantiate(hitEffect, hitPoint, Quaternion.identity);
+            }            
+        }
     }
 
     /// <summary>
