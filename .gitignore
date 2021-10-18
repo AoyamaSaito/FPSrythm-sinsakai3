@@ -60,3 +60,9 @@ crashlytics-build.properties
 
 sinsakai3 FPS/Library/
 sinsakai3 FPS/Temp/
+sinsakai3 FPS/Assets/Material/WallMaterials/Bricks_01_mat.mat
+sinsakai3 FPS/Assets/Material/WallMaterials/Bricks_01_mat.mat.meta
+sinsakai3 FPS/Assets/Image/WallTextures/Bricks_gloss.TGA
+sinsakai3 FPS/Assets/Image/WallTextures/Bricks_gloss.TGA.meta
+sinsakai3 FPS/Assets/Image/WallTextures/Bricks_specular.TGA
+sinsakai3 FPS/Assets/Image/WallTextures/Bricks_specular.TGA.meta
