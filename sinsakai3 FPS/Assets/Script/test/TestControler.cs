@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControler1 : MonoBehaviour
+public class TestControler : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5;
     [SerializeField] float jumpPower = 5f;
@@ -38,6 +38,11 @@ public class PlayerControler1 : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+        }
+
+        if (Input.GetKeyDown("left shift"))
+        {
+            Dodge();
         }
     }
 
