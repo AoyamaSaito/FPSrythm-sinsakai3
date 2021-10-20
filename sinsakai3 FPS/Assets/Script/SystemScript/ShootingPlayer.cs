@@ -29,9 +29,6 @@ public class ShootingPlayer : MonoBehaviour
     void Update()
     {
         Fire();
-        //Vector3 start = Camera.main.transform.position;
-        //Vector3 end = start + Camera.main.transform.forward * 50;
-        //Debug.DrawLine(start, end, Color.red);
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
@@ -7,11 +8,13 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] float moveSpeed = 5;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float dodgePower = 20f;
+    [SerializeField] float ultDamage = 10f;
     [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
     [SerializeField] float isHitLength = 50f;
     [SerializeField] GameObject hitEffect;
     [SerializeField] LayerMask enemyLayer;
- 
+
+    GameObject[] enemy;
     float firstSpeed = 0;
     Vector3 dir;
     Rigidbody rb;
@@ -21,6 +24,8 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        
 
         firstSpeed = moveSpeed;
     }
@@ -34,6 +39,7 @@ public class PlayerControler : MonoBehaviour
         dir = Vector3.forward * v + Vector3.right * h;
 
         Move();
+        Ultimate();
     }
 
     /// <summary>
@@ -90,6 +96,15 @@ public class PlayerControler : MonoBehaviour
         Debug.Log("Dodge");
     }
 
+    public void Ultimate()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            enemy = GameObject.FindGameObjectsWithTag("Enemy");
+
+            enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
+        }
+    }
     /// <summary>
     /// LineCastを使った接地判定
     /// </summary>
@@ -115,9 +130,11 @@ public class PlayerControler : MonoBehaviour
         {
             Debug.LogError("LayerにEnemyを設定してください");
         }
+
         Vector3 start = Camera.main.transform.position;
         Vector3 end = start + Camera.main.transform.forward * isHitLength;
         Debug.DrawLine(start, end, Color.red);
+
         bool isHit = Physics.Linecast(start, end , enemyLayer);
         if(isHit)
         {
@@ -153,6 +170,7 @@ public class PlayerControler : MonoBehaviour
             }            
         }
     }
+
 
     /// <summary>
     /// 回避で急加速する処理
