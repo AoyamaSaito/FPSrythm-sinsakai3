@@ -123,6 +123,8 @@ public class PlayerControler : MonoBehaviour
         {
             Debug.Log("HIT!");
         }
+
+        HitEffect();
         return isHit;
     }
 
