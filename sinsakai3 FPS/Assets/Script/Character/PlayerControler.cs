@@ -8,6 +8,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] float moveSpeed = 5;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float dodgePower = 20f;
+    [SerializeField] float shotDamage = 2f;
     [SerializeField] float ultDamage = 10f;
     [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
     [SerializeField] float isHitLength = 50f;
@@ -131,18 +132,22 @@ public class PlayerControler : MonoBehaviour
             Debug.LogError("LayerにEnemyを設定してください");
         }
 
+        RaycastHit isHit;
         Vector3 start = Camera.main.transform.position;
         Vector3 end = start + Camera.main.transform.forward * isHitLength;
         Debug.DrawLine(start, end, Color.red);
 
-        bool isHit = Physics.Linecast(start, end , enemyLayer);
-        if(isHit)
+        bool hit = Physics.Linecast(start, end, enemyLayer);
+
+        if (Physics.Raycast(start, end, out isHit, isHitLength) && hit)
         {
-            Debug.Log("HIT!");
+            GameObject hitEnemy = isHit.collider.gameObject;
+
+            hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
         }
 
         HitEffect();
-        return isHit;
+        return hit;
     }
 
     /// <summary>
