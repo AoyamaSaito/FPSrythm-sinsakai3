@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class MagagineManager : MonoBehaviour
 {
+    [SerializeField] int firstBulletCount = 6;
+    [System.NonSerialized] public int currrentBulletCount = 0;
+
+    [SerializeField] int reloadCount = 2;
+
     [SerializeField] Text fullMagagineText; //マガジンの総数のテキスト
     [SerializeField] Text currentMagagineText;　//残弾のテキスト
     [SerializeField] Text reloadText; //リロードの文字のテキスト
 
-    [SerializeField] int firstBulletCount = 6;
-    [System.NonSerialized]public int currrentBulletCount = 0;
-
-    [SerializeField] int reloadCount = 2;
     int currentReloadCount = 0;
-
 
     // Start is called before the first frame update
     void Start()

@@ -5,25 +5,24 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] float hp = 10;
-
-    GameObject[] enemy  = default;
-    EnemyBase eb;
+    [SerializeField] int hp = 10;
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        eb = enemy.ToList().Min().GetComponent<EnemyBase>();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Damage(float damage)
+    /// <summary>
+    /// 引数にダメージを設定する
+    /// </summary>
+    /// <param name="damage"></param>
+    public void Damage(int damage)
     {
         hp -= damage;
+
+        if(hp <= 0) //HPがゼロになったらDestroyする
+        {
+            Destroy(gameObject);
+        }
     }
 }

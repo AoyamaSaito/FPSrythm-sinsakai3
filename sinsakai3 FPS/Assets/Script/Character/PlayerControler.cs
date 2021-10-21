@@ -5,15 +5,22 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
+    [Header("基本動作")]
     [SerializeField] float moveSpeed = 5;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float dodgePower = 20f;
-    [SerializeField] float shotDamage = 2f;
-    [SerializeField] float ultDamage = 10f;
+    [SerializeField] Animator gunAnim;
+    [Header("ダメージ")]
+    [SerializeField] int shotDamage = 2;
+    [SerializeField] int ultDamage = 10;
+    [Header("レイヤー")]
     [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
     [SerializeField] float isHitLength = 50f;
-    [SerializeField] GameObject hitEffect;
     [SerializeField] LayerMask enemyLayer;
+    [Header("ヒットエフェクト")] 
+    [SerializeField] GameObject hitEffect;
+    [SerializeField] float effectDestroy = 0.5f;
+    [Header(" ")]
 
     GameObject[] enemy;
     float firstSpeed = 0;
@@ -26,8 +33,6 @@ public class PlayerControler : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        
-
         firstSpeed = moveSpeed;
     }
 
@@ -39,8 +44,12 @@ public class PlayerControler : MonoBehaviour
 
         dir = Vector3.forward * v + Vector3.right * h;
 
-        Move();
         Ultimate();
+    }
+
+    void FixedUpdate()
+    {
+        Move();
     }
 
     /// <summary>
@@ -51,6 +60,8 @@ public class PlayerControler : MonoBehaviour
         if (dir == Vector3.zero)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
+
+            gunAnim.SetBool("Move", false);
         }
         else
         {
@@ -63,6 +74,8 @@ public class PlayerControler : MonoBehaviour
             Vector3 velo = dir.normalized * moveSpeed;　//移動
             velo.y = rb.velocity.y;
             rb.velocity = velo;
+
+            gunAnim.SetBool("Move", true);
         }
     }
 
@@ -71,10 +84,27 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Shot()
     {
-        if (isHit())
+        if (enemyLayer == 0)
         {
-            Debug.Log("HIT!!");
+            Debug.LogError("LayerにEnemyを設定してください");
         }
+
+        gunAnim.SetTrigger("Shot");
+
+        RaycastHit isHit;
+        Vector3 start = Camera.main.transform.position;
+        Vector3 end = start + Camera.main.transform.forward * isHitLength;
+        bool hit = Physics.Linecast(start, end, enemyLayer);
+
+        if (Physics.Raycast(start, end, out isHit, isHitLength, enemyLayer) && hit)
+        {
+            Debug.DrawLine(start, end, Color.red);
+            GameObject hitEnemy = isHit.collider.gameObject;
+
+            hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
+        }
+
+        HitEffect();
     }
 
     /// <summary>
@@ -124,31 +154,7 @@ public class PlayerControler : MonoBehaviour
     /// 射撃が敵に当たったか判定する処理
     /// </summary>
     /// <returns></returns>
-    bool isHit()
-    {
 
-        if (enemyLayer == 0)
-        {
-            Debug.LogError("LayerにEnemyを設定してください");
-        }
-
-        RaycastHit isHit;
-        Vector3 start = Camera.main.transform.position;
-        Vector3 end = start + Camera.main.transform.forward * isHitLength;
-        Debug.DrawLine(start, end, Color.red);
-
-        bool hit = Physics.Linecast(start, end, enemyLayer);
-
-        if (Physics.Raycast(start, end, out isHit, isHitLength) && hit)
-        {
-            GameObject hitEnemy = isHit.collider.gameObject;
-
-            hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
-        }
-
-        HitEffect();
-        return hit;
-    }
 
     /// <summary>
     /// 着弾点にエフェクトを出す処理
@@ -171,7 +177,7 @@ public class PlayerControler : MonoBehaviour
         {
             if(hitEffect)
             {
-                Instantiate(hitEffect, hitPoint, Quaternion.identity);
+                Destroy(Instantiate(hitEffect, hitPoint, Quaternion.identity), effectDestroy);
             }            
         }
     }
