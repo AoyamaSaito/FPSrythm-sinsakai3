@@ -1133,6 +1133,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2060140426}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &806250510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806250509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420afed80a2d5ad40bd5cffd917d1646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &806250513
 Animator:
   serializedVersion: 3
