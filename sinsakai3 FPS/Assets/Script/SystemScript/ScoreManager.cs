@@ -18,11 +18,11 @@ public class ScoreManager : MonoBehaviour
     int firstScore = 0;
     int currentScore = 0;
 
-    MagagineManager mm;
+    GunManager mm;
     void Start()
     {
         firstScore = addScore;　//最初の加点スコアを保存する
-        mm = GameObject.Find("MagagineManager").GetComponent<MagagineManager>();
+        mm = GameObject.Find("MagagineManager").GetComponent<GunManager>();
     }
 
     // Update is called once per frame

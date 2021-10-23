@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagagineManager : MonoBehaviour
+public class GunManager : MonoBehaviour
 {
     [SerializeField] int firstBulletCount = 6;
     [System.NonSerialized] public int currrentBulletCount = 0;
@@ -14,7 +14,9 @@ public class MagagineManager : MonoBehaviour
     [SerializeField] Text currentMagagineText;　//残弾のテキスト
     [SerializeField] Text reloadText; //リロードの文字のテキスト
 
-    int currentReloadCount = 0;
+    [SerializeField] PistolAnimation pa;
+
+    public int currentReloadCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -48,14 +50,21 @@ public class MagagineManager : MonoBehaviour
         {
             Debug.Log("Reload");
             currentReloadCount++;
+            
 
             if (currentReloadCount == reloadCount)
             {
+                pa.Right();
+
                 currrentBulletCount = firstBulletCount; //残弾をMAXにする
 
                 currentReloadCount = 0; //カウントをリセットする
 
                 currentMagagineText.text = currrentBulletCount.ToString();
+            }
+            else
+            {
+                pa.Left();
             }
         }
     }

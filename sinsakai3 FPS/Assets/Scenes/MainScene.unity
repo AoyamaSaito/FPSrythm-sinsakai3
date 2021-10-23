@@ -151,7 +151,7 @@ RectTransform:
   m_LocalScale: {x: 3.446607, y: 3.446607, z: 3.446607}
   m_Children: []
   m_Father: {fileID: 810843581}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -698,6 +698,8 @@ MonoBehaviour:
   fullMagagineText: {fileID: 1433576678}
   currentMagagineText: {fileID: 108354600}
   reloadText: {fileID: 0}
+  pa: {fileID: 806250510}
+  currentReloadCount: 0
 --- !u!1 &605406420
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +826,7 @@ PrefabInstance:
     - target: {fileID: 4550605120544291234, guid: abd3b9b229fcce34fb075a3e735ff8a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4550605120544291234, guid: abd3b9b229fcce34fb075a3e735ff8a6,
         type: 3}
@@ -1145,6 +1147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420afed80a2d5ad40bd5cffd917d1646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveTime: 0.1
+  upAngle: 290
+  leftAngle: 290
+  camera: {fileID: 431187257}
 --- !u!95 &806250513
 Animator:
   serializedVersion: 3
@@ -1257,9 +1263,9 @@ RectTransform:
   - {fileID: 307159131}
   - {fileID: 1017680755}
   - {fileID: 108354602}
-  - {fileID: 2130334534}
   - {fileID: 54840060}
   - {fileID: 1433576676}
+  - {fileID: 2130334534}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2026,7 +2032,7 @@ RectTransform:
   m_LocalScale: {x: 3.446607, y: 3.446607, z: 3.446607}
   m_Children: []
   m_Father: {fileID: 810843581}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2365,9 +2371,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390364041158742644, guid: 88c317954d21507458b11527740e6eee,
         type: 3}
+      propertyPath: _rythm
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390364041158742644, guid: 88c317954d21507458b11527740e6eee,
+        type: 3}
       propertyPath: scoreMn
       value: 
       objectReference: {fileID: 1377981483}
+    - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
+        type: 3}
+      propertyPath: pa
+      value: 
+      objectReference: {fileID: 806250510}
     - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
         type: 3}
       propertyPath: gunAnim

@@ -27,6 +27,7 @@ public class PlayerControler : MonoBehaviour
     Vector3 dir;
     Rigidbody rb;
     Vector3 hitPoint;
+    [SerializeField]PistolAnimation pa;
 
     // Start is called before the first frame update
     void Start()
@@ -89,8 +90,6 @@ public class PlayerControler : MonoBehaviour
             Debug.LogError("LayerにEnemyを設定してください");
         }
 
-        gunAnim.SetTrigger("Shot");
-
         RaycastHit isHit;
         Vector3 start = Camera.main.transform.position;
         Vector3 end = start + Camera.main.transform.forward * isHitLength;
@@ -105,6 +104,11 @@ public class PlayerControler : MonoBehaviour
         }
 
         HitEffect();
+
+        if(pa)
+        {
+            pa.PistolRecoil();
+        }
     }
 
     /// <summary>

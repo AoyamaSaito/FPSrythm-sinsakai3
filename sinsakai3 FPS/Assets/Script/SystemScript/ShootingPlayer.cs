@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] public float rythm = 0.8f;    //リズム
+    [SerializeField] public float _rythm = 0.8f;    //リズム
+    public float rythm
+    {
+        get { return _rythm; }
+    }
+
     [SerializeField] float interval = 0.3f;     //譜面の猶予時間
 
     ScoreManager scoreMn;
-    MagagineManager mm;
+    GunManager mm;
     PlayerControler pc;
 
     float count;
@@ -22,7 +27,7 @@ public class ShootingPlayer : MonoBehaviour
         Cursor.visible = false; //マウスカーソルを非表示に
 
         scoreMn = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        mm = GameObject.Find("MagagineManager").GetComponent<MagagineManager>();
+        mm = GameObject.Find("MagagineManager").GetComponent<GunManager>();
         pc = GetComponent<PlayerControler>();
     }
 
@@ -39,7 +44,7 @@ public class ShootingPlayer : MonoBehaviour
     {
         //Debug.Log(count);
         count += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && mm.currrentBulletCount != 0)　//リズムのインターバルの間だけ射撃できる
+        if (Input.GetButtonDown("Fire1") && mm.currrentBulletCount != 0 && mm.currentReloadCount == 0)　//リズムのインターバルの間だけ射撃できる
         {
             if (count <= interval / 2 && isShot1 == false && isShot2 == false)
             {
