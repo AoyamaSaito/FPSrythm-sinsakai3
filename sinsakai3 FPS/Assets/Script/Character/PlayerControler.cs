@@ -194,6 +194,7 @@ public class PlayerControler : MonoBehaviour
     /// <returns></returns>
     IEnumerator DodgeSpeed()
     {
+        gunAnim.SetTrigger("Dodge");
         moveSpeed = dodgePower;
         yield return new WaitForSeconds(0.1f);
         moveSpeed = firstSpeed;
