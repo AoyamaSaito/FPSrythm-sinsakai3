@@ -698,7 +698,7 @@ MonoBehaviour:
   fullMagagineText: {fileID: 1433576678}
   currentMagagineText: {fileID: 108354600}
   reloadText: {fileID: 0}
-  pa: {fileID: 806250510}
+  gunAnim: {fileID: 806250513}
   currentReloadCount: 0
 --- !u!1 &605406420
 GameObject:
@@ -2212,7 +2212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4626708622261990, guid: 1c38d01b37b46554786a8da9ffb9e896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.549
+      value: 0.645
       objectReference: {fileID: 0}
     - target: {fileID: 4626708622261990, guid: 1c38d01b37b46554786a8da9ffb9e896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2372,13 +2372,23 @@ PrefabInstance:
     - target: {fileID: 1390364041158742644, guid: 88c317954d21507458b11527740e6eee,
         type: 3}
       propertyPath: _rythm
-      value: 0.4
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1390364041158742644, guid: 88c317954d21507458b11527740e6eee,
         type: 3}
       propertyPath: scoreMn
       value: 
       objectReference: {fileID: 1377981483}
+    - target: {fileID: 1390364041158742644, guid: 88c317954d21507458b11527740e6eee,
+        type: 3}
+      propertyPath: interval
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390364041158742644, guid: 88c317954d21507458b11527740e6eee,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
         type: 3}
       propertyPath: pa
@@ -2397,8 +2407,18 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
+        type: 3}
       propertyPath: dodgePower
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1390364041158742645, guid: 88c317954d21507458b11527740e6eee,
         type: 3}

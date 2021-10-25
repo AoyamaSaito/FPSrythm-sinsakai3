@@ -85,6 +85,7 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Shot()
     {
+        gunAnim.SetTrigger("Shot");
         if (enemyLayer == 0)
         {
             Debug.LogError("LayerにEnemyを設定してください");
@@ -105,10 +106,10 @@ public class PlayerControler : MonoBehaviour
 
         HitEffect();
 
-        if(pa)
-        {
-            pa.PistolRecoil();
-        }
+        //if(pa)
+        //{
+        //    pa.PistolRecoil();
+        //}
     }
 
     /// <summary>

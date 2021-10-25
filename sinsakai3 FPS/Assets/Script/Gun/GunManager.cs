@@ -14,7 +14,7 @@ public class GunManager : MonoBehaviour
     [SerializeField] Text currentMagagineText;　//残弾のテキスト
     [SerializeField] Text reloadText; //リロードの文字のテキスト
 
-    [SerializeField] PistolAnimation pa;
+    [SerializeField] Animator gunAnim;
 
     public int currentReloadCount = 0;
 
@@ -54,7 +54,9 @@ public class GunManager : MonoBehaviour
 
             if (currentReloadCount == reloadCount)
             {
-                pa.Right();
+                gunAnim.SetBool("Reload2", true);
+
+                StartCoroutine(ReloadReset());
 
                 currrentBulletCount = firstBulletCount; //残弾をMAXにする
 
@@ -64,7 +66,7 @@ public class GunManager : MonoBehaviour
             }
             else
             {
-                pa.Left();
+                gunAnim.SetBool("Reload1", true);
             }
         }
     }
@@ -75,5 +77,12 @@ public class GunManager : MonoBehaviour
     public void ReloadMiss()
     {
         currentReloadCount = 0;
+    }
+
+    IEnumerator ReloadReset()
+    {
+        gunAnim.SetBool("Reload1", false);
+        yield return new WaitForSeconds(0.2f);
+        gunAnim.SetBool("Reload2", false);
     }
 }
