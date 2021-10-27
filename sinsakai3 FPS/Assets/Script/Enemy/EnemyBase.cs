@@ -24,7 +24,6 @@ public class EnemyBase : MonoBehaviour
     //Prowlの変数
     GameObject[] targets;
     int targetIndex = 0;
-    Collider collision;
 
     RaycastHit hit;
     Rigidbody rb;
@@ -33,6 +32,7 @@ public class EnemyBase : MonoBehaviour
     float kyori = 0;
     float timer = 0;
     float chaseHeight = 0;
+    int beforeIndex = 0;
     void Start()
     {
         switch (state)
@@ -118,7 +118,22 @@ public class EnemyBase : MonoBehaviour
 
         if (collision.gameObject.tag == "NavTarget")
         {
+            beforeIndex = targetIndex;
             targetIndex = Random.Range(0, targets.Length - 1);
+            navAgent.destination = targets[Judge(targetIndex)].transform.position;
+            Debug.Log(targetIndex);
+        }
+    }
+
+    int Judge(int n)
+    {
+        if(n != beforeIndex)
+        {
+            return n;
+        }
+        else
+        {
+            return Judge(Random.Range(0, targets.Length - 1));
         }
     }
     enum EnemyPatern
