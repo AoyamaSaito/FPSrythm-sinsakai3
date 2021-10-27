@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviour
 {
     //Chaseの変数
     [Header("ステータス")]
@@ -39,6 +39,7 @@ public class EnemyBase : MonoBehaviour
         {
             case EnemyPatern.chase:
                 rb = GetComponent<Rigidbody>();
+                player = GameObject.FindGameObjectWithTag("Player");
                 chaseHeight = Random.Range(minHeight, maxHeight);
                 transform.position = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
                 break;
@@ -60,6 +61,9 @@ public class EnemyBase : MonoBehaviour
                 break;
         }
     }
+
+    public abstract void Attack();
+
     /// <summary>
     /// 引数にダメージを設定する
     /// </summary>
@@ -124,7 +128,7 @@ public class EnemyBase : MonoBehaviour
             Debug.Log(targetIndex);
         }
     }
-
+    
     int Judge(int n)
     {
         if(n != beforeIndex)
@@ -136,6 +140,7 @@ public class EnemyBase : MonoBehaviour
             return Judge(Random.Range(0, targets.Length - 1));
         }
     }
+
     enum EnemyPatern
     {
         //プレイヤーの座標を追う

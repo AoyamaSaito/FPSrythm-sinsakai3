@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] int magnification = 5;
     [SerializeField] int addScore = 100;
+    [SerializeField] float scoreChangeInterval = 0.2f;
 
     [SerializeField] Text scoreText;
     [SerializeField] Text magText;
@@ -70,6 +72,7 @@ public class ScoreManager : MonoBehaviour
         if (mm.currrentBulletCount != 0)
         {
             scoreCount++;
+            int beforeScore = currentScore;
 
             if (scoreCount >= magnification * 3)
             {
@@ -92,12 +95,12 @@ public class ScoreManager : MonoBehaviour
                 Debug.Log("actual");
             }
 
-            currentScore += addScore;
-        }
-
-        if (scoreText)
-        {
-            scoreText.text = currentScore.ToString("D10");
+            DOTween.To(() => currentScore, // 変化させる値
+                x => currentScore = x, // 変化させた値 x の処理
+                currentScore + addScore, // x をどの値まで変化させるか
+                scoreChangeInterval)   // 何秒かけて変化させるか
+                .OnUpdate(() => scoreText.text = currentScore.ToString("D10"))   // 数値が変化する度に実行する処理を書く
+                .OnComplete(() => scoreText.text = currentScore.ToString("D10"));
         }
     }
 
