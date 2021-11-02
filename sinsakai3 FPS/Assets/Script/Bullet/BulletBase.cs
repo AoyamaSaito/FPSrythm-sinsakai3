@@ -14,7 +14,6 @@ public abstract class BulletBase : MonoBehaviour
         playerPosition = GameObject.FindWithTag("Player").GetComponent<Transform>().position;
 
         targetPosition = playerPosition - this.transform.position; //Playerの座標をtargetとする
-        Debug.Log(targetPosition);
     }
 
     public abstract void Attack();

@@ -12,10 +12,11 @@ public class GunManager : MonoBehaviour
 
     [SerializeField] Text fullMagagineText; //マガジンの総数のテキスト
     [SerializeField] Text currentMagagineText;　//残弾のテキスト
-    [SerializeField] Text reloadText; //リロードの文字のテキスト
+    [SerializeField] GameObject[] reloadText; //リロードの文字のテキスト
 
     [SerializeField] Animator gunAnim;
 
+    int reloadTextCount = 0;
     public int currentReloadCount = 0;
 
     // Start is called before the first frame update
@@ -24,7 +25,8 @@ public class GunManager : MonoBehaviour
         fullMagagineText.text = firstBulletCount.ToString(); //マガジンの総数をテキストに表示する
         
         currrentBulletCount = firstBulletCount;        
-        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する      
+        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する
+        // = reloadText.Length / reloadCount                                                           
     }
 
     // Update is called once per frame
@@ -48,9 +50,8 @@ public class GunManager : MonoBehaviour
     {
         if (currrentBulletCount != firstBulletCount)
         {
-            Debug.Log("Reload");
             currentReloadCount++;
-            
+            ReloadText();      
 
             if (currentReloadCount == reloadCount)
             {
@@ -71,18 +72,38 @@ public class GunManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// リロードをミスしたときはカウントをゼロに
-    /// </summary>
-    public void ReloadMiss()
-    {
-        currentReloadCount = 0;
-    }
 
+    void ReloadText()
+    {
+        if(reloadTextCount == 0)
+        {
+            reloadText[0].SetActive(true);
+            reloadText[1].SetActive(true);
+
+            reloadTextCount++;
+        }
+        else
+        {
+            reloadText[2].SetActive(true);
+            reloadText[3].SetActive(true);
+
+            StartCoroutine(ReloadTextCor());
+
+            reloadTextCount = 0;
+        }
+    }
     IEnumerator ReloadReset()
     {
         gunAnim.SetBool("Reload1", false);
         yield return new WaitForSeconds(0.2f);
         gunAnim.SetBool("Reload2", false);
+    }
+    IEnumerator ReloadTextCor()
+    {
+        yield return new WaitForSeconds(0.4f);
+        reloadText[0].SetActive(false);
+        reloadText[1].SetActive(false);
+        reloadText[2].SetActive(false);
+        reloadText[3].SetActive(false);
     }
 }

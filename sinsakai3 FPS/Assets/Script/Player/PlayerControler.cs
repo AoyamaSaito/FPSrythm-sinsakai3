@@ -97,7 +97,6 @@ public class PlayerControler : MonoBehaviour
 
         if (Physics.Raycast(start, end, out isHit, isHitLength, enemyLayer) && hit)
         {
-            Debug.DrawLine(start, end, Color.red);
             GameObject hitEnemy = isHit.collider.gameObject;
 
             hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
@@ -148,12 +147,6 @@ public class PlayerControler : MonoBehaviour
         bool isGrounded = Physics.Linecast(start, end);
         return isGrounded;
     }
-
-    /// <summary>
-    /// 射撃が敵に当たったか判定する処理
-    /// </summary>
-    /// <returns></returns>
-
 
     /// <summary>
     /// 着弾点にエフェクトを出す処理

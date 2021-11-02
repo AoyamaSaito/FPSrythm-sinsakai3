@@ -9,7 +9,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class EnemyBase : MonoBehaviour
 {
-    //Chaseの変数
     [Header("ステータス")]
     [SerializeField] int hp = 10;
     [SerializeField] float chaseSpeed = 4;
@@ -17,14 +16,12 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] float minHeight = 3;
     [SerializeField] float maxHeight = 5;
     [Header("近づく距離")]
-    [SerializeField] float chaseDistance = 7;
+    [SerializeField] float chaseDistance = 1.7f;
     [Header("プレイヤー追跡パターン")]
-    [SerializeField]EnemyPatern state = default;
+    [SerializeField] MovePatern moveState = default;
+    
 
-    //Prowlの変数
     GameObject[] targets;
-    int targetIndex = 0;
-
     RaycastHit hit;
     Rigidbody rb;
     NavMeshAgent navAgent;
@@ -33,18 +30,23 @@ public abstract class EnemyBase : MonoBehaviour
     float timer = 0;
     float chaseHeight = 0;
     int beforeIndex = 0;
+    int targetIndex = 0;
+
     void Start()
     {
-        switch (state)
+        switch (moveState)
         {
-            case EnemyPatern.chase:
+            case MovePatern.chase:
                 rb = GetComponent<Rigidbody>();
+                navAgent = GetComponent<NavMeshAgent>();
+                navAgent.enabled = false;
                 player = GameObject.FindGameObjectWithTag("Player");
                 chaseHeight = Random.Range(minHeight, maxHeight);
                 transform.position = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
                 break;
-            case EnemyPatern.prowl:
+            case MovePatern.prowl:
                 navAgent = GetComponent<NavMeshAgent>();
+                navAgent.enabled = true;
                 targets = GameObject.FindGameObjectsWithTag("NavTarget");
                 targetIndex = Random.Range(0, targets.Length - 1);
                 navAgent.destination = targets[targetIndex].transform.position;
@@ -52,11 +54,16 @@ public abstract class EnemyBase : MonoBehaviour
         }            
     }
 
+    void Update()
+    {
+        Attack();
+    }
+
     void FixedUpdate()
     {
-        switch (state)
+        switch (moveState)
         {
-            case EnemyPatern.chase:
+            case MovePatern.chase:
                 Chase();
                 break;
         }
@@ -114,9 +121,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Prowl(other);
+        Wander(other);
     }
-    void Prowl(Collider collision)
+    void Wander(Collider collision)
     {
         navAgent.destination = targets[targetIndex].transform.position;
 
@@ -141,7 +148,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    enum EnemyPatern
+    enum MovePatern
     {
         //プレイヤーの座標を追う
         chase,

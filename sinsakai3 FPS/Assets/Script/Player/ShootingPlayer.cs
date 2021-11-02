@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] public float _rythm = 0.8f;    //リズム
+    [SerializeField] public static float _rythm = 0.8f;    //リズム
     public float rythm
     {
         get { return _rythm; }
@@ -90,7 +90,6 @@ public class ShootingPlayer : MonoBehaviour
             else
             {
                 scoreMn.Miss();
-                mm.ReloadMiss();
 
                 Debug.Log("miss");
             }
