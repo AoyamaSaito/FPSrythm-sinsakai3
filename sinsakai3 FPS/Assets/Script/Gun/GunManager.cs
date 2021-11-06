@@ -25,11 +25,8 @@ public class GunManager : MonoBehaviour
         fullMagagineText.text = firstBulletCount.ToString(); //マガジンの総数をテキストに表示する
         
         currrentBulletCount = firstBulletCount;        
-        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する
-        // = reloadText.Length / reloadCount                                                           
+        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する                                                           
     }
-
-    // Update is called once per frame
 
     /// <summary>
     /// 弾を射撃で消費する処理
@@ -71,7 +68,6 @@ public class GunManager : MonoBehaviour
             }
         }
     }
-
 
     void ReloadText()
     {

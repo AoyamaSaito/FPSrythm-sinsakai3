@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShootingPlayer : MonoBehaviour
 {
@@ -11,17 +12,17 @@ public class ShootingPlayer : MonoBehaviour
     }
 
     [SerializeField] float interval = 0.3f;     //譜面の猶予時間
+    [Header("MissText")]
+    [SerializeField] GameObject missText;
+    [SerializeField] float waitTime = 0.2f;
 
     ScoreManager scoreMn;
     GunManager mm;
     PlayerControler pc;
-
     float count;
-
     bool isShot1 = false;
     bool isShot2 = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false; //マウスカーソルを非表示に
@@ -69,7 +70,7 @@ public class ShootingPlayer : MonoBehaviour
             else
             {
                 scoreMn.Miss();
-                Debug.Log("miss");
+                MissText();
             }
         }
 
@@ -90,8 +91,7 @@ public class ShootingPlayer : MonoBehaviour
             else
             {
                 scoreMn.Miss();
-
-                Debug.Log("miss");
+                MissText();
             }
         }
 
@@ -131,7 +131,7 @@ public class ShootingPlayer : MonoBehaviour
             }
             else
             {
-                Debug.Log("miss");
+                MissText();
             }
         }
 
@@ -144,6 +144,18 @@ public class ShootingPlayer : MonoBehaviour
         {
             isShot1 = false;
             isShot2 = false;
-        }
+        }       
+    }
+
+    void MissText()
+    {
+        StartCoroutine(MissTextCor());
+    }
+
+    IEnumerator MissTextCor()
+    {
+        missText.SetActive(true);
+        yield return new WaitForSeconds(waitTime);
+        missText.SetActive(false);
     }
 }
