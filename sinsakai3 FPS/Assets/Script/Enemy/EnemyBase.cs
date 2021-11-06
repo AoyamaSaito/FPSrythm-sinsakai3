@@ -95,7 +95,7 @@ public abstract class EnemyBase : MonoBehaviour
         Vector3 playerPosition = new Vector3(player.transform.position.x, chaseHeight, player.transform.position.z);
         Vector3 myPosition = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
 
-        gameObject.transform.forward = player.transform.position;
+        transform.LookAt(playerPosition);
 
         if (Physics.Linecast(gameObject.transform.position, player.transform.position, out hit))
         {
