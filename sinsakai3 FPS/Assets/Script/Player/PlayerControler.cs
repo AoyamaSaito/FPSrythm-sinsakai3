@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControler : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float dodgePower = 20f;
     [SerializeField] Animator gunAnim;
+    [Header("ステータス")]
+    [SerializeField] int hp = 100;
+    [SerializeField] Text fullHpText;
+    [SerializeField] Text hpText;
     [Header("ダメージ")]
     [SerializeField] int shotDamage = 2;
     [SerializeField] int ultDamage = 10;
@@ -34,6 +40,7 @@ public class PlayerControler : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         firstSpeed = moveSpeed;
+        PlayerHP();
     }
 
     // Update is called once per frame
@@ -45,6 +52,7 @@ public class PlayerControler : MonoBehaviour
         dir = Vector3.forward * v + Vector3.right * h;
 
         Ultimate();
+        Jump();
     }
 
     void FixedUpdate()
@@ -110,7 +118,7 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Jump()
     {
-        if (isGround())
+        if (isGround() && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
@@ -133,6 +141,24 @@ public class PlayerControler : MonoBehaviour
 
             enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
         }
+    }
+
+    void PlayerHP()
+    {
+        if(hpText && fullHpText)
+        {
+            hpText.text = hp.ToString();
+            fullHpText.text = hp.ToString();
+        }
+    }
+
+    public void PlayerDamage(int damage)
+    {
+        DOTween.To(() => hp, // 変化させる値
+                x => hp = x, // 変化させた値 x の処理
+                hp - damage, // x をどの値まで変化させるか
+                0.05f)   // 何秒かけて変化させるか
+                .OnUpdate(() => hpText.text = hp.ToString());
     }
     /// <summary>
     /// LineCastを使った接地判定

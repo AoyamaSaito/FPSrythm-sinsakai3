@@ -12,6 +12,8 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("ステータス")]
     [SerializeField] int hp = 10;
     [SerializeField] float chaseSpeed = 4;
+    [SerializeField] Renderer r;
+    [SerializeField] Color damageColor = default;
     [Header("高さ")]
     [SerializeField] float minHeight = 3;
     [SerializeField] float maxHeight = 5;
@@ -77,7 +79,9 @@ public abstract class EnemyBase : MonoBehaviour
     /// <param name="damage"></param>
     public void Damage(int damage)
     {
+        Debug.Log($"Damage{damage}");
         hp -= damage;
+        r.material.color = damageColor;
 
         if(hp <= 0) //HPがゼロになったら死ぬ処理をする
         {
@@ -102,7 +106,6 @@ public abstract class EnemyBase : MonoBehaviour
             kyori = hit.distance;
             if(3 <= timer)
             {
-                Debug.Log(kyori);
                 timer = 0;
             }
         }
