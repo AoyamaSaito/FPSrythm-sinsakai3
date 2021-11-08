@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class BulletBase : MonoBehaviour
 {
+    [SerializeField] int damage = 10;
     [SerializeField] GameObject destroyEffect;
 
     Vector3 playerPosition;
@@ -22,6 +23,8 @@ public abstract class BulletBase : MonoBehaviour
     {      
         if (other.gameObject.tag == "Player")
         {
+            other.GetComponent<PlayerControler>().PlayerDamage(damage);
+
             if (destroyEffect)
             {
                 Instantiate(destroyEffect, this.transform.position, Quaternion.identity);

@@ -13,7 +13,7 @@ public class NormalBullet : BulletBase
 
     public override void Attack()
     {
-        rb.velocity = targetPosition * bulletSpeed;
+        rb.velocity = targetPosition.normalized * bulletSpeed;
     }
     // Update is called once per frame
     void FixedUpdate()

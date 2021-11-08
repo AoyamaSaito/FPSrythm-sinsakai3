@@ -28,6 +28,7 @@ public abstract class EnemyBase : MonoBehaviour
     Rigidbody rb;
     NavMeshAgent navAgent;
     GameObject player;
+    Color defaultColor;
     float kyori = 0;
     float timer = 0;
     float chaseHeight = 0;
@@ -36,6 +37,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     void Start()
     {
+
+        defaultColor = r.material.color;
         switch (moveState)
         {
             case MovePatern.chase:
@@ -81,9 +84,9 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Debug.Log($"Damage{damage}");
         hp -= damage;
-        r.material.color = damageColor;
+        StartCoroutine(DamageColor());
 
-        if(hp <= 0) //HPがゼロになったら死ぬ処理をする
+        if (hp <= 0) //HPがゼロになったら死ぬ処理をする
         {
             Destroy(gameObject);
         }
@@ -151,6 +154,12 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    IEnumerator DamageColor()
+    {
+        r.material.color = damageColor;
+        yield return new WaitForSeconds(0.5f);
+        r.material.color = defaultColor;
+    }
     enum MovePatern
     {
         //プレイヤーの座標を追う
