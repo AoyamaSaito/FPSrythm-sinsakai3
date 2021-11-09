@@ -29,17 +29,21 @@ public class PlayerControler : MonoBehaviour
     [Header(" ")]
 
     GameObject[] enemy;
+    float damageColor;
     float firstSpeed = 0;
     Vector3 dir;
     Rigidbody rb;
     Vector3 hitPoint;
-    UIMove ui;
+    UIMove uiAnim;
+    GameObject ui;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        ui = GameObject.Find("MoveUI").GetComponent<UIMove>();
+        ui = GameObject.Find("MoveUI");
+        uiAnim =ui.GetComponent<UIMove>();
+        damageColor = uiAnim.GetComponent<Image>().color.a;
 
         firstSpeed = moveSpeed;
         PlayerHP();
@@ -94,7 +98,7 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Shot()
     {
-        ui.AnimPlay();
+        uiAnim.AnimPlay();
         gunAnim.SetTrigger("Shot");
 
         if (enemyLayer == 0)
@@ -141,7 +145,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetKeyDown("q"))
         {
-            ui.AnimPlay();
+            uiAnim.AnimPlay();
             enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
             enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
@@ -212,7 +216,7 @@ public class PlayerControler : MonoBehaviour
     /// <returns></returns>
     IEnumerator DodgeSpeed()
     {
-        ui.AnimPlay();
+        uiAnim.AnimPlay();
         moveSpeed = dodgePower;
         yield return new WaitForSeconds(0.1f);
         moveSpeed = firstSpeed;
