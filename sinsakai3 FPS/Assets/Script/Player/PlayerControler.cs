@@ -33,11 +33,13 @@ public class PlayerControler : MonoBehaviour
     Vector3 dir;
     Rigidbody rb;
     Vector3 hitPoint;
+    UIMove ui;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        ui = GameObject.Find("MoveUI").GetComponent<UIMove>();
 
         firstSpeed = moveSpeed;
         PlayerHP();
@@ -92,7 +94,9 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Shot()
     {
+        ui.AnimPlay();
         gunAnim.SetTrigger("Shot");
+
         if (enemyLayer == 0)
         {
             Debug.LogError("LayerにEnemyを設定してください");
@@ -137,6 +141,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetKeyDown("q"))
         {
+            ui.AnimPlay();
             enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
             enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
@@ -207,7 +212,7 @@ public class PlayerControler : MonoBehaviour
     /// <returns></returns>
     IEnumerator DodgeSpeed()
     {
-        gunAnim.SetTrigger("Dodge");
+        ui.AnimPlay();
         moveSpeed = dodgePower;
         yield return new WaitForSeconds(0.1f);
         moveSpeed = firstSpeed;

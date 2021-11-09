@@ -15,7 +15,7 @@ public class NotesControler : MonoBehaviour
     float startTime = 0;
     float finishTime = 0;
 
-    void Start()
+    void Awake()
     {
         sp = GameObject.FindGameObjectWithTag("Player").GetComponent<ShootingPlayer>();
 

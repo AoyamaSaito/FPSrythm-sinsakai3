@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] public static float _rythm = 0.8f;    //リズム
+    [SerializeField] public float _rythm = 0.4f;    //リズム
     public float rythm
     {
         get { return _rythm; }
@@ -26,7 +26,7 @@ public class ShootingPlayer : MonoBehaviour
     bool isReload = true;
     bool isDodge = true;
 
-    void Start()
+    void Awake()
     {
         Cursor.visible = false; //マウスカーソルを非表示に
 
