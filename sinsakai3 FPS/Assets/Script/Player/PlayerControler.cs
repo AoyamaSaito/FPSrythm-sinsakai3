@@ -19,6 +19,7 @@ public class PlayerControler : MonoBehaviour
     [Header("ダメージ")]
     [SerializeField] int shotDamage = 2;
     [SerializeField] int ultDamage = 10;
+    [SerializeField] Animator damagePanel;
     [Header("レイヤー")]
     [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
     [SerializeField] float isHitLength = 50f;
@@ -163,6 +164,8 @@ public class PlayerControler : MonoBehaviour
 
     public void PlayerDamage(int damage)
     {
+        damagePanel.Play("DamageAnim");
+
         DOTween.To(() => hp, // 変化させる値
                 x => hp = x, // 変化させた値 x の処理
                 hp - damage, // x をどの値まで変化させるか

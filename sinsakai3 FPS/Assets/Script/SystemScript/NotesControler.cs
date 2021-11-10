@@ -26,7 +26,7 @@ public class NotesControler : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("target").GetComponent<RectTransform>();
 
         myRect = GetComponent<RectTransform>();
-
+        myRect.localScale = orizin.localScale;
         startTime = Time.timeSinceLevelLoad;
 
     }
