@@ -7,16 +7,10 @@ using UnityEngine.UI;
 public abstract class ItemBase : MonoBehaviour
 {
     [SerializeField] ItemPatern ItemState = default;
+    [SerializeField] GetPatern GetState = default;
     [SerializeField] GameObject[] ItemUI = default;
 
-    GetPatern GetState = default;
-    Collider col;
-    //public virtual void NormalItemGet() { }
-    //public virtual void EquipHeadGet() { }
-    //public virtual void EquipBodyGet() { }
-    //public virtual void WeaponGet() { }
-    //public virtual void SkillGet() { }
-    //public virtual void UltimateGet() { }
+    public Collider col;
     public abstract void Get();
 
     void Start()
@@ -53,7 +47,6 @@ public abstract class ItemBase : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         col = other;
-
         switch (GetState)
         {
             case GetPatern.pickup:
@@ -69,14 +62,19 @@ public abstract class ItemBase : MonoBehaviour
                     NormalItem();
                     break;
                 case ItemPatern.head:
+                    HeadItem();
                     break;
                 case ItemPatern.body:
+                    BodyItem();
                     break;
                 case ItemPatern.weapon:
+                    WeaponItem();
                     break;
                 case ItemPatern.skill:
+                    SkillItem();
                     break;
                 case ItemPatern.ultimate:
+                    UltimateItem();
                     break;
             }
         }
@@ -107,6 +105,72 @@ public abstract class ItemBase : MonoBehaviour
                 break;
         }
     }
+
+    void HeadItem()
+    {
+        switch (GetState)
+        {
+            case GetPatern.pickup:
+                if (Input.GetKeyDown("f"))
+                {
+                    Get();
+                }
+                break;
+        }
+    }
+
+    void BodyItem()
+    {
+        switch (GetState)
+        {
+            case GetPatern.pickup:
+                if (Input.GetKeyDown("f"))
+                {
+                    Get();
+                }
+                break;
+        }
+    }
+
+    void WeaponItem()
+    {
+        switch (GetState)
+        {
+            case GetPatern.pickup:
+                if (Input.GetKeyDown("f"))
+                {
+                    Get();
+                }
+                break;
+        }
+    }
+
+    void SkillItem()
+    {
+        switch (GetState)
+        {
+            case GetPatern.pickup:
+                if (Input.GetKeyDown("f"))
+                {
+                    Get();
+                }
+                break;
+        }
+    }
+
+    void UltimateItem()
+    {
+        switch (GetState)
+        {
+            case GetPatern.pickup:
+                if (Input.GetKeyDown("f"))
+                {
+                    Get();
+                }
+                break;
+        }
+    }
+
     enum GetPatern
     {
         //体で拾う

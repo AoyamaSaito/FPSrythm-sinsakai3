@@ -32,6 +32,7 @@ public class PlayerControler : MonoBehaviour
     GameObject[] enemy;
     float damageColor;
     float firstSpeed = 0;
+    int firstHp = 0;
     Vector3 dir;
     Rigidbody rb;
     Vector3 hitPoint;
@@ -45,6 +46,7 @@ public class PlayerControler : MonoBehaviour
         ui = GameObject.Find("MoveUI");
         uiAnim =ui.GetComponent<UIMove>();
         damageColor = uiAnim.GetComponent<Image>().color.a;
+        firstHp = hp;
 
         firstSpeed = moveSpeed;
         PlayerHP();
@@ -169,6 +171,17 @@ public class PlayerControler : MonoBehaviour
         DOTween.To(() => hp, // 変化させる値
                 x => hp = x, // 変化させた値 x の処理
                 hp - damage, // x をどの値まで変化させるか
+                0.05f)   // 何秒かけて変化させるか
+                .OnUpdate(() => hpText.text = hp.ToString());
+    }
+
+    public void PlayerHeal(int heal)
+    {
+        damagePanel.Play("DamageAnim");
+
+        DOTween.To(() => hp, // 変化させる値
+                x => hp = x, // 変化させた値 x の処理
+                Mathf.Min(hp + heal, firstHp), // x をどの値まで変化させるか
                 0.05f)   // 何秒かけて変化させるか
                 .OnUpdate(() => hpText.text = hp.ToString());
     }

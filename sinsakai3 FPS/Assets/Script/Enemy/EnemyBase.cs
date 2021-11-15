@@ -18,12 +18,10 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] float maxHeight = 5;
     [Header("近づく距離")]
     [SerializeField] float chaseDistance = 1.7f;
-    [SerializeField] float navStopDistance = 0.05f;
     [SerializeField] GameObject navTarget = default;
     [Header("プレイヤー追跡パターン")]
     [SerializeField] MovePatern moveState = default;
     
-
     RaycastHit hit;
     Rigidbody rb;
     Collider col;
