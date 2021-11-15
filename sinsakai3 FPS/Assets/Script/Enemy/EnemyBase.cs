@@ -4,14 +4,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("ステータス")]
     [SerializeField] int hp = 10;
     [SerializeField] float chaseSpeed = 4;
+    [SerializeField] float navSpeed = 6;
     [SerializeField] Renderer r;
     [SerializeField] Color damageColor = default;
     [Header("高さ")]
@@ -19,48 +18,64 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] float maxHeight = 5;
     [Header("近づく距離")]
     [SerializeField] float chaseDistance = 1.7f;
+    [SerializeField] float navStopDistance = 0.05f;
+    [SerializeField] GameObject navTarget = default;
     [Header("プレイヤー追跡パターン")]
     [SerializeField] MovePatern moveState = default;
     
 
-    GameObject[] targets;
     RaycastHit hit;
     Rigidbody rb;
+    Collider col;
     NavMeshAgent navAgent;
     GameObject player;
     Color defaultColor;
     float kyori = 0;
-    float timer = 0;
     float chaseHeight = 0;
-    int beforeIndex = 0;
-    int targetIndex = 0;
+    float targetX = 0;
+    float targetZ = 0;
+    Vector3 beforeTarget = default;
 
     void Start()
     {
-
         defaultColor = r.material.color;
+
         switch (moveState)
         {
             case MovePatern.chase:
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
                 navAgent.enabled = false;
-                player = GameObject.FindGameObjectWithTag("Player");
                 chaseHeight = Random.Range(minHeight, maxHeight);
                 transform.position = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
                 break;
-            case MovePatern.prowl:
+            case MovePatern.wander:
+                rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
+                rb.Sleep();
                 navAgent.enabled = true;
-                targets = GameObject.FindGameObjectsWithTag("NavTarget");
-                targetIndex = Random.Range(0, targets.Length - 1);
-                navAgent.destination = targets[targetIndex].transform.position;
+                targetX = Random.Range(-14f, 14f);
+                targetZ = Random.Range(-14f, 14f);
+                beforeTarget = new Vector3(targetX, 4, targetZ);
+                navAgent.destination = new Vector3(targetX, 4, targetZ);
+                Instantiate(navTarget, beforeTarget, Quaternion.identity);
+                Debug.Log(beforeTarget);
                 break;
         }            
     }
 
     void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        transform.LookAt(player.transform.position);
+
+        switch (moveState)
+        {
+            case MovePatern.wander:
+                navAgent.speed = Mathf.PerlinNoise(gameObject.transform.position.x, gameObject.transform.position.z) * navSpeed;
+                break;
+        }
+
         Attack();
     }
 
@@ -97,30 +112,22 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     void Chase()
     {
-        timer += Time.deltaTime;
 
         Vector3 playerPosition = new Vector3(player.transform.position.x, chaseHeight, player.transform.position.z);
         Vector3 myPosition = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
 
-        transform.LookAt(playerPosition);
-
         if (Physics.Linecast(gameObject.transform.position, player.transform.position, out hit))
         {
             kyori = hit.distance;
-            if(3 <= timer)
-            {
-                timer = 0;
-            }
         }
 
         if(kyori >= chaseDistance)
         {
-            Debug.Log("chase");
-            rb.velocity = (playerPosition - myPosition).normalized * chaseSpeed;
+            Vector3 dir = playerPosition - myPosition;
+            rb.velocity = dir.normalized * Mathf.PerlinNoise(this.transform.position.x, this.transform.position.z) * chaseSpeed;
         }
         else
         {
-            Debug.Log("not chase");
             rb.velocity = new Vector3(0, 0, 0);
         }
     }
@@ -129,28 +136,21 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Wander(other);
     }
-    void Wander(Collider collision)
-    {
-        navAgent.destination = targets[targetIndex].transform.position;
 
-        if (collision.gameObject.tag == "NavTarget")
+    void Wander(Collider other)
+    {     
+        if (other.gameObject.CompareTag("NavTarget"))
         {
-            beforeIndex = targetIndex;
-            targetIndex = Random.Range(0, targets.Length - 1);
-            navAgent.destination = targets[Judge(targetIndex)].transform.position;
-            Debug.Log(targetIndex);
-        }
-    }
-    
-    int Judge(int n)
-    {
-        if(n != beforeIndex)
-        {
-            return n;
-        }
-        else
-        {
-            return Judge(Random.Range(0, targets.Length - 1));
+            Destroy(other.gameObject);
+
+            targetX = Random.Range(-14f, 14f);
+            targetZ = Random.Range(-14f, 14f);
+            beforeTarget = new Vector3(targetX, 4, targetZ);
+            navAgent.destination = new Vector3(targetX, 4, targetZ);
+
+            Instantiate(navTarget, beforeTarget, Quaternion.identity);
+
+            Debug.Log(beforeTarget);
         }
     }
 
@@ -165,6 +165,6 @@ public abstract class EnemyBase : MonoBehaviour
         //プレイヤーの座標を追う
         chase,
         //あたりをうろつく
-        prowl,
+        wander,
     }
 }

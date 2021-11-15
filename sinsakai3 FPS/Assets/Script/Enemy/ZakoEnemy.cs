@@ -25,7 +25,7 @@ public class ZakoEnemy : EnemyBase
 
         if(sp.rythm * 2 >= _timer)
         {
-             shotTime = Random.Range(minShotTime, sp.rythm * 2);
+             shotTime = Random.Range(minShotTime, maxShotTime);
         }
 
         if(shotTime <= _timer)
