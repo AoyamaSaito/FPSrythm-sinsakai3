@@ -10,11 +10,14 @@ public abstract class ItemBase : MonoBehaviour
     [SerializeField] GetPatern GetState = default;
     [SerializeField] GameObject[] ItemUI = default;
 
+    PlayerEquip pe;
     public Collider col;
     public abstract void Get();
 
     void Start()
     {
+        pe = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquip>();
+
         switch (GetState)
         {
             case GetPatern.pickup:
@@ -113,7 +116,7 @@ public abstract class ItemBase : MonoBehaviour
             case GetPatern.pickup:
                 if (Input.GetKeyDown("f"))
                 {
-                    Get();
+                    pe.HeadEquip = gameObject;
                 }
                 break;
         }
@@ -126,7 +129,7 @@ public abstract class ItemBase : MonoBehaviour
             case GetPatern.pickup:
                 if (Input.GetKeyDown("f"))
                 {
-                    Get();
+                    pe.BodyEquip = gameObject;
                 }
                 break;
         }

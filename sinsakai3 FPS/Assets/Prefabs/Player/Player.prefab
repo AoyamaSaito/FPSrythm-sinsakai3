@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1390364041158742647}
   - component: {fileID: 1390364041158742646}
   - component: {fileID: 1390364041158742644}
+  - component: {fileID: 1486488067373984040}
   - component: {fileID: 1390364041158742645}
   - component: {fileID: 1390364041158742650}
   m_Layer: 0
@@ -109,9 +110,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9967b0d7f93c2e148b22cfe9aebf4671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rythm: 0.4
+  _rythm: 0.4
   interval: 0.2
-  scoreMn: {fileID: 0}
+  missText: {fileID: 0}
+  waitTime: 0.2
+--- !u!114 &1486488067373984040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390364041158742643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29406675e7f1e04c8a57a7b4470c73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  headEquip: {fileID: 0}
+  bodyEquip: {fileID: 0}
+  skill: {fileID: 0}
+  ultimate: {fileID: 0}
 --- !u!114 &1390364041158742645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,12 +146,20 @@ MonoBehaviour:
   moveSpeed: 5
   jumpPower: 5
   dodgePower: 50
+  gunAnim: {fileID: 0}
+  hp: 100
+  fullHpText: {fileID: 0}
+  hpText: {fileID: 0}
+  shotDamage: 2
+  ultDamage: 10
+  damagePanel: {fileID: 0}
   isGroundLength: 1.1
   isHitLength: 50
-  hitEffect: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  hitEffect: {fileID: 0}
+  effectDestroy: 0.5
 --- !u!54 &1390364041158742650
 Rigidbody:
   m_ObjectHideFlags: 0

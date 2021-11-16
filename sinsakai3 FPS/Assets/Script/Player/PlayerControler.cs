@@ -46,9 +46,10 @@ public class PlayerControler : MonoBehaviour
         ui = GameObject.Find("MoveUI");
         uiAnim =ui.GetComponent<UIMove>();
         damageColor = uiAnim.GetComponent<Image>().color.a;
-        firstHp = hp;
 
+        firstHp = hp;
         firstSpeed = moveSpeed;
+
         PlayerHP();
     }
 
@@ -177,8 +178,6 @@ public class PlayerControler : MonoBehaviour
 
     public void PlayerHeal(int heal)
     {
-        damagePanel.Play("DamageAnim");
-
         DOTween.To(() => hp, // 変化させる値
                 x => hp = x, // 変化させた値 x の処理
                 Mathf.Min(hp + heal, firstHp), // x をどの値まで変化させるか
