@@ -31,7 +31,7 @@ public class ShootingPlayer : MonoBehaviour
         Cursor.visible = false; //マウスカーソルを非表示に
 
         scoreMn = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        mm = GameObject.Find("MagagineManager").GetComponent<GunManager>();
+        mm = GameObject.Find("GunManager").GetComponent<GunManager>();
         pc = GetComponent<PlayerControler>();
     }
 
