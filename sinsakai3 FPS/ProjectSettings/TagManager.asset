@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - NavTarget
   - StageChange
+  - StageBack
   layers:
   - Default
   - TransparentFX
