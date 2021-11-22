@@ -19,16 +19,12 @@ public class ZakoEnemy : EnemyBase
     {
         sp = GameObject.FindGameObjectWithTag("Player").GetComponent<ShootingPlayer>();
     }
+
     public override void Attack()
     {      
         _timer += Time.deltaTime;
 
-        if(sp.rythm * 2 >= _timer)
-        {
-             shotTime = Random.Range(minShotTime, maxShotTime);
-        }
-
-        if(shotTime <= _timer)
+        if(sp.rythm * 4 <= _timer)
         {
             Instantiate(bullet, muzzle.position, Quaternion.identity);
             _timer = 0;

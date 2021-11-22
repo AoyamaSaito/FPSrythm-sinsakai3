@@ -61,7 +61,7 @@ public class PlayerControler : MonoBehaviour
 
         dir = Vector3.forward * v + Vector3.right * h;
 
-        Ultimate();
+        //Ultimate();
         Jump();
     }
 
@@ -115,8 +115,17 @@ public class PlayerControler : MonoBehaviour
         Vector3 end = start + Camera.main.transform.forward * isHitLength;
         bool hit = Physics.Linecast(start, end, enemyLayer);
 
+        if(hit)
+        {
+            Debug.Log("hit");
+        }
+        if (Physics.Raycast(start, end, out isHit, isHitLength))
+        {
+            Debug.Log(isHit.collider.gameObject.name);
+        }
         if (Physics.Raycast(start, end, out isHit, isHitLength, enemyLayer) && hit)
         {
+            Debug.Log(isHit.collider.gameObject);
             GameObject hitEnemy = isHit.collider.gameObject;
 
             hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
@@ -142,7 +151,6 @@ public class PlayerControler : MonoBehaviour
     public void Dodge()
     {
         StartCoroutine(DodgeSpeed());
-        Debug.Log("Dodge");
     }
 
     public void Ultimate()

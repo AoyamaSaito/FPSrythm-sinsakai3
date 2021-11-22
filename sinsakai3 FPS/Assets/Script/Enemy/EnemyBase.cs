@@ -43,6 +43,7 @@ public abstract class EnemyBase : MonoBehaviour
         switch (moveState)
         {
             case MovePatern.chase:
+                player = GameObject.FindGameObjectWithTag("Player");
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
                 navAgent.enabled = false;
@@ -52,14 +53,13 @@ public abstract class EnemyBase : MonoBehaviour
             case MovePatern.wander:
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
-                rb.Sleep();
+                rb.isKinematic = false;
                 navAgent.enabled = true;
                 targetX = Random.Range(-wanderWidth, wanderWidth);
                 targetZ = Random.Range(-wanderWidth, wanderWidth);
                 beforeTarget = new Vector3(targetX, wanderHeight, targetZ);
                 navAgent.destination = new Vector3(targetX, wanderHeight, targetZ);
                 Instantiate(navTarget, beforeTarget, Quaternion.identity);
-                Debug.Log(beforeTarget);
                 break;
         }            
     }

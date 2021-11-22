@@ -55,8 +55,6 @@ public class ShootingPlayer : MonoBehaviour
 
             if (count <= interval / 2 && isRythm1 == false && isRythm2 == false)
             {
-                Debug.Log("shot");
-
                 pc.Shot();
                 scoreMn.Score();
                 mm.Shot();
@@ -65,8 +63,6 @@ public class ShootingPlayer : MonoBehaviour
             }
             else if (count >= rythm - interval / 2 && isRythm2 == false)
             {
-                Debug.Log("shot");
-
                 pc.Shot();
                 scoreMn.Score();
                 mm.Shot();

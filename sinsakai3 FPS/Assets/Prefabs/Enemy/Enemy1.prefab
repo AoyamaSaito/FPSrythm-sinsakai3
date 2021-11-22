@@ -109,11 +109,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   chaseSpeed: 4
+  navSpeed: 6
   r: {fileID: 1148380820931816835}
   damageColor: {r: 1, g: 1, b: 0, a: 1}
   minHeight: 1
   maxHeight: 2
+  wanderHeight: 4
   chaseDistance: 7
+  wanderWidth: 14
+  navTarget: {fileID: 0}
   moveState: 0
   bullet: {fileID: 1190479576830284387, guid: 86475ec460fe53644913af002e1cb636, type: 3}
   muzzle: {fileID: 6311483536150436389}
@@ -145,7 +149,7 @@ GameObject:
   - component: {fileID: 1148380820931816835}
   m_Layer: 8
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -14,7 +14,7 @@ public class PlayerEquip : MonoBehaviour
     /// <summary>
     /// カプセル化
     /// </summary>
-    public GameObject Wepon{ get { return weapon; } set { weapon = value; } }
+    public GameObject Wepon { get { return weapon; } set { weapon = value; } }
     public GameObject HeadEquip { get { return headEquip; } set { headEquip = value; } }
     public GameObject BodyEquip { get { return bodyEquip; } set { bodyEquip = value; } }
     public GameObject Skill { get { return skill; } set { skill = value; } }

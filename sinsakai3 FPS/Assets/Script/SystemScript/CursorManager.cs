@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    bool a = true;
     [SerializeField] CinemachineVirtualCamera cm;
 
     void Start()
