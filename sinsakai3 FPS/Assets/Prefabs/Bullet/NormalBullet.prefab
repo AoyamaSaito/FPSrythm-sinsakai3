@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1190479576830284386}
   - component: {fileID: 1190479576830284390}
   - component: {fileID: 1378916858419972763}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NormalBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,7 @@ TrailRenderer:
   m_GameObject: {fileID: 1190479576830284387}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0

@@ -16,8 +16,10 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("高さ")]
     [SerializeField] float minHeight = 3;
     [SerializeField] float maxHeight = 5;
-    [Header("近づく距離")]
+    [SerializeField] float wanderHeight = 4f;
+    [Header("距離")]
     [SerializeField] float chaseDistance = 1.7f;
+    [SerializeField] float wanderWidth = 14f;
     [SerializeField] GameObject navTarget = default;
     [Header("プレイヤー追跡パターン")]
     [SerializeField] MovePatern moveState = default;
@@ -52,10 +54,10 @@ public abstract class EnemyBase : MonoBehaviour
                 navAgent = GetComponent<NavMeshAgent>();
                 rb.Sleep();
                 navAgent.enabled = true;
-                targetX = Random.Range(-14f, 14f);
-                targetZ = Random.Range(-14f, 14f);
-                beforeTarget = new Vector3(targetX, 4, targetZ);
-                navAgent.destination = new Vector3(targetX, 4, targetZ);
+                targetX = Random.Range(-wanderWidth, wanderWidth);
+                targetZ = Random.Range(-wanderWidth, wanderWidth);
+                beforeTarget = new Vector3(targetX, wanderHeight, targetZ);
+                navAgent.destination = new Vector3(targetX, wanderHeight, targetZ);
                 Instantiate(navTarget, beforeTarget, Quaternion.identity);
                 Debug.Log(beforeTarget);
                 break;
@@ -141,10 +143,10 @@ public abstract class EnemyBase : MonoBehaviour
         {
             Destroy(other.gameObject);
 
-            targetX = Random.Range(-14f, 14f);
-            targetZ = Random.Range(-14f, 14f);
-            beforeTarget = new Vector3(targetX, 4, targetZ);
-            navAgent.destination = new Vector3(targetX, 4, targetZ);
+            targetX = Random.Range(-wanderWidth, wanderWidth);
+            targetZ = Random.Range(-wanderWidth, wanderWidth);
+            beforeTarget = new Vector3(targetX, wanderHeight, targetZ);
+            navAgent.destination = new Vector3(targetX, wanderHeight, targetZ);
 
             Instantiate(navTarget, beforeTarget, Quaternion.identity);
 
