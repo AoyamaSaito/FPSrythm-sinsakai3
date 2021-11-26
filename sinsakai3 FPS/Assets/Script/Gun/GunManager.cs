@@ -5,26 +5,30 @@ using UnityEngine.UI;
 
 public class GunManager : MonoBehaviour
 {
-    [SerializeField] int firstBulletCount = 6;
+    [SerializeField] int _firstBulletCount = 6;
     [System.NonSerialized] public int currrentBulletCount = 0;
 
-    [SerializeField] int reloadCount = 2;
+    [SerializeField] int _reloadCount = 2;
 
     [SerializeField] Text fullMagagineText; //マガジンの総数のテキスト
     [SerializeField] Text currentMagagineText;　//残弾のテキスト
     [SerializeField] GameObject[] reloadText; //リロードの文字のテキスト
 
-    [SerializeField] Animator gunAnim;
+    [SerializeField] Animator _gunAnim;
 
     int reloadTextCount = 0;
-    public int currentReloadCount = 0;
+    [System.NonSerialized]public int currentReloadCount = 0;
+
+    public int firstBulletCount { get => _firstBulletCount; set => _firstBulletCount = value; }
+    public int reloadCount { get => _reloadCount; set => _reloadCount = value; }
+    public Animator gunAnim { get => _gunAnim; set => _gunAnim = value; }
 
     // Start is called before the first frame update
     void Start()
     {        
-        fullMagagineText.text = firstBulletCount.ToString(); //マガジンの総数をテキストに表示する
+        fullMagagineText.text = _firstBulletCount.ToString(); //マガジンの総数をテキストに表示する
         
-        currrentBulletCount = firstBulletCount;        
+        currrentBulletCount = _firstBulletCount;        
         currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する                                                           
     }
 
@@ -45,18 +49,18 @@ public class GunManager : MonoBehaviour
     /// </summary>
     public void Reload()
     {
-        if (currrentBulletCount != firstBulletCount)
+        if (currrentBulletCount != _firstBulletCount)
         {
             currentReloadCount++;
             ReloadText();      
 
-            if (currentReloadCount == reloadCount)
+            if (currentReloadCount == _reloadCount)
             {
-                gunAnim.SetBool("Reload2", true);
+                _gunAnim.SetBool("Reload2", true);
 
                 StartCoroutine(ReloadReset());
 
-                currrentBulletCount = firstBulletCount; //残弾をMAXにする
+                currrentBulletCount = _firstBulletCount; //残弾をMAXにする
 
                 currentReloadCount = 0; //カウントをリセットする
 
@@ -64,7 +68,7 @@ public class GunManager : MonoBehaviour
             }
             else
             {
-                gunAnim.SetBool("Reload1", true);
+                _gunAnim.SetBool("Reload1", true);
             }
         }
     }
@@ -90,9 +94,9 @@ public class GunManager : MonoBehaviour
     }
     IEnumerator ReloadReset()
     {
-        gunAnim.SetBool("Reload1", false);
+        _gunAnim.SetBool("Reload1", false);
         yield return new WaitForSeconds(0.2f);
-        gunAnim.SetBool("Reload2", false);
+        _gunAnim.SetBool("Reload2", false);
     }
     IEnumerator ReloadTextCor()
     {

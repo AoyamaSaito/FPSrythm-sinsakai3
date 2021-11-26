@@ -20,10 +20,38 @@ public class PlayerEquip : MonoBehaviour
     public GameObject Skill { get { return skill; } set { skill = value; } }
     public GameObject Ultimate { get { return ultimate; } set { ultimate = value; } }
 
+
+    void Start()
+    {
+        if (Wepon != null)
+        {
+            Wepon.GetComponent<ItemBase>().Get();
+        }
+
+        if (HeadEquip != null)
+        {
+            HeadEquip.GetComponent<ItemBase>().Get();
+        }
+
+        if (BodyEquip != null)
+        {
+            BodyEquip.GetComponent<ItemBase>().Get();
+        }
+
+        if (Skill != null)
+        {
+            Skill.GetComponent<ItemBase>().Get();
+        }
+
+        if (Ultimate != null)
+        {
+            Ultimate.GetComponent<ItemBase>().Get();
+        }
+    }
     /// <summary>
     /// 装備品の確認
     /// </summary>
-    void Update()
+    public void Equip() 
     {
         if(Wepon != null)
         {

@@ -12,6 +12,9 @@ TagManager:
   - StageBack
   - Bullet
   - StageManager
+  - GunPosition
+  - GunManager
+  - Vcam1
   layers:
   - Default
   - TransparentFX

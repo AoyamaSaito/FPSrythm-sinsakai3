@@ -11,7 +11,7 @@ public abstract class ItemBase : MonoBehaviour
     [SerializeField] GameObject[] ItemUI = default;
 
     PlayerEquip pe;
-    public Collider col;
+    [NonSerialized] public Collider col;
     public abstract void Get();
 
     void Start()

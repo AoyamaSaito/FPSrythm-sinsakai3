@@ -39,6 +39,8 @@ public class PlayerControler : MonoBehaviour
     UIMove uiAnim;
     GameObject ui;
 
+    public Animator GunAnim { get => gunAnim; set => gunAnim = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,7 +85,7 @@ public class PlayerControler : MonoBehaviour
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
-            gunAnim.SetBool("Move", false);
+            GunAnim.SetBool("Move", false);
         }
         else
         {
@@ -97,7 +99,7 @@ public class PlayerControler : MonoBehaviour
             velo.y = rb.velocity.y;
             rb.velocity = velo;
 
-            gunAnim.SetBool("Move", true);
+            GunAnim.SetBool("Move", true);
         }
     }
 
@@ -107,7 +109,7 @@ public class PlayerControler : MonoBehaviour
     public void Shot()
     {
         uiAnim.AnimPlay();
-        gunAnim.SetTrigger("Shot");
+        GunAnim.SetTrigger("Shot");
 
         if (enemyLayer == 0)
         {
