@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] public float _rythm = 0.4f;    //リズム
+    [SerializeField] float _rythm = 0.4f;    //リズム
     public float rythm
     {
         get { return _rythm; }

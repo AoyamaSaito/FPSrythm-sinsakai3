@@ -9,14 +9,17 @@ public class StageManager : MonoBehaviour
 {
     [SerializeField, Tooltip("最初に呼び出されるステージ")] GameObject firstStage;
     [SerializeField, Tooltip("SetActiveをfalseにしてください")] GameObject[] stages;
-    [SerializeField] int nowStage = 0;
+    [SerializeField] int _nowStage = 0;
     [SerializeField] float respawnTime = 0.1f;
     [SerializeField] GameObject fadePanel;
 
+    
     List<GameObject> inGameStages = new List<GameObject>();
     GameObject[] shuffleStage;
     GameObject player;
     Vector3 respawnPoint;
+
+    public int nowStage { get => _nowStage; set => _nowStage = value; }
 
     void Awake()
     {     

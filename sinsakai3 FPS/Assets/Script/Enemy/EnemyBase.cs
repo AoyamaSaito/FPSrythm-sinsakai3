@@ -23,6 +23,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] GameObject navTarget = default;
     [Header("プレイヤー追跡パターン")]
     [SerializeField] MovePatern moveState = default;
+    [SerializeField] bool isMove = true;
     
     RaycastHit hit;
     Rigidbody rb;
@@ -55,6 +56,8 @@ public abstract class EnemyBase : MonoBehaviour
                 navAgent = GetComponent<NavMeshAgent>();
                 rb.isKinematic = false;
                 navAgent.enabled = true;
+                int nowStageIndex = GameObject.FindGameObjectWithTag("StageManager").GetComponent<StageManager>().nowStage * 50;
+                wanderWidth += nowStageIndex;
                 targetX = Random.Range(-wanderWidth, wanderWidth);
                 targetZ = Random.Range(-wanderWidth, wanderWidth);
                 beforeTarget = new Vector3(targetX, wanderHeight, targetZ);
@@ -72,10 +75,12 @@ public abstract class EnemyBase : MonoBehaviour
         switch (moveState)
         {
             case MovePatern.wander:
-                navAgent.speed = Mathf.PerlinNoise(gameObject.transform.position.x, gameObject.transform.position.z) * navSpeed;
+                if(isMove)
+                {
+                    navAgent.speed = Mathf.PerlinNoise(gameObject.transform.position.x, gameObject.transform.position.z) * navSpeed;
+                }
                 break;
         }
-
         Attack();
     }
 
@@ -84,7 +89,10 @@ public abstract class EnemyBase : MonoBehaviour
         switch (moveState)
         {
             case MovePatern.chase:
-                Chase();
+                if(isMove)
+                {
+                    Chase();
+                }
                 break;
         }
     }

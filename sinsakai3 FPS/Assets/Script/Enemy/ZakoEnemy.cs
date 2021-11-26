@@ -8,12 +8,9 @@ public class ZakoEnemy : EnemyBase
     [Header("弾")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform muzzle;
-    [SerializeField] float minShotTime = 2;
-    [SerializeField] float maxShotTime = 3;
 
     ShootingPlayer sp;
     float _timer = 0;
-    float shotTime = 0;
 
     void Awake()
     {

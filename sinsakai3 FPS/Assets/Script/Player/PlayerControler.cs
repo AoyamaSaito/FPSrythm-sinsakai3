@@ -63,6 +63,10 @@ public class PlayerControler : MonoBehaviour
 
         //Ultimate();
         Jump();
+
+        Vector3 start = Camera.main.transform.position;
+        Vector3 end = start + Camera.main.transform.forward * isHitLength;
+        Debug.DrawLine(start, end, Color.red);
     }
 
     void FixedUpdate()
@@ -112,23 +116,16 @@ public class PlayerControler : MonoBehaviour
 
         RaycastHit isHit;
         Vector3 start = Camera.main.transform.position;
-        Vector3 end = start + Camera.main.transform.forward * isHitLength;
-        bool hit = Physics.Linecast(start, end, enemyLayer);
-
-        if(hit)
-        {
-            Debug.Log("hit");
-        }
+        Vector3 end = Camera.main.transform.forward * isHitLength;
         if (Physics.Raycast(start, end, out isHit, isHitLength))
         {
-            Debug.Log(isHit.collider.gameObject.name);
-        }
-        if (Physics.Raycast(start, end, out isHit, isHitLength, enemyLayer) && hit)
-        {
             Debug.Log(isHit.collider.gameObject);
-            GameObject hitEnemy = isHit.collider.gameObject;
+            if(isHit.collider.gameObject.tag == "Enemy")
+            {
+                GameObject hitEnemy = isHit.collider.gameObject;
 
-            hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
+                hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
+            }
         }
 
         HitEffect();
@@ -216,6 +213,7 @@ public class PlayerControler : MonoBehaviour
         Vector3 end = Camera.main.transform.forward * isHitLength;
         if(Physics.Raycast(start, end, out hit, isHitLength))
         {
+            Debug.Log(hit.collider.gameObject.name);
             hitPoint = hit.point;
         }
         else
