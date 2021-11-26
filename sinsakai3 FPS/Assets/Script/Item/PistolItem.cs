@@ -20,20 +20,22 @@ public class PistolItem : ItemBase
     {
         if(!first)
         {
-            anim = GetComponent<Animator>();
-
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<PlayerEquip>().Wepon = gameObject;
-            player.GetComponent<PlayerControler>().GunAnim = anim;
 
             instantiatePositon = GameObject.FindGameObjectWithTag("GunPosition").transform;
             gunmana = GameObject.FindGameObjectWithTag("GunManager").GetComponent<GunManager>();
-            GameObject.FindGameObjectWithTag("Vcam1").transform.SetParent(gameObject.transform);
+            Transform vcam = GameObject.FindGameObjectWithTag("Vcam1").transform;
 
-            Instantiate(gameObject, instantiatePositon.localPosition, Quaternion.identity);
+            GameObject go = Instantiate(gameObject, instantiatePositon.localPosition, Quaternion.identity);
+            go.transform.SetParent(vcam);
+            anim = go.GetComponent<Animator>();
+
             gunmana.firstBulletCount = firstBullet;
             gunmana.reloadCount = reloadCount;
+            player.GetComponent<PlayerControler>().GunAnim = anim;
             gunmana.gunAnim = anim;
+
             first = false;
         }
     }

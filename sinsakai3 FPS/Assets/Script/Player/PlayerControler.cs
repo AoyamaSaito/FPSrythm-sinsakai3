@@ -63,7 +63,6 @@ public class PlayerControler : MonoBehaviour
 
         dir = Vector3.forward * v + Vector3.right * h;
 
-        //Ultimate();
         Jump();
 
         Vector3 start = Camera.main.transform.position;
@@ -121,7 +120,6 @@ public class PlayerControler : MonoBehaviour
         Vector3 end = Camera.main.transform.forward * isHitLength;
         if (Physics.Raycast(start, end, out isHit, isHitLength))
         {
-            Debug.Log(isHit.collider.gameObject);
             if(isHit.collider.gameObject.tag == "Enemy")
             {
                 GameObject hitEnemy = isHit.collider.gameObject;
