@@ -50,6 +50,7 @@ public class BossEnemy : EnemyBase
             switch(currentAttackPatern)
             {
                 case 0:
+                    Debug.Log("Late");
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     yield return new WaitForSeconds(sp.rythm);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
@@ -59,12 +60,15 @@ public class BossEnemy : EnemyBase
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     break;
                 case 1:
+                    Debug.Log("Fast");
                     Instantiate(fastBullet, muzzle.position, Quaternion.identity);
                     break;
                 case 2:
+                    Debug.Log("Wall");
                     Instantiate(damageWall, wallInstantiante.position, Quaternion.identity);
                     break;
                 case 3:
+                    Debug.Log("Big");
                     Instantiate(bigBullet, muzzle.position, Quaternion.identity);
                     break;
             }

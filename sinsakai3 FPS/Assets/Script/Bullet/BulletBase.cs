@@ -24,12 +24,13 @@ public abstract class BulletBase : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerControler>().PlayerDamage(damage);
+            Destroy(gameObject);
 
             if (destroyEffect)
             {
                 Instantiate(destroyEffect, this.transform.position, Quaternion.identity);
             }           
         }
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 2f);
     }
 }

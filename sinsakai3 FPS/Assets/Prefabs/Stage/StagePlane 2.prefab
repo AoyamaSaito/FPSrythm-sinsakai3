@@ -2802,12 +2802,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2173320332249101892}
   m_Layer: 0
-  m_Name: StagePlane
+  m_Name: StagePlane 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2173320332249101892
 Transform:
   m_ObjectHideFlags: 0

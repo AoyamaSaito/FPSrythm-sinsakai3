@@ -27,7 +27,7 @@ public class PistolItem : ItemBase
             gunmana = GameObject.FindGameObjectWithTag("GunManager").GetComponent<GunManager>();
             Transform vcam = GameObject.FindGameObjectWithTag("Vcam1").transform;
 
-            GameObject go = Instantiate(gameObject, instantiatePositon.localPosition, Quaternion.identity);
+            GameObject go = Instantiate(gameObject, instantiatePositon.localPosition, Quaternion.identity); //インスタンス化
             go.transform.SetParent(vcam);
             anim = go.GetComponent<Animator>();
 
