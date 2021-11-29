@@ -13,7 +13,6 @@ public class BossEnemy : EnemyBase
     [SerializeField] Transform muzzle;
     [SerializeField] Transform wallInstantiante;
 
-    GameObject player;
     ShootingPlayer sp;
     bool isAttack = true;
     int attackPatern = 3;
@@ -25,16 +24,11 @@ public class BossEnemy : EnemyBase
         sp = player.GetComponent<ShootingPlayer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override void Attack()
     {
         if (!a)
         {
+            Debug.Log("Attack");
             StartCoroutine(AttackCor());
             a = true;
         }
@@ -52,11 +46,11 @@ public class BossEnemy : EnemyBase
                 case 0:
                     Debug.Log("Late");
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(sp.rythm);
+                    yield return new WaitForSeconds(sp.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(sp.rythm);
+                    yield return new WaitForSeconds(sp.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(sp.rythm);
+                    yield return new WaitForSeconds(sp.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     break;
                 case 1:

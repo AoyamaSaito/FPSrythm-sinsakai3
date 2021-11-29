@@ -12,25 +12,31 @@ public abstract class BulletBase : MonoBehaviour
 
     void Awake()
     {
-        playerPosition = GameObject.FindWithTag("Player").GetComponent<Transform>().position;
+        playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
 
         targetPosition = playerPosition - this.transform.position; //Playerの座標をtargetとする
     }
 
-    public abstract void Attack();
+    public abstract void Move();
+
 
     void OnTriggerEnter(Collider other)
-    {      
-        if (other.gameObject.tag == "Player")
+    {
+        Hit(other);
+    }
+
+    public virtual void Hit(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerControler>().PlayerDamage(damage);
+            col.GetComponent<PlayerControler>().PlayerDamage(damage);
             Destroy(gameObject);
 
             if (destroyEffect)
             {
-                Instantiate(destroyEffect, this.transform.position, Quaternion.identity);
-            }           
+                Instantiate(destroyEffect, transform.position, Quaternion.identity);
+            }
         }
-        Destroy(this.gameObject, 2f);
+        Destroy(gameObject, 5f);
     }
 }

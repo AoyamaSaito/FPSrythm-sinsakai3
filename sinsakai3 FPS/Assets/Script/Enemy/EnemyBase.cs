@@ -29,7 +29,7 @@ public abstract class EnemyBase : MonoBehaviour
     Rigidbody rb;
     Collider col;
     NavMeshAgent navAgent;
-    GameObject player;
+    protected GameObject player;
     Color defaultColor;
     float kyori = 0;
     float chaseHeight = 0;
@@ -40,11 +40,11 @@ public abstract class EnemyBase : MonoBehaviour
     void Start()
     {
         defaultColor = r.material.color;
+        player = GameObject.FindGameObjectWithTag("Player");
 
         switch (moveState)
         {
             case MovePatern.chase:
-                player = GameObject.FindGameObjectWithTag("Player");
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
                 navAgent.enabled = false;

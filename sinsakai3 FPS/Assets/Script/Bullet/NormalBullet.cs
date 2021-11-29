@@ -11,13 +11,13 @@ public class NormalBullet : BulletBase
         rb = GetComponent<Rigidbody>();
     }
 
-    public override void Attack()
+    public override void Move()
     {
         rb.velocity = targetPosition.normalized * bulletSpeed;
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        Attack();
+        Move();
     }
 }

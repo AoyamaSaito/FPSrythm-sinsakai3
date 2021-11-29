@@ -13,7 +13,7 @@ public class NotesControler : MonoBehaviour
     RectTransform myRect;
 
     float startTime = 0;
-    float finishTime = 0;
+    float finishTimeMag = 2;
 
     void Awake()
     {
@@ -28,13 +28,12 @@ public class NotesControler : MonoBehaviour
         myRect = GetComponent<RectTransform>();
         myRect.localScale = orizin.localScale;
         startTime = Time.timeSinceLevelLoad;
-
+        Destroy(this.gameObject, finishTimeMag);
     }
 
     void Update()
     {
         NotesControl();
-        StartCoroutine(Reset());
     }
  
     /// <summary>
@@ -42,17 +41,10 @@ public class NotesControler : MonoBehaviour
     /// </summary>
     public void NotesControl()
     {
-        finishTime = sp.rythm * 2;
-
+        finishTimeMag = sp.rythm / finishTimeMag;
         var diff = Time.timeSinceLevelLoad - startTime;
-        var rate = diff / finishTime;
+        var rate = diff / finishTimeMag;
 
         myRect.position = Vector3.Lerp(orizin.position, target.position, rate);
-    }
-
-    IEnumerator Reset()
-    {
-        yield return new WaitForSeconds(finishTime);
-        Destroy(this.gameObject);
     }
 }
