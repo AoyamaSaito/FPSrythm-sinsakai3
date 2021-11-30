@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     GameObject[] shuffleStage;
     GameObject player;
     Vector3 respawnPoint;
+    Animator fadeAnim;
 
     public int nowStage { get => _nowStage; set => _nowStage = value; }
 
@@ -36,14 +37,16 @@ public class StageManager : MonoBehaviour
         }
 
         respawnPoint = inGameStages[nowStage].transform.Find("Respawn1").position;
-        player.transform.position = respawnPoint;      
+        player.transform.position = respawnPoint;
+
+        fadeAnim = fadePanel.GetComponent<Animator>(); 
     }
 
     public void NextStage()
     {
         Debug.Log("NextStage");
         nowStage++;
-        fadePanel.SetActive(true);
+        fadeAnim.Play("FadeAnim");
         inGameStages[nowStage - 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
         respawnPoint = inGameStages[nowStage].transform.Find("Respawn1").position;
@@ -54,7 +57,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("BackStage");
         nowStage--;
-        fadePanel.SetActive(true);
+        fadeAnim.Play("FadeAnim");
         inGameStages[nowStage + 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
         respawnPoint = inGameStages[nowStage].transform.Find("Respawn2").position;
@@ -64,7 +67,6 @@ public class StageManager : MonoBehaviour
     IEnumerator RespawnPlayer()
     {
         yield return new WaitForSeconds(respawnTime);
-        fadePanel.SetActive(false);
         player.transform.position = respawnPoint;
 
     }

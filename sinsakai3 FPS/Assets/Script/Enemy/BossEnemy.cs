@@ -6,6 +6,7 @@ public class BossEnemy : EnemyBase
 {
     [Header("ボスの攻撃パターン")]
     [SerializeField] int attackTime = 4;
+    [SerializeField] GameObject normalBullet;
     [SerializeField] GameObject lateBullet;
     [SerializeField] GameObject fastBullet;
     [SerializeField] GameObject bigBullet;
@@ -30,6 +31,7 @@ public class BossEnemy : EnemyBase
         {
             Debug.Log("Attack");
             StartCoroutine(AttackCor());
+            StartCoroutine(NormalAttackCor());
             a = true;
         }
     }
@@ -69,4 +71,12 @@ public class BossEnemy : EnemyBase
         } 
     }
 
+    IEnumerator NormalAttackCor()
+    {
+        while (isAttack)
+        {
+            yield return new WaitForSeconds(sp.rythm);
+            Instantiate(normalBullet, muzzle.position, Quaternion.identity);
+        }
+    }
 }

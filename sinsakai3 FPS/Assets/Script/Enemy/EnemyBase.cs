@@ -70,7 +70,6 @@ public abstract class EnemyBase : MonoBehaviour
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        transform.LookAt(player.transform.position);
 
         switch (moveState)
         {
@@ -174,5 +173,7 @@ public abstract class EnemyBase : MonoBehaviour
         chase,
         //あたりをうろつく
         wander,
+        //その場で止まる
+        stop,
     }
 }

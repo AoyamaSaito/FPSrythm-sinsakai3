@@ -32,8 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5244568, y: 1.5377423, z: 5.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2257513656123319399}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,9 +142,11 @@ MonoBehaviour:
   wanderWidth: 14
   navTarget: {fileID: 4038130777887654483, guid: 47653a7799152f84d8ed958909600c64,
     type: 3}
-  moveState: 0
+  moveState: 2
   isMove: 1
   attackTime: 4
+  normalBullet: {fileID: 1190479576830284387, guid: 86475ec460fe53644913af002e1cb636,
+    type: 3}
   lateBullet: {fileID: 1190479576830284387, guid: cacc1c647e3c95b42bb7abff70f33e9d,
     type: 3}
   fastBullet: {fileID: 1190479576830284387, guid: 3fb3b257b62c162479637becf0117988,
@@ -154,8 +155,8 @@ MonoBehaviour:
     type: 3}
   damageWall: {fileID: 1190479576830284387, guid: 4a60bf2c4ab3b47458705d635e641f3a,
     type: 3}
-  muzzle: {fileID: 2257513656123319399}
-  wallInstantiante: {fileID: 2257513656123319399}
+  muzzle: {fileID: 0}
+  wallInstantiante: {fileID: 0}
 --- !u!54 &5113323461695411165
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,33 +173,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &2257513656123319398
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2257513656123319399}
-  m_Layer: 0
-  m_Name: GameObject (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2257513656123319399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2257513656123319398}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.202}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2257513655983061885}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

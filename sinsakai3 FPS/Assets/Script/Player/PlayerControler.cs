@@ -211,9 +211,8 @@ public class PlayerControler : MonoBehaviour
         RaycastHit hit;
         Vector3 start = Camera.main.transform.position;
         Vector3 end = Camera.main.transform.forward * isHitLength;
-        if(Physics.Raycast(start, end, out hit, isHitLength))
+        if(Physics.Raycast(start, end, out hit, isHitLength, enemyLayer))
         {
-            Debug.Log(hit.collider.gameObject.name);
             hitPoint = hit.point;
         }
         else

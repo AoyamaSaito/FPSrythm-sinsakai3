@@ -18,7 +18,8 @@ public class ZakoEnemy : EnemyBase
     }
 
     public override void Attack()
-    {      
+    {
+        transform.LookAt(player.transform.position);
         _timer += Time.deltaTime;
 
         if(sp.rythm * 4 <= _timer)

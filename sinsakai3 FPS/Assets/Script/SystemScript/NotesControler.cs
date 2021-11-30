@@ -13,7 +13,7 @@ public class NotesControler : MonoBehaviour
     RectTransform myRect;
 
     float startTime = 0;
-    float finishTimeMag = 2;
+    float finishTimeMag = 4;
 
     void Awake()
     {
@@ -29,6 +29,7 @@ public class NotesControler : MonoBehaviour
         myRect.localScale = orizin.localScale;
         startTime = Time.timeSinceLevelLoad;
         Destroy(this.gameObject, finishTimeMag);
+        finishTimeMag = sp.rythm * finishTimeMag;
     }
 
     void Update()
@@ -41,7 +42,6 @@ public class NotesControler : MonoBehaviour
     /// </summary>
     public void NotesControl()
     {
-        finishTimeMag = sp.rythm / finishTimeMag;
         var diff = Time.timeSinceLevelLoad - startTime;
         var rate = diff / finishTimeMag;
 
