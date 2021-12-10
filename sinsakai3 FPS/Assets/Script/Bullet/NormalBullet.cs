@@ -9,6 +9,7 @@ public class NormalBullet : BulletBase
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
     }
 
     public override void Move()

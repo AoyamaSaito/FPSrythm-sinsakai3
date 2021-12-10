@@ -54,7 +54,7 @@ PrefabInstance:
     - target: {fileID: 2257513655983061875, guid: 0ee43691f908d14438316722d8683b32,
         type: 3}
       propertyPath: m_Name
-      value: BossTest (1)
+      value: BossTest (1) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2257513655983061875, guid: 0ee43691f908d14438316722d8683b32,
         type: 3}
@@ -141,8 +141,7 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c6d7d7138901a1c44888891a85aa9020, type: 2}
-    m_RemovedComponents:
-    - {fileID: 2257513655983061872, guid: 0ee43691f908d14438316722d8683b32, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ee43691f908d14438316722d8683b32, type: 3}
 --- !u!1 &1370840295630698685 stripped
 GameObject:
