@@ -40,8 +40,6 @@ public class PlayerControler : MonoBehaviour
     GameObject ui;
 
     public Animator GunAnim { get => gunAnim; set => gunAnim = value; }
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();

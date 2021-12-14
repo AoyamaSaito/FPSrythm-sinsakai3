@@ -15,6 +15,7 @@ TagManager:
   - GunPosition
   - GunManager
   - Vcam1
+  - StageClear
   layers:
   - Default
   - TransparentFX

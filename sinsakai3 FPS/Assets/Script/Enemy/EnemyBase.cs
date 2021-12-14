@@ -24,6 +24,8 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("プレイヤー追跡パターン")]
     [SerializeField] MovePatern moveState = default;
     [SerializeField] bool isMove = true;
+    [Header("StageClear")]
+    [SerializeField] StageClear sc;
     
     RaycastHit hit;
     Rigidbody rb;
@@ -111,6 +113,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (hp <= 0) //HPがゼロになったら死ぬ処理をする
         {
             Destroy(gameObject);
+            sc.IsStageClear();
         }
     }
 
