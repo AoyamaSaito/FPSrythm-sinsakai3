@@ -4,26 +4,32 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+//[ToDo] Wanderが未完成
+
+/// <summary>
+/// Enemyの基底クラス
+/// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("ステータス")]
-    [SerializeField] int hp = 10;
-    [SerializeField] float chaseSpeed = 4;
-    [SerializeField] float navSpeed = 6;
-    [SerializeField] Renderer r;
-    [SerializeField] Color damageColor = default;
+    [SerializeField, Tooltip("EnemyのHP")] int hp = 10;
+    [SerializeField, Tooltip("Chaseの追尾速度")] float chaseSpeed = 4;
+    [SerializeField, Tooltip("NavMeshの追尾速度")] float navSpeed = 6;
+    [Header("ダメージエフェクト")]
+    [SerializeField, Tooltip("ダメージを受けた時に変化させるRenderer")] Renderer r;
+    [SerializeField, Tooltip("ダメージを受けた時に変化させる色")] Color damageColor = default;
     [Header("高さ")]
-    [SerializeField] float minHeight = 3;
-    [SerializeField] float maxHeight = 5;
-    [SerializeField] float wanderHeight = 4f;
+    [SerializeField, Tooltip("リスポーンするときの最低の高さ")] float minHeight = 3;
+    [SerializeField, Tooltip("リスポーンするときの最大の高さ")] float maxHeight = 5;
+    [SerializeField, Tooltip("NavMeshの高さ")] float wanderHeight = 4f;
     [Header("距離")]
-    [SerializeField] float chaseDistance = 1.7f;
+    [SerializeField, Tooltip("プレイヤーに近づける距離")] float chaseDistance = 1.7f;
     [SerializeField] float wanderWidth = 14f;
-    [SerializeField] GameObject navTarget = default;
+    [SerializeField, Tooltip("目標地点の生成オブジェクト")] GameObject navTarget = default;
     [Header("プレイヤー追跡パターン")]
-    [SerializeField] MovePatern moveState = default;
-    [SerializeField] bool isMove = true;
+    [SerializeField, Tooltip("プレイヤー追跡パターン")] MovePatern moveState = default;
+    [SerializeField, Tooltip("falseで動作を止める")] bool isMove = true;
     [Header("StageClear")]
     [SerializeField] StageClear sc;
     
@@ -46,14 +52,14 @@ public abstract class EnemyBase : MonoBehaviour
 
         switch (moveState)
         {
-            case MovePatern.chase:
+            case MovePatern.chase:　//chaseはrb依存で動作を行うのでそれ以外のコンポーネントをオフにする
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
                 navAgent.enabled = false;
                 chaseHeight = Random.Range(minHeight, maxHeight);
                 transform.position = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
                 break;
-            case MovePatern.wander:
+            case MovePatern.wander:　//wanderはNavMesh依存で動作を行うのでそれ以外のコンポーネントをオフにする
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
                 rb.isKinematic = false;
@@ -78,6 +84,7 @@ public abstract class EnemyBase : MonoBehaviour
             case MovePatern.wander:
                 if(isMove)
                 {
+                    //PerlineNoiseで追尾速度を不規則に
                     navAgent.speed = Mathf.PerlinNoise(gameObject.transform.position.x, gameObject.transform.position.z) * navSpeed;
                 }
                 break;
@@ -122,16 +129,18 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     void Chase()
     {
-
+        //Playerと自分の現在の座標をchaseHeightに応じて出す
         Vector3 playerPosition = new Vector3(player.transform.position.x, chaseHeight, player.transform.position.z);
         Vector3 myPosition = new Vector3(gameObject.transform.position.x, chaseHeight, gameObject.transform.position.z);
 
+        //Playerと自分の座標との距離を求める
         if (Physics.Linecast(gameObject.transform.position, player.transform.position, out hit))
         {
             kyori = hit.distance;
         }
 
-        if(kyori >= chaseDistance)
+        //Playerと自分の座標との距離がプレイヤーに近づける距離(chaseDistance)より長かったらプレイヤーの方向に向かう
+        if (kyori >= chaseDistance)
         {
             Vector3 dir = playerPosition - myPosition;
             rb.velocity = dir.normalized * Mathf.PerlinNoise(this.transform.position.x, this.transform.position.z) * chaseSpeed;
@@ -147,6 +156,10 @@ public abstract class EnemyBase : MonoBehaviour
         Wander(other);
     }
 
+    /// <summary>
+    /// NavMeshAgentを使った、指定範囲内を不規則に移動する関数
+    /// </summary>
+    /// <param name="other"></param>
     void Wander(Collider other)
     {     
         if (other.gameObject.CompareTag("NavTarget"))
@@ -164,12 +177,20 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ダメージを受けた時に色を変えるコルーチン
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DamageColor()
     {
         r.material.color = damageColor;
         yield return new WaitForSeconds(0.5f);
         r.material.color = defaultColor;
     }
+
+    /// <summary>
+    /// 動作の種類の列挙型
+    /// </summary>
     enum MovePatern
     {
         //プレイヤーの座標を追う

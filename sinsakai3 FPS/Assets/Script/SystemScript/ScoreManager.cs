@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Scoreのマネージャー
+/// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] int magnification = 5;
-    [SerializeField] int addScore = 100;
-    [SerializeField] float scoreChangeInterval = 0.2f;
+    [SerializeField, Tooltip("何回撃ったら倍率が上がるか")] int magnification = 5;
+    [SerializeField, Tooltip("追加されるスコア")] int addScore = 100;
+    [SerializeField, Tooltip("スコアがTextで変化しきるまでの秒数")] float scoreChangeInterval = 0.2f;
 
     [SerializeField] Text scoreText;
     [SerializeField] Text magText;

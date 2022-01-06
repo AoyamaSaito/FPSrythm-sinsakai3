@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Notesの動作の処理
+/// </summary>
 public class NotesControler : MonoBehaviour
 {   
-    ShootingPlayer sp;
+    ShootingPlayer shootingPlayer;
 
     RectTransform orizin;
     RectTransform target;
 
-    RectTransform myRect;
+    RectTransform myRectTr;
 
     float startTime = 0;
     float finishTimeMag = 4;
 
-    void Awake()
+    void Start()
     {
-        sp = GameObject.FindGameObjectWithTag("Player").GetComponent<ShootingPlayer>();
+        shootingPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<ShootingPlayer>();
 
         GameObject canvas = GameObject.Find("Canvas");
         gameObject.transform.transform.SetParent(canvas.transform);
@@ -25,11 +28,11 @@ public class NotesControler : MonoBehaviour
         orizin = GameObject.FindGameObjectWithTag("orizin").GetComponent<RectTransform>();
         target = GameObject.FindGameObjectWithTag("target").GetComponent<RectTransform>();
 
-        myRect = GetComponent<RectTransform>();
-        myRect.localScale = orizin.localScale;
+        myRectTr = GetComponent<RectTransform>();
+        myRectTr.localScale = orizin.localScale;
         startTime = Time.timeSinceLevelLoad;
         Destroy(this.gameObject, finishTimeMag);
-        finishTimeMag = sp.rythm * finishTimeMag;
+        finishTimeMag = shootingPlayer.rythm * finishTimeMag;
     }
 
     void Update()
@@ -45,6 +48,6 @@ public class NotesControler : MonoBehaviour
         var diff = Time.timeSinceLevelLoad - startTime;
         var rate = diff / finishTimeMag;
 
-        myRect.position = Vector3.Lerp(orizin.position, target.position, rate);
+        myRectTr.position = Vector3.Lerp(orizin.position, target.position, rate); //targetに段々と向かう
     }
 }

@@ -5,34 +5,41 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//[ToDo] Playerのステータスを構造体にする
+//[ToDo] とにかく相互干渉をしない
+/// <summary>
+/// Playerの動作関係
+/// </summary>
 public class PlayerControler : MonoBehaviour
 {
     [Header("基本動作")]
-    [SerializeField] float moveSpeed = 5;
-    [SerializeField] float jumpPower = 5f;
-    [SerializeField] float dodgePower = 20f;
-    [SerializeField] Animator gunAnim;
+    [SerializeField, Tooltip("Playerの移動速度")] float moveSpeed = 5;
+    [SerializeField, Tooltip("Playerのジャンプの高さ")] float jumpPower = 5f;
+    [SerializeField, Tooltip("Playerの回避距離")] float dodgePower = 20f;
     [Header("ステータス")]
-    [SerializeField] int hp = 100;
-    [SerializeField] Text fullHpText;
-    [SerializeField] Text hpText;
+    [SerializeField, Tooltip("Playerのヘルス")] int hp = 100;
+    [SerializeField, Tooltip("Playerのヘルス最大値のText")] Text fullHpText;
+    [SerializeField, Tooltip("Playerの現在のヘルスのText")] Text currentHpText;
     [Header("ダメージ")]
-    [SerializeField] int shotDamage = 2;
-    [SerializeField] int ultDamage = 10;
-    [SerializeField] Animator damagePanel;
+    [SerializeField, Tooltip("Playerの射撃のダメージ")] int shotDamage = 2;
     [Header("レイヤー")]
-    [SerializeField] float isGroundLength = 1.1f; //接地判定をとる長さ
-    [SerializeField] float isHitLength = 50f;
-    [SerializeField] LayerMask enemyLayer;
+    [SerializeField, Tooltip("接地判定をとる高さ")] float isGroundLength = 1.1f; 
+    [SerializeField, Tooltip("射撃のHit判定をとる長さ")] float isHitLength = 50f;
+    [SerializeField, Tooltip("Enemyのレイヤー")] LayerMask enemyLayer;
     [Header("ヒットエフェクト")] 
-    [SerializeField] GameObject hitEffect;
-    [SerializeField] float effectDestroy = 0.5f;
-    [Header(" ")]
+    [SerializeField, Tooltip("着弾エフェクト")] GameObject hitEffect;
+    [SerializeField, Tooltip("エフェクトをDestroyする時間")] float effectDestroy = 0.5f;
+    [Header("アニメーター")]
+    [SerializeField, Tooltip("銃のアニメーター")] Animator gunAnim;
+    [SerializeField, Tooltip("ダメージを受けた時のPanelのアニメーター")] Animator damagePanel;
+
+    //初期値を保存
+    float firstSpeed = 0;
+    int firstHp = 0;
 
     GameObject[] enemy;
     float damageColor;
-    float firstSpeed = 0;
-    int firstHp = 0;
     Vector3 dir;
     Rigidbody rb;
     Vector3 hitPoint;
@@ -43,6 +50,8 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        //ダメージの時に赤くなるUIの処理
         ui = GameObject.Find("MoveUI");
         uiAnim =ui.GetComponent<UIMove>();
         damageColor = uiAnim.GetComponent<Image>().color.a;
@@ -53,7 +62,6 @@ public class PlayerControler : MonoBehaviour
         PlayerHP();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -108,7 +116,7 @@ public class PlayerControler : MonoBehaviour
         uiAnim.AnimPlay();
         GunAnim.SetTrigger("Shot");
 
-        if (enemyLayer == 0)
+        if (enemyLayer == 0) //enemyLayerが設定されていないと
         {
             Debug.LogError("LayerにEnemyを設定してください");
         }
@@ -148,22 +156,22 @@ public class PlayerControler : MonoBehaviour
         StartCoroutine(DodgeSpeed());
     }
 
-    public void Ultimate()
-    {
-        if (Input.GetKeyDown("q"))
-        {
-            uiAnim.AnimPlay();
-            enemy = GameObject.FindGameObjectsWithTag("Enemy");
+    //public void Ultimate()
+    //{
+    //    if (Input.GetKeyDown("q"))
+    //    {
+    //        uiAnim.AnimPlay();
+    //        enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
-            enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
-        }
-    }
+    //        enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
+    //    }
+    //}
 
     void PlayerHP()
     {
-        if(hpText && fullHpText)
+        if(currentHpText && fullHpText)
         {
-            hpText.text = hp.ToString();
+            currentHpText.text = hp.ToString();
             fullHpText.text = hp.ToString();
         }
     }
@@ -176,7 +184,7 @@ public class PlayerControler : MonoBehaviour
                 x => hp = x, // 変化させた値 x の処理
                 hp - damage, // x をどの値まで変化させるか
                 0.05f)   // 何秒かけて変化させるか
-                .OnUpdate(() => hpText.text = hp.ToString());
+                .OnUpdate(() => currentHpText.text = hp.ToString());
     }
 
     public void PlayerHeal(int heal)
@@ -185,8 +193,9 @@ public class PlayerControler : MonoBehaviour
                 x => hp = x, // 変化させた値 x の処理
                 Mathf.Min(hp + heal, firstHp), // x をどの値まで変化させるか
                 0.05f)   // 何秒かけて変化させるか
-                .OnUpdate(() => hpText.text = hp.ToString());
+                .OnUpdate(() => currentHpText.text = hp.ToString());
     }
+
     /// <summary>
     /// LineCastを使った接地判定
     /// </summary>

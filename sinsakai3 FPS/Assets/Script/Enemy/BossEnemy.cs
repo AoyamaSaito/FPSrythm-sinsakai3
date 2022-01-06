@@ -5,16 +5,17 @@ using UnityEngine;
 public class BossEnemy : EnemyBase
 {
     [Header("ボスの攻撃パターン")]
-    [SerializeField] int attackTime = 4;
+    [SerializeField, Tooltip("攻撃間隔")] int attackTime = 4;
     [SerializeField] GameObject normalBullet;
     [SerializeField] GameObject lateBullet;
     [SerializeField] GameObject fastBullet;
     [SerializeField] GameObject bigBullet;
-    [SerializeField] GameObject damageWall;//一定時間出現する壁
+    [SerializeField] GameObject damageWall;　//一定時間出現する壁
+    [Header("各種座標")]
     [SerializeField] Transform muzzle;
     [SerializeField] Transform wallInstantiante;
 
-    ShootingPlayer sp;
+    ShootingPlayer shootingPlayer;
     bool isAttack = true;
     int attackPatern = 3;
     bool a = false;
@@ -22,7 +23,7 @@ public class BossEnemy : EnemyBase
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        sp = player.GetComponent<ShootingPlayer>();
+        shootingPlayer = player.GetComponent<ShootingPlayer>();
     }
 
     public override void Attack()
@@ -40,7 +41,7 @@ public class BossEnemy : EnemyBase
     {
         while(isAttack)
         {
-            yield return new WaitForSeconds(sp.rythm * attackTime);
+            yield return new WaitForSeconds(shootingPlayer.rythm * attackTime);
             int currentAttackPatern = Random.Range(0, attackPatern);
 
             switch(currentAttackPatern)
@@ -48,11 +49,11 @@ public class BossEnemy : EnemyBase
                 case 0:
                     Debug.Log("Late");
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(sp.rythm * 2);
+                    yield return new WaitForSeconds(shootingPlayer.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(sp.rythm * 2);
+                    yield return new WaitForSeconds(shootingPlayer.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(sp.rythm * 2);
+                    yield return new WaitForSeconds(shootingPlayer.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     break;
                 case 1:
@@ -71,11 +72,15 @@ public class BossEnemy : EnemyBase
         } 
     }
 
+    /// <summary>
+    /// 弾を常時打ち出すコルーチン
+    /// </summary>
+    /// <returns></returns>
     IEnumerator NormalAttackCor()
     {
         while (isAttack)
         {
-            yield return new WaitForSeconds(sp.rythm);
+            yield return new WaitForSeconds(shootingPlayer.rythm);
             Instantiate(normalBullet, muzzle.position, Quaternion.identity);
         }
     }

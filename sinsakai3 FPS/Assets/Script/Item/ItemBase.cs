@@ -4,19 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 取得できるアイテムの基底クラス
+/// </summary>
 public abstract class ItemBase : MonoBehaviour
 {
-    [SerializeField] ItemPatern ItemState = default;
-    [SerializeField] GetPatern GetState = default;
-    [SerializeField] GameObject[] ItemUI = default;
+    [Header("アイテムの種別")]
+    [SerializeField, Tooltip("アイテムの種類")] ItemPatern ItemState = default;
+    [SerializeField, Tooltip("アイテムの取得方法")] GetPatern GetState = default;
+    [SerializeField, Tooltip("ゲーム上に表示するUI")] GameObject[] ItemUI = default;
 
-    PlayerEquip pe;
-    [NonSerialized] public Collider col;
+    PlayerEquip playerEquip;
+    [NonSerialized] private Collider col;
+
+    public Collider Col { get => col; set => col = value; }
+
+    /// <summary>
+    /// 取得したときの処理
+    /// </summary>
     public abstract void Get();
 
     void Start()
     {
-        pe = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquip>();
+        playerEquip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquip>();
 
         switch (GetState)
         {
@@ -42,18 +52,13 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter(Collider other)
     {
         col = other;
         switch (GetState)
         {
             case GetPatern.pickup:
-                Array.ForEach(ItemUI, g => g.SetActive(true));
+                Array.ForEach(ItemUI, g => g.SetActive(true)); //Triggerに入ったらUIを表示する
                 break;
         }
 
@@ -116,7 +121,7 @@ public abstract class ItemBase : MonoBehaviour
             case GetPatern.pickup:
                 if (Input.GetKeyDown("f"))
                 {
-                    pe.HeadEquip = gameObject;
+                    playerEquip.HeadEquip = gameObject;
                 }
                 break;
         }
@@ -129,7 +134,7 @@ public abstract class ItemBase : MonoBehaviour
             case GetPatern.pickup:
                 if (Input.GetKeyDown("f"))
                 {
-                    pe.BodyEquip = gameObject;
+                    playerEquip.BodyEquip = gameObject;
                 }
                 break;
         }
@@ -176,7 +181,7 @@ public abstract class ItemBase : MonoBehaviour
 
     enum GetPatern
     {
-        //体で拾う
+        //触れたら入手する
         pickup,
         //ボタンで入手する
         get,

@@ -31,8 +31,8 @@ public class PistolItem : ItemBase
             go.transform.SetParent(vcam);
             anim = go.GetComponent<Animator>();
 
-            gunmana.firstBulletCount = firstBullet;
-            gunmana.reloadCount = reloadCount;
+            gunmana.FirstBulletCount = firstBullet;
+            gunmana.ReloadCount = reloadCount;
             player.GetComponent<PlayerControler>().GunAnim = anim;
             gunmana.gunAnim = anim;
 

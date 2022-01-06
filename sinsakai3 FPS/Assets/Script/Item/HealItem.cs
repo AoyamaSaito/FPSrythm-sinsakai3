@@ -7,6 +7,6 @@ public class NormalItemTest : ItemBase
     [SerializeField] int heal = 20;
     public override void Get()
     {
-        base.col.gameObject.GetComponent<PlayerControler>().PlayerHeal(heal);
+        base.Col.gameObject.GetComponent<PlayerControler>().PlayerHeal(heal);
     }
 }

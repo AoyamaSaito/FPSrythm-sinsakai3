@@ -23,10 +23,10 @@ public class WallBullet : BulletBase
     {
         if(!a)
         {
-            transform.LookAt(base.targetPosition);
+            transform.LookAt(base.TargetPosition);
             a = true;
         }
 
-        rb.velocity = base.targetPosition.normalized * bulletSpeed;
+        rb.velocity = base.TargetPosition.normalized * bulletSpeed;
     }
 }
