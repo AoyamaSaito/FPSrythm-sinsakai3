@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ステージクリアの判定を行うスクリプト
+/// </summary>
 public class StageClear : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemys;
+    [SerializeField, Tooltip("そのステージ内の敵")] GameObject[] enemys;
     [SerializeField] string textTag = "StageClear";
 
     int enemyLength = 0;
@@ -18,6 +21,9 @@ public class StageClear : MonoBehaviour
         clearText.enabled = false;
     }
 
+    /// <summary>
+    /// もしステージ内の敵が0になったらTextを表示する
+    /// </summary>
     public void IsStageClear()
     {
         enemyLength--;

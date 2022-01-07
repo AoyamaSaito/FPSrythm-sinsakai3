@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Notesを生成するスクリプト
+/// </summary>
 public class NotesSystem : MonoBehaviour
 {
 
-    [SerializeField] public GameObject target1;
+    [SerializeField, Tooltip("Noteを生成する座標")] public GameObject instantiatePosition;
 
-    [SerializeField] GameObject notes;
+    [SerializeField, Tooltip("生成するNotes")] GameObject notes;
     [SerializeField] ShootingPlayer sp;
 
     float count = 0;
@@ -26,7 +29,7 @@ public class NotesSystem : MonoBehaviour
         {
             if (sp.rythm <= count)
             {
-                Instantiate(notes, target1.transform.position, Quaternion.identity);
+                Instantiate(notes, instantiatePosition.transform.position, Quaternion.identity);
                 count = 0;
             }
         }

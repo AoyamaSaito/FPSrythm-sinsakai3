@@ -130,7 +130,7 @@ public class PlayerControler : MonoBehaviour
             {
                 GameObject hitEnemy = isHit.collider.gameObject;
 
-                hitEnemy.GetComponent<EnemyBase>().Damage(shotDamage);
+                hitEnemy.GetComponent<EnemyBase>().enemyDamage(shotDamage);
             }
         }
 

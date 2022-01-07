@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//ItemBaseを継承したPistolのアイテム
 public class PistolItem : ItemBase
 {
     [SerializeField] int firstBullet = 6;

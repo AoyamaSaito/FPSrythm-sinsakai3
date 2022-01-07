@@ -13,7 +13,7 @@ public class BossEnemy : EnemyBase
     [SerializeField] GameObject damageWall;　//一定時間出現する壁
     [Header("各種座標")]
     [SerializeField] Transform muzzle;
-    [SerializeField] Transform wallInstantiante;
+    [SerializeField] Transform wallInstantiate;
 
     ShootingPlayer shootingPlayer;
     bool isAttack = true;
@@ -30,13 +30,16 @@ public class BossEnemy : EnemyBase
     {
         if (!a)
         {
-            Debug.Log("Attack");
             StartCoroutine(AttackCor());
             StartCoroutine(NormalAttackCor());
             a = true;
         }
     }
 
+    /// <summary>
+    /// Bossの攻撃分岐のコルーチン
+    /// </summary>
+    /// <returns></returns>
     IEnumerator AttackCor()
     {
         while(isAttack)
@@ -46,8 +49,7 @@ public class BossEnemy : EnemyBase
 
             switch(currentAttackPatern)
             {
-                case 0:
-                    Debug.Log("Late");
+                case 0: //遅い球を4回生成する
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     yield return new WaitForSeconds(shootingPlayer.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
@@ -56,16 +58,13 @@ public class BossEnemy : EnemyBase
                     yield return new WaitForSeconds(shootingPlayer.rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     break;
-                case 1:
-                    Debug.Log("Fast");
+                case 1:　//速い球を生成する
                     Instantiate(fastBullet, muzzle.position, Quaternion.identity);
                     break;
-                case 2:
-                    Debug.Log("Wall");
-                    Instantiate(damageWall, wallInstantiante.position, Quaternion.identity);
+                case 2:　//ダメージを受ける壁を生成する
+                    Instantiate(damageWall, wallInstantiate.position, Quaternion.identity);
                     break;
-                case 3:
-                    Debug.Log("Big");
+                case 3:　//大きい球を生成する
                     Instantiate(bigBullet, muzzle.position, Quaternion.identity);
                     break;
             }
@@ -73,7 +72,7 @@ public class BossEnemy : EnemyBase
     }
 
     /// <summary>
-    /// 弾を常時打ち出すコルーチン
+    /// 普通の弾を常時打ち出すコルーチン
     /// </summary>
     /// <returns></returns>
     IEnumerator NormalAttackCor()

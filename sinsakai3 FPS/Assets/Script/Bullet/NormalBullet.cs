@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//[ToDO] コメントを入れる
 public class NormalBullet : BulletBase
 {
     [SerializeField] float bulletSpeed = 5;

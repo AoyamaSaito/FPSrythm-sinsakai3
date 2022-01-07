@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//[ToDO] コメントを入れる
+
 public class WallBullet : BulletBase
 {
     [SerializeField] float bulletSpeed = 7f;

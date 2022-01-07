@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Playerがステージ移動を行うためのスクリプト
+/// </summary>
 public class PlayerStage : MonoBehaviour
 {
     StageManager stagemana;
+
     void Start()
     {
         stagemana = GameObject.Find("StageManager").GetComponent<StageManager>();

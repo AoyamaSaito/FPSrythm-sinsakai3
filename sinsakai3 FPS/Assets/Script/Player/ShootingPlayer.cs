@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// リズムごとにしか行動ができないようにするスクリプト
+/// </summary>
 public class ShootingPlayer : MonoBehaviour
 {
     [SerializeField] float _rythm = 0.4f;    //リズム
@@ -11,10 +14,10 @@ public class ShootingPlayer : MonoBehaviour
         get { return _rythm; }
     }
 
-    [SerializeField] float interval = 0.3f;     //譜面の猶予時間
+    [SerializeField, Tooltip("譜面の猶予時間")] float interval = 0.3f;
     [Header("MissText")]
-    [SerializeField] GameObject missText;
-    [SerializeField] float waitTime = 0.2f;
+    [SerializeField, Tooltip("Missしたときに画面に出るText")] GameObject missText;
+    [SerializeField, Tooltip("MissTextを表示しておく時間")] float waitTime = 0.2f;
 
     ScoreManager scoreMn;
     GunManager mm;
@@ -35,7 +38,6 @@ public class ShootingPlayer : MonoBehaviour
         pc = GetComponent<PlayerControler>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Fire();
@@ -144,6 +146,10 @@ public class ShootingPlayer : MonoBehaviour
         StartCoroutine(MissTextCor());
     }
 
+    /// <summary>
+    /// リズム外で動作をしたときにMissTextを表示するコルーチン
+    /// </summary>
+    /// <returns></returns>
     IEnumerator MissTextCor()
     {
         missText.SetActive(true);

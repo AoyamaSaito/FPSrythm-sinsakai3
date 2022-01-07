@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//[ToDo]
+
 /// <summary>
 /// Bulletの基底クラス
 /// </summary>
@@ -13,7 +15,7 @@ public abstract class BulletBase : MonoBehaviour
     [SerializeField, Tooltip("破壊されるときのエフェクト")] GameObject destroyEffect;
 
     Vector3 playerPosition;
-    [System.NonSerialized] Vector3 targetPosition;
+    [System.NonSerialized, Tooltip("Playerの座標を代入する変数")] Vector3 targetPosition;
 
     public Vector3 TargetPosition { get => targetPosition; set => targetPosition = value; }
 

@@ -48,6 +48,7 @@ public class NotesControler : MonoBehaviour
         var diff = Time.timeSinceLevelLoad - startTime;
         var rate = diff / finishTimeMag;
 
+        //orizinからtargetに向かってゆっくり進む
         myRectTr.position = Vector3.Lerp(orizin.position, target.position, rate); //targetに段々と向かう
     }
 }

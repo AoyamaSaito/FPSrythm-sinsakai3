@@ -17,7 +17,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Tooltip("Chaseの追尾速度")] float chaseSpeed = 4;
     [SerializeField, Tooltip("NavMeshの追尾速度")] float navSpeed = 6;
     [Header("ダメージエフェクト")]
-    [SerializeField, Tooltip("ダメージを受けた時に変化させるRenderer")] Renderer r;
+    [SerializeField, Tooltip("ダメージを受けた時に変化させるRenderer")] Renderer changeRenderer;
     [SerializeField, Tooltip("ダメージを受けた時に変化させる色")] Color damageColor = default;
     [Header("高さ")]
     [SerializeField, Tooltip("リスポーンするときの最低の高さ")] float minHeight = 3;
@@ -25,13 +25,13 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Tooltip("NavMeshの高さ")] float wanderHeight = 4f;
     [Header("距離")]
     [SerializeField, Tooltip("プレイヤーに近づける距離")] float chaseDistance = 1.7f;
-    [SerializeField] float wanderWidth = 14f;
+    [SerializeField, Tooltip("NavMeshが動ける幅")] float wanderWidth = 14f;
     [SerializeField, Tooltip("目標地点の生成オブジェクト")] GameObject navTarget = default;
     [Header("プレイヤー追跡パターン")]
-    [SerializeField, Tooltip("プレイヤー追跡パターン")] MovePatern moveState = default;
+    [SerializeField, Tooltip("プレイヤー追跡パターンの列挙型")] MovePatern moveState = default;
     [SerializeField, Tooltip("falseで動作を止める")] bool isMove = true;
     [Header("StageClear")]
-    [SerializeField] StageClear sc;
+    [SerializeField] StageClear stageClear;
     
     RaycastHit hit;
     Rigidbody rb;
@@ -47,12 +47,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     void Start()
     {
-        defaultColor = r.material.color;
+        defaultColor = changeRenderer.material.color;
         player = GameObject.FindGameObjectWithTag("Player");
 
         switch (moveState)
         {
-            case MovePatern.chase:　//chaseはrb依存で動作を行うのでそれ以外のコンポーネントをオフにする
+            case MovePatern.chase:　//chaseはRigidBody依存で動作を行うのでそれ以外のコンポーネントをオフにする
                 rb = GetComponent<Rigidbody>();
                 navAgent = GetComponent<NavMeshAgent>();
                 navAgent.enabled = false;
@@ -89,6 +89,7 @@ public abstract class EnemyBase : MonoBehaviour
                 }
                 break;
         }
+
         Attack();
     }
 
@@ -111,21 +112,20 @@ public abstract class EnemyBase : MonoBehaviour
     /// 引数にダメージを設定する
     /// </summary>
     /// <param name="damage"></param>
-    public void Damage(int damage)
+    public void enemyDamage(int damage)
     {
-        Debug.Log($"Damage{damage}");
         hp -= damage;
         StartCoroutine(DamageColor());
 
         if (hp <= 0) //HPがゼロになったら死ぬ処理をする
         {
             Destroy(gameObject);
-            sc.IsStageClear();
+            stageClear.IsStageClear();
         }
     }
 
     /// <summary>
-    /// プレイヤーとの距離が一定以内なら追跡する
+    /// プレイヤーとの距離がchaseDistanceより遠ければ追跡する
     /// </summary>
     void Chase()
     {
@@ -183,9 +183,9 @@ public abstract class EnemyBase : MonoBehaviour
     /// <returns></returns>
     IEnumerator DamageColor()
     {
-        r.material.color = damageColor;
+        changeRenderer.material.color = damageColor;
         yield return new WaitForSeconds(0.5f);
-        r.material.color = defaultColor;
+        changeRenderer.material.color = defaultColor;
     }
 
     /// <summary>
@@ -193,11 +193,8 @@ public abstract class EnemyBase : MonoBehaviour
     /// </summary>
     enum MovePatern
     {
-        //プレイヤーの座標を追う
-        chase,
-        //あたりをうろつく
-        wander,
-        //その場で止まる
-        stop,
+        [Tooltip("プレイヤーの座標を追う")] chase,
+        [Tooltip("あたりをうろつく")] wander,
+        [Tooltip("その場で止まる")] stop,
     }
 }

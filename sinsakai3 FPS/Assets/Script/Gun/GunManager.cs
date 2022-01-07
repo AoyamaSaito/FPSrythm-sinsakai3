@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// 銃の残弾管理
+/// リロードするためにはreloadCountの回数分決められたボタンを押す
 /// </summary>
 public class GunManager : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class GunManager : MonoBehaviour
     [SerializeField, Tooltip("銃のアニメーター")] Animator _gunAnim;
 
     int reloadTextCount = 0;
-    [System.NonSerialized, Tooltip("現在のリロードに必要な入力の回数")]public int currentReloadCount = 0;
+    [System.NonSerialized, Tooltip("現在のリロードの入力の回数")]public int currentReloadCount = 0;
 
     public int FirstBulletCount { get => fullBulletCount; set => fullBulletCount = value; }
     public int ReloadCount { get => reloadCount; set => reloadCount = value; }
@@ -54,11 +55,13 @@ public class GunManager : MonoBehaviour
     /// </summary>
     public void Reload()
     {
+        //弾を消費していたら
         if (currrentBulletCount != fullBulletCount)
         {
             currentReloadCount++;
             ReloadText();      
 
+            //リロードが完了したら
             if (currentReloadCount == reloadCount)
             {
                 _gunAnim.SetBool("Reload2", true);
