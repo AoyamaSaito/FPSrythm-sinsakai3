@@ -14,7 +14,6 @@ public class PlayerStage : MonoBehaviour
         stagemana = GameObject.Find("StageManager").GetComponent<StageManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
