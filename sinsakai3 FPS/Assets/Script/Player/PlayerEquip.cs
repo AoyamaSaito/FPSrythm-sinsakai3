@@ -14,6 +14,12 @@ public class PlayerEquip : MonoBehaviour
     [SerializeField, Tooltip("プレイヤーのスキル")] GameObject skill;
     [SerializeField, Tooltip("プレイヤーの奥義")] GameObject ultimate;
 
+    GameObject currentWeapon;
+    GameObject currentHead;
+    GameObject currentBody;
+    GameObject currentSkill;
+    GameObject currentUltimate;
+
     //カプセル化
     public GameObject Wepon { get { return weapon; } set { weapon = value; } }
     public GameObject HeadEquip { get { return headEquip; } set { headEquip = value; } }
@@ -26,57 +32,87 @@ public class PlayerEquip : MonoBehaviour
     {
         if (Wepon != null)
         {
-            Wepon.GetComponent<ItemBase>().Get();
+            if (currentWeapon != Wepon)
+            {
+                Wepon.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (HeadEquip != null)
         {
-            HeadEquip.GetComponent<ItemBase>().Get();
+            if (currentHead != HeadEquip)
+            {
+                HeadEquip.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (BodyEquip != null)
         {
-            BodyEquip.GetComponent<ItemBase>().Get();
+            if (currentBody != BodyEquip)
+            {
+                BodyEquip.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (Skill != null)
         {
-            Skill.GetComponent<ItemBase>().Get();
+            if (currentSkill != Skill)
+            {
+                Skill.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (Ultimate != null)
         {
-            Ultimate.GetComponent<ItemBase>().Get();
+            if (currentUltimate != Ultimate)
+            {
+                Ultimate.GetComponent<ItemBase>().Get();
+            }
         }
     }
     /// <summary>
     /// 装備品の確認
     /// </summary>
-    public void Equip() 
+    public void Equip()
     {
-        if(Wepon != null)
+        if (Wepon != null)
         {
-            Wepon.GetComponent<ItemBase>().Get();
+            if (currentHead != HeadEquip)
+            {
+                HeadEquip.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (HeadEquip != null)
         {
-            HeadEquip.GetComponent<ItemBase>().Get();
+            if (currentHead != HeadEquip)
+            {
+                HeadEquip.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (BodyEquip != null)
         {
-            BodyEquip.GetComponent<ItemBase>().Get();
+            if (currentBody != BodyEquip)
+            {
+                BodyEquip.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (Skill != null)
         {
-            Skill.GetComponent<ItemBase>().Get();
+            if (currentSkill != Skill)
+            {
+                Skill.GetComponent<ItemBase>().Get();
+            }
         }
 
         if (Ultimate != null)
         {
-            Ultimate.GetComponent<ItemBase>().Get();
+            if (currentUltimate != Ultimate)
+            {
+                Ultimate.GetComponent<ItemBase>().Get();
+            }
         }
     }
 }

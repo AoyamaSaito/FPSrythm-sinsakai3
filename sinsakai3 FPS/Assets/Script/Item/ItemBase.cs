@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 /// <summary>
@@ -16,6 +17,8 @@ public abstract class ItemBase : MonoBehaviour
 
     PlayerEquip playerEquip;
     [NonSerialized] private Collider col;
+    [Tooltip("PlayerがItemのエリア内にいるか")]bool onAria;
+    [Tooltip("初回か")] protected bool first = false;
 
     public Collider Col { get => col; set => col = value; }
 
@@ -27,6 +30,7 @@ public abstract class ItemBase : MonoBehaviour
     void Start()
     {
         playerEquip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquip>();
+        first = false;
 
         switch (GetState)
         {
@@ -52,18 +56,27 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown("f") && onAria == true)
+        {
+            playerEquip.Equip();
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         col = other;
-        switch (GetState)
-        {
-            case GetPatern.pickup:
-                Array.ForEach(ItemUI, g => g.SetActive(true)); //Triggerに入ったらUIを表示する
-                break;
-        }
 
         if (other.gameObject.CompareTag("Player"))
         {
+            switch (GetState)
+            {
+                case GetPatern.pickup:
+                    Array.ForEach(ItemUI, g => g.SetActive(true)); //Triggerに入ったらUIを表示する
+                    break;
+            }
+
             switch (ItemState)
             {
                 case ItemPatern.normal:
@@ -94,6 +107,7 @@ public abstract class ItemBase : MonoBehaviour
         {
             case GetPatern.pickup:
                 Array.ForEach(ItemUI, g => g.SetActive(false));
+                onAria = false;
                 break;
         }
     }
@@ -103,10 +117,7 @@ public abstract class ItemBase : MonoBehaviour
         switch (GetState)
         {
             case GetPatern.pickup:
-                if (Input.GetKeyDown("f"))
-                {
-                    Get();
-                }
+                onAria = true;
                 break;
             case GetPatern.get:
                     Get();
@@ -119,10 +130,8 @@ public abstract class ItemBase : MonoBehaviour
         switch (GetState)
         {
             case GetPatern.pickup:
-                if (Input.GetKeyDown("f"))
-                {
-                    playerEquip.HeadEquip = gameObject;
-                }
+                playerEquip.HeadEquip = gameObject;
+                onAria = true;
                 break;
         }
     }
@@ -131,11 +140,9 @@ public abstract class ItemBase : MonoBehaviour
     {
         switch (GetState)
         {
-            case GetPatern.pickup:
-                if (Input.GetKeyDown("f"))
-                {
-                    playerEquip.BodyEquip = gameObject;
-                }
+            case GetPatern.pickup:;
+                playerEquip.BodyEquip = gameObject;
+                onAria = true;
                 break;
         }
     }
@@ -145,10 +152,8 @@ public abstract class ItemBase : MonoBehaviour
         switch (GetState)
         {
             case GetPatern.pickup:
-                if (Input.GetKeyDown("f"))
-                {
-                    Get();
-                }
+                playerEquip.Wepon = gameObject;
+                onAria = true;
                 break;
         }
     }
@@ -158,10 +163,8 @@ public abstract class ItemBase : MonoBehaviour
         switch (GetState)
         {
             case GetPatern.pickup:
-                if (Input.GetKeyDown("f"))
-                {
-                    Get();
-                }
+                playerEquip.Skill = gameObject;
+                onAria = true;
                 break;
         }
     }
@@ -171,10 +174,8 @@ public abstract class ItemBase : MonoBehaviour
         switch (GetState)
         {
             case GetPatern.pickup:
-                if (Input.GetKeyDown("f"))
-                {
-                    Get();
-                }
+                playerEquip.Ultimate = gameObject;
+                onAria = true;
                 break;
         }
     }

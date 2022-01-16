@@ -6,6 +6,6 @@ public class HeadItem : ItemBase
 {
     public override void Get()
     {
-        
+        gameObject.SetActive(false);
     }
 }
