@@ -11,11 +11,11 @@ public class PistolItem : ItemBase
     GunManager gunmana;
     Animator anim;
     Transform instantiatePositon;
+    [Tooltip("初回か")] bool first = false;
+
 
     public override void Get()
     {
-        if(base.first == false)return;
-
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerEquip>().Wepon = gameObject;
 
@@ -31,6 +31,5 @@ public class PistolItem : ItemBase
         gunmana.ReloadCount = reloadCount;
         player.GetComponent<PlayerControler>().GunAnim = anim;
         gunmana.gunAnim = anim;
-        base.first = true;
     }
 }

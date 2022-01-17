@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2554361967940221084}
   - component: {fileID: 3290330754284630000}
   m_Layer: 0
-  m_Name: ItemPlane
+  m_Name: HelmItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

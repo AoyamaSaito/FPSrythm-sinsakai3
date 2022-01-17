@@ -18,7 +18,6 @@ public abstract class ItemBase : MonoBehaviour
     PlayerEquip playerEquip;
     [NonSerialized] private Collider col;
     [Tooltip("PlayerがItemのエリア内にいるか")]bool onAria;
-    [Tooltip("初回か")] protected bool first = false;
 
     public Collider Col { get => col; set => col = value; }
 
@@ -30,7 +29,6 @@ public abstract class ItemBase : MonoBehaviour
     void Start()
     {
         playerEquip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquip>();
-        first = false;
 
         switch (GetState)
         {

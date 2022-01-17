@@ -17,6 +17,8 @@ TagManager:
   - Vcam1
   - StageClear
   - MainUI
+  - ArmorUI
+  - HelmUI
   layers:
   - Default
   - TransparentFX
