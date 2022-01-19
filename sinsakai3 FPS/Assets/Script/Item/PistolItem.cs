@@ -11,7 +11,6 @@ public class PistolItem : ItemBase
     GunManager gunmana;
     Animator anim;
     Transform instantiatePositon;
-    [Tooltip("初回か")] bool first = false;
 
 
     public override void Get()

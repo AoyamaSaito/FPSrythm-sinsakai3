@@ -20,7 +20,7 @@ public class ItemUIRotate : MonoBehaviour
     void Update()
     {
         //Payerの座標を取得してその方向を向く
-        playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
+        playerPosition = GameObject.FindGameObjectWithTag(playerTag).GetComponent<Transform>().position;
 
         Vector3 vector3 = playerPosition - this.transform.position;
         vector3.y = 0f;

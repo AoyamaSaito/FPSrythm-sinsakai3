@@ -31,7 +31,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField, Tooltip("プレイヤー追跡パターンの列挙型")] MovePatern moveState = default;
     [SerializeField, Tooltip("falseで動作を止める")] bool isMove = true;
     [Header("StageClear")]
-    [SerializeField] StageClear stageClear;
+    [SerializeField] StageClearSystem stageClear;
     
     RaycastHit hit;
     Rigidbody rb;
