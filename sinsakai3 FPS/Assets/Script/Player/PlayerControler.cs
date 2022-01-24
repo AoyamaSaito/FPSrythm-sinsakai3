@@ -24,10 +24,10 @@ public class PlayerControler : MonoBehaviour
     [Header("ダメージ")]
     [SerializeField, Tooltip("Playerの射撃のダメージ")] int shotDamage = 2;
     [Header("レイヤー")]
-    [SerializeField, Tooltip("接地判定をとる高さ")] float isGroundLength = 1.1f; 
+    [SerializeField, Tooltip("接地判定をとる高さ")] float isGroundLength = 1.1f;
     [SerializeField, Tooltip("射撃のHit判定をとる長さ")] float isHitLength = 50f;
     [SerializeField, Tooltip("Enemyのレイヤー")] LayerMask enemyLayer;
-    [Header("ヒットエフェクト")] 
+    [Header("ヒットエフェクト")]
     [SerializeField, Tooltip("着弾エフェクト")] GameObject hitEffect;
     [SerializeField, Tooltip("エフェクトをDestroyする時間")] float effectDestroy = 0.5f;
     [Header("アニメーター")]
@@ -53,7 +53,7 @@ public class PlayerControler : MonoBehaviour
 
         //ダメージの時に赤くなるUIの処理
         ui = GameObject.Find("MoveUI");
-        uiAnim =ui.GetComponent<UIMove>();
+        uiAnim = ui.GetComponent<UIMove>();
         damageColor = uiAnim.GetComponent<Image>().color.a;
 
         firstHp = hp;
@@ -70,6 +70,10 @@ public class PlayerControler : MonoBehaviour
         dir = Vector3.forward * v + Vector3.right * h;
 
         Jump();
+
+        dir = Camera.main.transform.TransformDirection(dir);
+        dir.y = 0;
+        if (dir != Vector3.zero) this.transform.forward = dir;
 
         Vector3 start = Camera.main.transform.position;
         Vector3 end = start + Camera.main.transform.forward * isHitLength;
@@ -94,15 +98,12 @@ public class PlayerControler : MonoBehaviour
         }
         else
         {
-            dir = Camera.main.transform.TransformDirection(dir); //カメラを基準に座標をとる
-            dir.y = 0;
-
-            Quaternion rotation = Quaternion.LookRotation(dir);
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, Time.deltaTime);
-
             Vector3 velo = dir.normalized * moveSpeed;　//移動
             velo.y = rb.velocity.y;
             rb.velocity = velo;
+
+            Quaternion rotation = Quaternion.LookRotation(dir);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, Time.deltaTime);
 
             GunAnim.SetBool("Move", true);
         }
@@ -124,14 +125,10 @@ public class PlayerControler : MonoBehaviour
         RaycastHit isHit;
         Vector3 start = Camera.main.transform.position;
         Vector3 end = Camera.main.transform.forward * isHitLength;
-        if (Physics.Raycast(start, end, out isHit, isHitLength))
+        if (Physics.Raycast(start, end, out isHit, isHitLength, enemyLayer))
         {
-            if(isHit.collider.gameObject.tag == "Enemy")
-            {
-                GameObject hitEnemy = isHit.collider.gameObject;
-
-                hitEnemy.GetComponent<EnemyBase>().enemyDamage(shotDamage);
-            }
+            GameObject hitEnemy = isHit.collider.gameObject;
+            hitEnemy.GetComponent<EnemyBase>().enemyDamage(shotDamage);
         }
 
         HitEffect();
@@ -169,7 +166,7 @@ public class PlayerControler : MonoBehaviour
 
     void PlayerHP()
     {
-        if(currentHpText && fullHpText)
+        if (currentHpText && fullHpText)
         {
             currentHpText.text = hp.ToString();
             fullHpText.text = hp.ToString();
@@ -205,7 +202,7 @@ public class PlayerControler : MonoBehaviour
         CapsuleCollider capcol = GetComponent<CapsuleCollider>();
         Vector3 start = this.transform.position + capcol.center;
         Vector3 end = start + Vector3.down * isGroundLength;
-        Debug.DrawLine(start, end); 
+        Debug.DrawLine(start, end);
         bool isGrounded = Physics.Linecast(start, end);
         return isGrounded;
     }
@@ -218,7 +215,7 @@ public class PlayerControler : MonoBehaviour
         RaycastHit hit;
         Vector3 start = Camera.main.transform.position;
         Vector3 end = Camera.main.transform.forward * isHitLength;
-        if(Physics.Raycast(start, end, out hit, isHitLength, enemyLayer))
+        if (Physics.Raycast(start, end, out hit, isHitLength, enemyLayer))
         {
             hitPoint = hit.point;
         }
@@ -227,12 +224,12 @@ public class PlayerControler : MonoBehaviour
             hitPoint = Vector3.zero;
         }
 
-        if(hitPoint != Vector3.zero)
+        if (hitPoint != Vector3.zero)
         {
-            if(hitEffect)
+            if (hitEffect)
             {
                 Destroy(Instantiate(hitEffect, hitPoint, Quaternion.identity), effectDestroy);
-            }            
+            }
         }
     }
 

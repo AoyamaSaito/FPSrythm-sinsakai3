@@ -35,6 +35,7 @@ public class PlayerEquip : MonoBehaviour
             if (currentWeapon != Wepon)
             {
                 Wepon.GetComponent<ItemBase>().Get();
+                currentWeapon = Wepon;
             }
         }
 
@@ -43,6 +44,7 @@ public class PlayerEquip : MonoBehaviour
             if (currentHead != HeadEquip)
             {
                 HeadEquip.GetComponent<ItemBase>().Get();
+                currentHead = HeadEquip;
             }
         }
 
@@ -51,6 +53,7 @@ public class PlayerEquip : MonoBehaviour
             if (currentBody != BodyEquip)
             {
                 BodyEquip.GetComponent<ItemBase>().Get();
+                currentBody = BodyEquip;
             }
         }
 
@@ -59,6 +62,7 @@ public class PlayerEquip : MonoBehaviour
             if (currentSkill != Skill)
             {
                 Skill.GetComponent<ItemBase>().Get();
+                currentSkill = Skill;
             }
         }
 
@@ -67,6 +71,7 @@ public class PlayerEquip : MonoBehaviour
             if (currentUltimate != Ultimate)
             {
                 Ultimate.GetComponent<ItemBase>().Get();
+                currentUltimate = Ultimate;
             }
         }
     }
@@ -77,9 +82,12 @@ public class PlayerEquip : MonoBehaviour
     {
         if (Wepon != null)
         {
-            if (currentHead != HeadEquip)
+            if (currentWeapon != Wepon)
             {
-                HeadEquip.GetComponent<ItemBase>().Get();
+                ItemBase itemBase = Wepon.GetComponent<ItemBase>();
+                itemBase.Out();
+                itemBase.Get();
+                currentWeapon = Wepon;
             }
         }
 
@@ -87,7 +95,10 @@ public class PlayerEquip : MonoBehaviour
         {
             if (currentHead != HeadEquip)
             {
-                HeadEquip.GetComponent<ItemBase>().Get();
+                ItemBase itemBase = HeadEquip.GetComponent<ItemBase>();
+                itemBase.Out();
+                itemBase.Get();
+                currentHead = HeadEquip;
             }
         }
 
@@ -95,7 +106,10 @@ public class PlayerEquip : MonoBehaviour
         {
             if (currentBody != BodyEquip)
             {
-                BodyEquip.GetComponent<ItemBase>().Get();
+                ItemBase itemBase = BodyEquip.GetComponent<ItemBase>();
+                itemBase.Out();
+                itemBase.Get();
+                currentBody = BodyEquip;
             }
         }
 
@@ -103,7 +117,10 @@ public class PlayerEquip : MonoBehaviour
         {
             if (currentSkill != Skill)
             {
-                Skill.GetComponent<ItemBase>().Get();
+                ItemBase itemBase = Skill.GetComponent<ItemBase>();
+                itemBase.Out();
+                itemBase.Get();
+                currentSkill = Skill;
             }
         }
 
@@ -111,7 +128,10 @@ public class PlayerEquip : MonoBehaviour
         {
             if (currentUltimate != Ultimate)
             {
-                Ultimate.GetComponent<ItemBase>().Get();
+                ItemBase itemBase = Ultimate.GetComponent<ItemBase>();
+                itemBase.Out();
+                itemBase.Get();
+                currentUltimate = Ultimate;
             }
         }
     }

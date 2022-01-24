@@ -61,7 +61,7 @@ public class TestControler : MonoBehaviour
             dir.y = 0;
 
             Quaternion rotation = Quaternion.LookRotation(dir);
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, Time.deltaTime);
+            this.transform.rotation = rotation;
 
             Vector3 velo = dir.normalized * moveSpeed;　//移動
             velo.y = rb.velocity.y;

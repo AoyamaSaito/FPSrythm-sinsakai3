@@ -22,9 +22,17 @@ public abstract class ItemBase : MonoBehaviour
     public Collider Col { get => col; set => col = value; }
 
     /// <summary>
-    /// 取得したときの処理
+    /// Itemを取得したときの処理
     /// </summary>
     public abstract void Get();
+
+    /// <summary>
+    /// Itemを外すときの処理
+    /// </summary>
+    public virtual void Out()
+    {
+        //外したときの処理を書く
+    }
 
     void Start()
     {
