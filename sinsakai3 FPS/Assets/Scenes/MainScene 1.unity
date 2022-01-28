@@ -4461,6 +4461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 218601389}
     m_Modifications:
+    - target: {fileID: 3727267485772527072, guid: 7ecea17eb7aad3f4ead82bd92dd2d629,
+        type: 3}
+      propertyPath: stagemana
+      value: 
+      objectReference: {fileID: 700402369}
     - target: {fileID: 3727267486048321670, guid: 7ecea17eb7aad3f4ead82bd92dd2d629,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4521,6 +4526,11 @@ PrefabInstance:
       propertyPath: damagePanel
       value: 
       objectReference: {fileID: 1109723723}
+    - target: {fileID: 3727267486079005383, guid: 7ecea17eb7aad3f4ead82bd92dd2d629,
+        type: 3}
+      propertyPath: currentHpText
+      value: 
+      objectReference: {fileID: 918737358}
     - target: {fileID: 3727267486079005383, guid: 7ecea17eb7aad3f4ead82bd92dd2d629,
         type: 3}
       propertyPath: enemyLayer.m_Bits

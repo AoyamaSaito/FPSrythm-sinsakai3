@@ -8,13 +8,14 @@ using UnityEngine.UI;
 
 //[ToDo] Playerのステータスを構造体にする
 //[ToDo] とにかく相互干渉をしない
+//[ToDO] 
 /// <summary>
 /// Playerの動作関係
 /// </summary>
 public class PlayerControler : MonoBehaviour
 {
     [Header("基本動作")]
-    [SerializeField, Tooltip("Playerの移動速度")] float moveSpeed = 5;
+    [SerializeField, Tooltip("Playerの移動速度")] float moveSpeed = 7;
     [SerializeField, Tooltip("Playerのジャンプの高さ")] float jumpPower = 5f;
     [SerializeField, Tooltip("Playerの回避距離")] float dodgePower = 20f;
     [Header("ステータス")]
@@ -30,6 +31,9 @@ public class PlayerControler : MonoBehaviour
     [Header("ヒットエフェクト")]
     [SerializeField, Tooltip("着弾エフェクト")] GameObject hitEffect;
     [SerializeField, Tooltip("エフェクトをDestroyする時間")] float effectDestroy = 0.5f;
+    [Header("stage移動")]
+    [SerializeField, Tooltip("Playerが今いるステージ")] int _nowStage = 0;
+    [SerializeField, Tooltip("Playerがステージ移動するまでの時間")] float teleportTime = 0.1f;
     [Header("アニメーター")]
     [SerializeField, Tooltip("銃のアニメーター")] Animator gunAnim;
     [SerializeField, Tooltip("ダメージを受けた時のPanelのアニメーター")] Animator damagePanel;
@@ -41,12 +45,14 @@ public class PlayerControler : MonoBehaviour
     GameObject[] enemy;
     float damageColor;
     Vector3 dir;
+    Vector3 playerPosition;
     Rigidbody rb;
     Vector3 hitPoint;
     UIMove uiAnim;
     GameObject ui;
 
     public Animator GunAnim { get => gunAnim; set => gunAnim = value; }
+    public Vector3 PlayerPosition { get => playerPosition; }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -233,6 +239,16 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    public Vector3 SearchPlayer(Vector3 target)
+    {
+        playerPosition = this.transform.position - target;
+        return playerPosition;
+    }
+
+    public void playerTransform(Vector3 respawnPoint)
+    {
+        StartCoroutine(RespawnPlayer(respawnPoint));
+    }
 
     /// <summary>
     /// 回避で急加速する処理
@@ -244,5 +260,15 @@ public class PlayerControler : MonoBehaviour
         moveSpeed = dodgePower;
         yield return new WaitForSeconds(0.1f);
         moveSpeed = firstSpeed;
+    }
+
+    /// <summary>
+    /// プレイヤーの位置をrespawnPointに移動させるコルーチン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator RespawnPlayer(Vector3 respawnPoint)
+    {
+        yield return new WaitForSeconds(teleportTime);
+        this.transform.position = respawnPoint;
     }
 }

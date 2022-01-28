@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
+// [ToDo] プレイヤーの動作が別のクラスにまで侵食しているので、クラスのモデル化をする
 /// <summary>
 /// 取得できるアイテムの基底クラス
 /// </summary>

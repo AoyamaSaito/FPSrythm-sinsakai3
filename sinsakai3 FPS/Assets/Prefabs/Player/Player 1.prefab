@@ -101,8 +101,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3727267486048321667}
-  m_LocalRotation: {x: -0.03538783, y: -0, z: -0, w: 0.9993737}
-  m_LocalPosition: {x: -0.049999952, y: 2.38, z: 6.74}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.48000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3727267484571692735}
@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 3770475754371582362}
   - component: {fileID: 3727267486079005383}
   - component: {fileID: 3727267486079005384}
+  - component: {fileID: 4607127503827630835}
   - component: {fileID: 3727267485772527072}
   m_Layer: 0
   m_Name: Player 1
@@ -402,13 +403,10 @@ MonoBehaviour:
   moveSpeed: 7
   jumpPower: 5
   dodgePower: 40
-  gunAnim: {fileID: 0}
   hp: 100
   fullHpText: {fileID: 0}
-  hpText: {fileID: 0}
+  currentHpText: {fileID: 0}
   shotDamage: 10
-  ultDamage: 10
-  damagePanel: {fileID: 0}
   isGroundLength: 1.1
   isHitLength: 80
   enemyLayer:
@@ -417,6 +415,10 @@ MonoBehaviour:
   hitEffect: {fileID: 715652482395077877, guid: fbe7db7d458a9b8488b57f14b043cab9,
     type: 3}
   effectDestroy: 0.1
+  _nowStage: 0
+  teleportTime: 0.1
+  gunAnim: {fileID: 0}
+  damagePanel: {fileID: 0}
 --- !u!54 &3727267486079005384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -433,6 +435,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &4607127503827630835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727267486079005377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6e9d72dbd70374b8b3c9234f6fcf31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3727267485772527072
 MonoBehaviour:
   m_ObjectHideFlags: 0

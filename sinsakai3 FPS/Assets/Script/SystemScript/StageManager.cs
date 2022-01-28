@@ -27,7 +27,6 @@ public class StageManager : MonoBehaviour
     {     
         //ステージをシャッフルする
         shuffleStage = stages.OrderBy(i => Guid.NewGuid()).ToArray();
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Start()
@@ -61,8 +60,6 @@ public class StageManager : MonoBehaviour
         nowStage++;
         inGameStages[nowStage - 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
-        respawnPoint = inGameStages[nowStage].transform.Find("Respawn1").position;
-        StartCoroutine(RespawnPlayer());
     }
 
     /// <summary>
@@ -75,18 +72,6 @@ public class StageManager : MonoBehaviour
         nowStage--;
         inGameStages[nowStage + 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
-        respawnPoint = inGameStages[nowStage].transform.Find("Respawn2").position;
-        StartCoroutine(RespawnPlayer());
     }
 
-    /// <summary>
-    /// プレイヤーの位置をrespawnPointに移動させるコルーチン
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator RespawnPlayer()
-    {
-        yield return new WaitForSeconds(teleportTime);
-        player.transform.position = respawnPoint;
-
-    }
 }

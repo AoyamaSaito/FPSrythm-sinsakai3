@@ -7,28 +7,18 @@ using UnityEngine;
 /// </summary>
 public class PlayerStage : MonoBehaviour
 {
-    StageManager stagemana;
-
-    void Start()
-    {
-        stagemana = GameObject.Find("StageManager").GetComponent<StageManager>();
-    }
-
-    void Update()
-    {
-        
-    }
+    [SerializeField] StageManager stageManager;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("StageChange"))
         {
-            stagemana.NextStage();
+            stageManager.NextStage();
         }
 
         if (other.gameObject.CompareTag("StageBack"))
         {
-            stagemana.BackStage();
+            stageManager.BackStage();
         }
     }
 }
