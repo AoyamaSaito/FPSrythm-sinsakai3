@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Singleton : MonoBehaviour
 {
-    public static Singleton playerInstance = default;
+    [Tooltip("Playerのインスタンス")]　public static Singleton playerInstance = default;
+
     void Awake()
     {
         if (playerInstance)
@@ -18,7 +19,13 @@ public class Singleton : MonoBehaviour
         {
             // このクラスのインスタンスが無かった場合は、自分を DontDestroyOnload に置く
             playerInstance = this;
+            OnAwake();
             DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    void OnAwake()
+    {
+
     }
 }

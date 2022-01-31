@@ -12,14 +12,14 @@ public class StageManager : MonoBehaviour
     [SerializeField, Tooltip("Bossステージを設定してください")] GameObject bossStage;
     [SerializeField, Tooltip("Playerが今いるステージ")] int _nowStage = 0;
     [SerializeField, Tooltip("Playerがステージ移動するまでの時間")] float teleportTime = 0.1f;
-    [SerializeField] GameObject fadePanel;
+    [SerializeField] Animator fadePanel;
 
 
     [Tooltip("ゲーム内のステージを格納するList")]List<GameObject> inGameStages = new List<GameObject>();
     GameObject[] shuffleStage;
     GameObject player;
     Vector3 respawnPoint;
-    Animator fadeAnim;
+    PlayerControler playerControler;
 
     public int nowStage { get => _nowStage; set => _nowStage = value; }
 
@@ -31,6 +31,8 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
+        playerControler = Singleton.playerInstance.GetComponent<PlayerControler>();
+
         //最初のステージを生成
         inGameStages.Add(Instantiate(firstStage, Vector3.zero, Quaternion.identity));
         //その後のステージをshuffleStageに基づいて、50m間隔で生成
@@ -45,9 +47,7 @@ public class StageManager : MonoBehaviour
         }
 
         respawnPoint = inGameStages[nowStage].transform.Find("Respawn1").position;
-        player.transform.position = respawnPoint;
-
-        fadeAnim = fadePanel.GetComponent<Animator>(); 
+        playerControler.PlayerTransform(respawnPoint);
     }
 
     /// <summary>
@@ -55,11 +55,13 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void NextStage()
     {
-        fadeAnim.Play("FadeAnim");
+        fadePanel.Play("FadeAnim");
 
         nowStage++;
         inGameStages[nowStage - 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
+        respawnPoint = inGameStages[nowStage].transform.Find("Respawn1").position;
+        playerControler.PlayerTransform(respawnPoint);
     }
 
     /// <summary>
@@ -67,11 +69,13 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void BackStage()
     {
-        fadeAnim.Play("FadeAnim");
+        fadePanel.Play("FadeAnim");
 
         nowStage--;
         inGameStages[nowStage + 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
+        respawnPoint = inGameStages[nowStage].transform.Find("Respawn2").position;
+        playerControler.PlayerTransform(respawnPoint);
     }
 
 }

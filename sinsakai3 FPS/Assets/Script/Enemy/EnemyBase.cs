@@ -45,7 +45,7 @@ public abstract class EnemyBase : MonoBehaviour
     float targetZ = 0;
     Vector3 beforeTarget = default;
 
-    void Start()
+    protected virtual void Start()
     {
         defaultColor = changeRenderer.material.color;
         player = GameObject.FindGameObjectWithTag("Player");

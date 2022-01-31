@@ -10,20 +10,22 @@ public class ZakoEnemy : EnemyBase
     [SerializeField, Tooltip("発射間隔")] int shotInterval = 4;
     [SerializeField, Tooltip("弾の発射位置")] Transform muzzle;
 
+    Vector3 playerPosition;
     ShootingPlayer shootingPlayer;
     float _timer = 0;
 
-    void Awake()
+    protected override void Start()
     {
-        shootingPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<ShootingPlayer>();
+        base.Start();
     }
 
     public override void Attack()
     {
-        transform.LookAt(player.transform.position); //Playerの方向を向く
+        playerPosition = Singleton.playerInstance.transform.position;
+        transform.LookAt(playerPosition); //Playerの方向を向く
         _timer += Time.deltaTime;
 
-        if(shootingPlayer.rythm * shotInterval <= _timer) //rythm　×　shotIntervalの間隔で弾を生成
+        if(Singleton.playerInstance.GetComponent<ShootingPlayer>().rythm * shotInterval <= _timer) //rythm　×　shotIntervalの間隔で弾を生成
         {
             Instantiate(bullet, muzzle.position, Quaternion.identity);
             _timer = 0;

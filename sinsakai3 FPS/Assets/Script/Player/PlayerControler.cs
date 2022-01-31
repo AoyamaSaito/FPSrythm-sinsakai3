@@ -52,7 +52,6 @@ public class PlayerControler : MonoBehaviour
     GameObject ui;
 
     public Animator GunAnim { get => gunAnim; set => gunAnim = value; }
-    public Vector3 PlayerPosition { get => playerPosition; }
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -159,17 +158,6 @@ public class PlayerControler : MonoBehaviour
         StartCoroutine(DodgeSpeed());
     }
 
-    //public void Ultimate()
-    //{
-    //    if (Input.GetKeyDown("q"))
-    //    {
-    //        uiAnim.AnimPlay();
-    //        enemy = GameObject.FindGameObjectsWithTag("Enemy");
-
-    //        enemy.Where(go => go != null).ToList().ForEach(go => go.GetComponent<EnemyBase>().Damage(ultDamage));
-    //    }
-    //}
-
     void PlayerHP()
     {
         if (currentHpText && fullHpText)
@@ -239,13 +227,22 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    public Vector3 SearchPlayer(Vector3 target)
+    /// <summary>
+    /// Playerの位置を戻り値で返す
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public Vector3 ReturnPlayerPosition(Vector3 thisPosition)
     {
-        playerPosition = this.transform.position - target;
+        playerPosition = this.transform.position - thisPosition;
         return playerPosition;
     }
 
-    public void playerTransform(Vector3 respawnPoint)
+    /// <summary>
+    /// Playerの位置を引数の位置に移動させる
+    /// </summary>
+    /// <param name="respawnPoint"></param>
+    public void PlayerTransform(Vector3 respawnPoint)
     {
         StartCoroutine(RespawnPlayer(respawnPoint));
     }
