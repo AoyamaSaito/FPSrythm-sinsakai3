@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-/// <summary>継承するとシングルトンパターンになります</summary>
+/// <summary>継承するとシングルトンパターンになる</summary>
 /// <typeparam name="T"></typeparam>
 public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -13,7 +13,11 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
     virtual protected void Awake()
     {
         CheckInstance();
+        OnAwake();
     }
+
+    /// <summary>継承先でAwakeが必要な場合はこれを呼ぶ</summary>
+    protected virtual void OnAwake(){}
 
     /// <summary>インスタンスがなければ代入する、すでにあればなにもしない</summary>
     /// <returns></returns>
