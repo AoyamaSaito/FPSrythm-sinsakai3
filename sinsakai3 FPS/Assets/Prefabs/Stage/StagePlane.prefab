@@ -218,6 +218,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1438044458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438044459}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1438044459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438044458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.574, y: 0.513, z: 5.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2173320332249101892}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1779867172210187558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2918,7 +2948,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4658
+  m_VersionIndex: 4670
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3050,6 +3080,7 @@ Transform:
   - {fileID: 7812283245368915915}
   - {fileID: 6062819804700282089}
   - {fileID: 13336642}
+  - {fileID: 1438044459}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3831,7 +3862,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3632
+  m_VersionIndex: 3644
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4516,7 +4547,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3473
+  m_VersionIndex: 3485
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4801,6 +4832,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HelmItem
       objectReference: {fileID: 0}
+    - target: {fileID: 6572159312116772147, guid: baf6e6311c8aef943836c56eaaa90e6d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf6e6311c8aef943836c56eaaa90e6d, type: 3}
 --- !u!4 &5845757395148387328 stripped
@@ -4893,6 +4929,12 @@ PrefabInstance:
       objectReference: {fileID: 1683367175070694809}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b05b8e3d27797274cb7bd8e62b082ef5, type: 3}
+--- !u!4 &137457257 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 595573812211596858, guid: b05b8e3d27797274cb7bd8e62b082ef5,
+    type: 3}
+  m_PrefabInstance: {fileID: 595573812076269651}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3159705840571621637 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2565469051881746774, guid: b05b8e3d27797274cb7bd8e62b082ef5,
@@ -4905,12 +4947,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15179276ff0c85f46a58a637f4e6afea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &137457257 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 595573812211596858, guid: b05b8e3d27797274cb7bd8e62b082ef5,
-    type: 3}
-  m_PrefabInstance: {fileID: 595573812076269651}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1779867172210187544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5067,6 +5103,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1148380820928700605, guid: 7428856ed51f40d4d8370ee9f6b15b42, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7428856ed51f40d4d8370ee9f6b15b42, type: 3}
+--- !u!137 &1683367175067578523 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1148380820931816835, guid: 7428856ed51f40d4d8370ee9f6b15b42,
+    type: 3}
+  m_PrefabInstance: {fileID: 1779867172210187544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1683367175070654905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1148380820928740513, guid: 7428856ed51f40d4d8370ee9f6b15b42,
@@ -5076,12 +5118,6 @@ Transform:
 --- !u!1 &1683367175070694809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1148380820928700545, guid: 7428856ed51f40d4d8370ee9f6b15b42,
-    type: 3}
-  m_PrefabInstance: {fileID: 1779867172210187544}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &1683367175067578523 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1148380820931816835, guid: 7428856ed51f40d4d8370ee9f6b15b42,
     type: 3}
   m_PrefabInstance: {fileID: 1779867172210187544}
   m_PrefabAsset: {fileID: 0}
@@ -5151,6 +5187,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HelmItem (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805739355659151592, guid: 8939053febe41144f9fac9bde2d833e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8939053febe41144f9fac9bde2d833e8, type: 3}
@@ -5247,6 +5288,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BodyItem
       objectReference: {fileID: 0}
+    - target: {fileID: 3297982227713019624, guid: 5d06cfab3d5073949b906e30cf370e29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d06cfab3d5073949b906e30cf370e29, type: 3}
 --- !u!4 &7812283245368915915 stripped
@@ -5341,6 +5387,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BodyItem (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448046638548798574, guid: 96a509ef0d0927546bb92e6e9be1bcac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96a509ef0d0927546bb92e6e9be1bcac, type: 3}
