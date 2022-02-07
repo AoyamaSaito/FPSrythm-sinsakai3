@@ -86,14 +86,12 @@ public class GunManager : MonoBehaviour
         if(reloadTextCount == 0)
         {
             reloadText[0].SetActive(true);
-            reloadText[1].SetActive(true);
 
             reloadTextCount++;
         }
         else
         {
-            reloadText[2].SetActive(true);
-            reloadText[3].SetActive(true);
+            reloadText[1].SetActive(true);
 
             StartCoroutine(ReloadTextCor());
 
@@ -121,7 +119,5 @@ public class GunManager : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         reloadText[0].SetActive(false);
         reloadText[1].SetActive(false);
-        reloadText[2].SetActive(false);
-        reloadText[3].SetActive(false);
     }
 }
