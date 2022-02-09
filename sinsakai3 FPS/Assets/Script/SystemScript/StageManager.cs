@@ -34,15 +34,15 @@ public class StageManager : MonoBehaviour
         playerControler = Singleton.playerInstance.GetComponent<PlayerControler>();
 
         //最初のステージを生成
-        inGameStages.Add(Instantiate(firstStage, Vector3.zero, Quaternion.identity));
+        inGameStages.Add(Instantiate(firstStage, Vector3.zero, Quaternion.identity ,this.transform));
         //その後のステージをshuffleStageに基づいて、50m間隔で生成
         for(int i = 0; i < shuffleStage.Length; i++)
         {
-            inGameStages.Add(Instantiate(shuffleStage[i], new Vector3(0, 0, 50 + 50 * i), Quaternion.identity));
+            inGameStages.Add(Instantiate(shuffleStage[i], new Vector3(0, 0, 50 + 50 * i), Quaternion.identity, this.transform));
             //最後にBossStageを生成する
             if(i == shuffleStage.Length - 1)
             {
-                inGameStages.Add(Instantiate(bossStage, new Vector3(0, 0, 50 + 50 * (i + 1)), Quaternion.identity));
+                inGameStages.Add(Instantiate(bossStage, new Vector3(0, 0, 50 + 50 * (i + 1)), Quaternion.identity, this.transform));
             }
         }
 

@@ -27,7 +27,7 @@ public class ZakoEnemy : EnemyBase
 
         if(Singleton.playerInstance.GetComponent<ShootingPlayer>().rythm * shotInterval <= _timer) //rythm　×　shotIntervalの間隔で弾を生成
         {
-            Instantiate(bullet, muzzle.position, Quaternion.identity);
+            Instantiate(bullet, muzzle.position, Quaternion.identity, this.transform);
             _timer = 0;
         }
     }
