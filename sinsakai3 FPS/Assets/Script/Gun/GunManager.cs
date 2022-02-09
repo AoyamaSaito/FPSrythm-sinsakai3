@@ -58,6 +58,7 @@ public class GunManager : MonoBehaviour
         //弾を消費していたら
         if (currrentBulletCount != fullBulletCount)
         {
+            SoundManager.Instance.UseSound(SoundType.Reload);
             currentReloadCount++;
             ReloadText();      
 

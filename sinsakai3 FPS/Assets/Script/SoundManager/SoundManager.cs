@@ -109,6 +109,9 @@ public enum SoundType
 {
     //ここに音の列挙型を追加する
     Shot,
+    Reload,
+    Dodge,
+    Damage
 }
 
 /// <summary>SoundPoolParamのList</summary>

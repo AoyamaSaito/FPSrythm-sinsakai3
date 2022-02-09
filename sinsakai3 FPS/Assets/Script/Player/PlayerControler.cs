@@ -122,6 +122,8 @@ public class PlayerControler : MonoBehaviour
         uiAnim.AnimPlay();
         GunAnim.SetTrigger("Shot");
 
+        SoundManager.Instance.UseSound(SoundType.Shot);
+
         if (enemyLayer == 0) //enemyLayerが設定されていないと
         {
             Debug.LogError("LayerにEnemyを設定してください");
@@ -155,6 +157,8 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Dodge()
     {
+        SoundManager.Instance.UseSound(SoundType.Dodge);
+
         StartCoroutine(DodgeSpeed());
     }
 
@@ -170,6 +174,7 @@ public class PlayerControler : MonoBehaviour
     public void PlayerDamage(int damage)
     {
         damagePanel.Play("DamageAnim");
+        SoundManager.Instance.UseSound(SoundType.Damage);
 
         DOTween.To(() => hp, // 変化させる値
                 x => hp = x, // 変化させた値 x の処理
