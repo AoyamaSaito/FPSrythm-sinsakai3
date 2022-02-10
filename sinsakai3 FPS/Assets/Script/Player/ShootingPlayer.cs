@@ -50,7 +50,7 @@ public class ShootingPlayer : MonoBehaviour
     {
         count += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1") && mm.currrentBulletCount != 0 && mm.currentReloadCount == 0 && isShot == true)　//リズムのインターバルの間だけ射撃できる
+        if (Input.GetButtonDown("Fire1") && mm.currentBulletCount != 0 && mm.currentReloadCount == 0 && isShot == true)　//リズムのインターバルの間だけ射撃できる
         {
             isReload = false;
             isDodge = false;

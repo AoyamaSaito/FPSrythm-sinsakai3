@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class GunManager : MonoBehaviour
 {
     [SerializeField, Tooltip("弾の最大数")] int fullBulletCount = 6;
-    [System.NonSerialized, Tooltip("現在の残弾")] public int currrentBulletCount = 0;
+    [System.NonSerialized, Tooltip("現在の残弾")] public int currentBulletCount = 0;
 
     [SerializeField, Tooltip("リロードに必要な入力の回数")] int reloadCount = 2;
 
@@ -34,8 +34,8 @@ public class GunManager : MonoBehaviour
     {        
         fullMagagineText.text = fullBulletCount.ToString(); //マガジンの総数をテキストに表示する
         
-        currrentBulletCount = fullBulletCount;        
-        currentMagagineText.text = currrentBulletCount.ToString();　//現在の残弾をテキストに表示する                                                           
+        currentBulletCount = fullBulletCount;        
+        currentMagagineText.text = currentBulletCount.ToString();　//現在の残弾をテキストに表示する                                                           
     }
 
     /// <summary>
@@ -43,10 +43,16 @@ public class GunManager : MonoBehaviour
     /// </summary>
     public void Shot()
     {
-        if (currrentBulletCount > 0)
+        if (currentBulletCount > 0)
         {
-            currrentBulletCount--;　//弾を消費する
-            currentMagagineText.text = currrentBulletCount.ToString();
+            currentBulletCount--;　//弾を消費する
+            currentMagagineText.text = currentBulletCount.ToString();
+        }
+        else if(currentBulletCount == 0)
+        {
+            reloadText[0].SetActive(true);
+            reloadText[1].SetActive(true);
+            StartCoroutine(ReloadTextCor());
         }
     }
 
@@ -56,7 +62,7 @@ public class GunManager : MonoBehaviour
     public void Reload()
     {
         //弾を消費していたら
-        if (currrentBulletCount != fullBulletCount)
+        if (currentBulletCount != fullBulletCount)
         {
             SoundManager.Instance.UseSound(SoundType.Reload);
             currentReloadCount++;
@@ -69,11 +75,11 @@ public class GunManager : MonoBehaviour
 
                 StartCoroutine(AnimatorBoolReset());
 
-                currrentBulletCount = fullBulletCount; //残弾をMAXにする
+                currentBulletCount = fullBulletCount; //残弾をMAXにする
 
                 currentReloadCount = 0; //カウントをリセットする
 
-                currentMagagineText.text = currrentBulletCount.ToString();
+                currentMagagineText.text = currentBulletCount.ToString();
             }
             else
             {

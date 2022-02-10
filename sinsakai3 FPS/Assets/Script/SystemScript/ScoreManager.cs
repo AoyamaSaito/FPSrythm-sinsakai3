@@ -71,7 +71,7 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void Score()
     {
-        if (mm.currrentBulletCount != 0)
+        if (mm.currentBulletCount != 0)
         {
             scoreCount++;
             int beforeScore = currentScore;

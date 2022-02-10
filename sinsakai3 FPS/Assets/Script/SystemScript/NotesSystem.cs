@@ -10,10 +10,17 @@ public class NotesSystem : MonoBehaviour
 
     [SerializeField, Tooltip("Noteを生成する座標")] public GameObject instantiatePosition;
 
-    [SerializeField, Tooltip("生成するNotes")] GameObject notes;
+    [SerializeField, Tooltip("生成するNotes 大きいほう")] GameObject notes;
+    [SerializeField, Tooltip("生成するNotes 小さいほう")] GameObject miniNotes;
     [SerializeField] ShootingPlayer sp;
 
     float count = 0;
+    bool mini = false;
+
+    void Start()
+    {
+        mini = false;
+    }
 
     void Update()
     {
@@ -27,15 +34,18 @@ public class NotesSystem : MonoBehaviour
     {
         if (sp)
         {
-            if (sp.rythm <= count)
+            if (sp.rythm <= count && !mini)
             {
-                Instantiate(notes, instantiatePosition.transform.position, Quaternion.identity);
+                Instantiate(notes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
                 count = 0;
+                mini = true;
             }
-        }
-        else
-        {
-            Debug.LogError("null");
+            else if(sp.rythm <= count && mini)
+            {
+                var notes = Instantiate(miniNotes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
+                count = 0;
+                mini = false;
+            }
         }
     }
 
