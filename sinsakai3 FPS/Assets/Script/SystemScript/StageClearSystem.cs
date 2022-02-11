@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class StageClearSystem : MonoBehaviour
 {
     [SerializeField, Tooltip("そのステージ内の敵")] GameObject[] enemys;
+    [SerializeField, Tooltip("そのステージ内のアイテム")] RamdomInstantiate[] items;
     [SerializeField, Tooltip("そのステージ内のドア")] GameObject doors;
     [SerializeField] string textTag = "StageClear";
 
@@ -41,6 +42,7 @@ public class StageClearSystem : MonoBehaviour
     void StageClear()
     {
         StartCoroutine(TextCor());
+        Array.ForEach(items, go => go.Pop());
 
         Destroy(doors);
     }

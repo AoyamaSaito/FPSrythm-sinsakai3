@@ -18,5 +18,6 @@ public class RamdomInstantiate : MonoBehaviour
     public void Pop()
     {
         Instantiate(items[number], transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
