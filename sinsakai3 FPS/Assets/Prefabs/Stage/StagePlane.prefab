@@ -356,6 +356,7 @@ MonoBehaviour:
   - {fileID: 6572159312116772147, guid: baf6e6311c8aef943836c56eaaa90e6d, type: 3}
   - {fileID: 7448046638548798574, guid: 96a509ef0d0927546bb92e6e9be1bcac, type: 3}
   - {fileID: 3297982227713019624, guid: 5d06cfab3d5073949b906e30cf370e29, type: 3}
+  - {fileID: 3297982227713019624, guid: 5d06cfab3d5073949b906e30cf370e29, type: 3}
 --- !u!1 &2173320332126564184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2996,7 +2997,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4745
+  m_VersionIndex: 4751
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3907,7 +3908,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3719
+  m_VersionIndex: 3722
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4592,7 +4593,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3560
+  m_VersionIndex: 3563
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
