@@ -107,10 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ceee37553d15c441ae2b7f918e0c4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 6
   chaseSpeed: 4
   navSpeed: 6
-  r: {fileID: 1148380820931816835}
+  changeRenderer: {fileID: 0}
   damageColor: {r: 1, g: 1, b: 0, a: 1}
   minHeight: 1
   maxHeight: 2
@@ -119,10 +119,11 @@ MonoBehaviour:
   wanderWidth: 14
   navTarget: {fileID: 0}
   moveState: 0
+  isMove: 1
+  stageClear: {fileID: 0}
   bullet: {fileID: 1190479576830284387, guid: 86475ec460fe53644913af002e1cb636, type: 3}
+  shotInterval: 4
   muzzle: {fileID: 6311483536150436389}
-  minShotTime: 2
-  maxShotTime: 3
 --- !u!136 &1148380820928700606
 CapsuleCollider:
   m_ObjectHideFlags: 0
