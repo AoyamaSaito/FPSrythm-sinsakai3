@@ -1963,7 +1963,7 @@ MonoBehaviour:
   - {fileID: 2173320332249101893, guid: c5465d5234a64e14aaf1abf0a8e30f8e, type: 3}
   - {fileID: 2173320332249101893, guid: c5465d5234a64e14aaf1abf0a8e30f8e, type: 3}
   - {fileID: 2173320332249101893, guid: c5465d5234a64e14aaf1abf0a8e30f8e, type: 3}
-  bossStage: {fileID: 2875542280992980816, guid: 99f34016e8c8d40439a48f8f0c0c0272,
+  bossStage: {fileID: 2173320332249101893, guid: c5465d5234a64e14aaf1abf0a8e30f8e,
     type: 3}
   _nowStage: 0
   teleportTime: 0.1
