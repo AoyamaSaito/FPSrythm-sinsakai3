@@ -9,17 +9,19 @@ using UnityEngine.UI;
 /// </summary>
 public class StageClearSystem : MonoBehaviour
 {
-    [SerializeField, Tooltip("そのステージ内の敵")] GameObject[] enemys;
     [SerializeField, Tooltip("そのステージ内のアイテム")] RamdomInstantiate[] items;
     [SerializeField, Tooltip("そのステージ内のドア")] GameObject doors;
     [SerializeField] string textTag = "StageClear";
 
     int enemyLength = 0;
+    List<GameObject> enemys = new List<GameObject>();
     Text clearText;
+
+    public List<GameObject> Enemys { get => enemys; set => enemys = value; }
 
     void Start()
     {
-        enemyLength = enemys.Length;
+        enemyLength = Enemys.Count;
         clearText = GameObject.Find(textTag).GetComponent<Text>();
         clearText.enabled = false;
     }

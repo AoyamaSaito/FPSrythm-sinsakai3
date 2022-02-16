@@ -6,19 +6,19 @@ using UnityEngine;
 public class NormalBullet : BulletBase
 {
     [SerializeField] float bulletSpeed = 5;
+
+    Vector3 target = new Vector3();
     Rigidbody rb;
     void Start()
     {
+        target = Singleton.playerInstance.transform.position - this.transform.position; //Playerの座標をtargetとする
         rb = GetComponent<Rigidbody>();
+        Move();
     }
 
     public override void Move()
     {
-        rb.velocity = TargetPosition.normalized * bulletSpeed;
+        rb.velocity = target.normalized * bulletSpeed;
     }
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        Move();
-    }
 }

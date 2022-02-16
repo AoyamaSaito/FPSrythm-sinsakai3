@@ -21,9 +21,7 @@ public abstract class BulletBase : MonoBehaviour
 
     void Awake()
     {
-        playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position;
-
-        TargetPosition = playerPosition - this.transform.position; //Playerの座標をtargetとする
+        Destroy(gameObject, 5f);
     }
 
     public abstract void Move();
@@ -43,16 +41,16 @@ public abstract class BulletBase : MonoBehaviour
     /// <param name="col"></param>
     public virtual void Hit(Collider col)
     {
+        Destroy(gameObject);
+
         if (col.gameObject.tag == "Player")
         {
             col.GetComponent<PlayerControler>().PlayerDamage(damage); //PlayerのPlayerDamage関数でダメージを与える
-            Destroy(gameObject);
 
             if (destroyEffect)
             {
                 Instantiate(destroyEffect, transform.position, Quaternion.identity);　//エフェクトを生成
             }
         }
-        Destroy(gameObject, 5f);
     }
 }
