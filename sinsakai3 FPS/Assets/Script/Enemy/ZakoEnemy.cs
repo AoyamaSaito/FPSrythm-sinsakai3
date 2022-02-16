@@ -25,7 +25,7 @@ public class ZakoEnemy : EnemyBase
         transform.LookAt(playerPosition); //Playerの方向を向く
         _timer += Time.deltaTime;
 
-        if(Singleton.playerInstance.GetComponent<ShootingPlayer>().rythm * shotInterval <= _timer) //rythm　×　shotIntervalの間隔で弾を生成
+        if(Singleton.playerInstance.GetComponent<ShootingPlayer>().Rythm * shotInterval <= _timer) //rythm　×　shotIntervalの間隔で弾を生成
         {
             Instantiate(bullet, muzzle.position, Quaternion.identity);
             _timer = 0;

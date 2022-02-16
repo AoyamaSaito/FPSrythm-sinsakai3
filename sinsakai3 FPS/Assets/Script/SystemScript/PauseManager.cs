@@ -21,7 +21,6 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            PausePanel.SetActive(!isPause);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             cm.enabled = !cm.enabled;

@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class ShootingPlayer : MonoBehaviour
 {
     [SerializeField] float _rythm = 0.4f;    //リズム
-    public float rythm
+    public float Rythm
     {
-        get { return _rythm; }
+        get { return _rythm - 0.0047f; }
     }
 
     [SerializeField, Tooltip("譜面の猶予時間")] float interval = 0.3f;
@@ -63,7 +63,7 @@ public class ShootingPlayer : MonoBehaviour
 
                 isRythm1 = true;
             }
-            else if (count >= rythm - interval / 2 && isRythm2 == false)
+            else if (count >= Rythm - interval / 2 && isRythm2 == false)
             {
                 pc.Shot();
                 scoreMn.Score();
@@ -89,7 +89,7 @@ public class ShootingPlayer : MonoBehaviour
 
                 isRythm1 = true;
             }
-            else if (count >= rythm - interval / 2 && isRythm2 == false)
+            else if (count >= Rythm - interval / 2 && isRythm2 == false)
             {
                 mm.Reload();
 
@@ -113,7 +113,7 @@ public class ShootingPlayer : MonoBehaviour
 
                 isRythm1 = true;
             }
-            else if (count >= rythm - interval / 2 && isRythm2 == false)
+            else if (count >= Rythm - interval / 2 && isRythm2 == false)
             {
                 pc.Dodge();
 
@@ -126,7 +126,7 @@ public class ShootingPlayer : MonoBehaviour
         }
 
         //リズムごとにカウントをリセットする
-        if (count >= rythm)
+        if (count >= Rythm)
         {
             count = 0f;
         }

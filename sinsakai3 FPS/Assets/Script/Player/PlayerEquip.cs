@@ -11,21 +11,15 @@ public class PlayerEquip : MonoBehaviour
     [SerializeField, Tooltip("プレイヤーの武器")] GameObject weapon;
     [SerializeField, Tooltip("プレイヤーの頭装備")] GameObject headEquip;
     [SerializeField, Tooltip("プレイヤーの胴体装備")] GameObject bodyEquip;
-    [SerializeField, Tooltip("プレイヤーのスキル")] GameObject skill;
-    [SerializeField, Tooltip("プレイヤーの奥義")] GameObject ultimate;
 
     GameObject currentWeapon;
     GameObject currentHead;
     GameObject currentBody;
-    GameObject currentSkill;
-    GameObject currentUltimate;
 
     //カプセル化
     public GameObject Wepon { get { return weapon; } set { weapon = value; } }
     public GameObject HeadEquip { get { return headEquip; } set { headEquip = value; } }
     public GameObject BodyEquip { get { return bodyEquip; } set { bodyEquip = value; } }
-    public GameObject Skill { get { return skill; } set { skill = value; } }
-    public GameObject Ultimate { get { return ultimate; } set { ultimate = value; } }
 
 
     void Start()
@@ -54,24 +48,6 @@ public class PlayerEquip : MonoBehaviour
             {
                 BodyEquip.GetComponent<ItemBase>().Get();
                 currentBody = BodyEquip;
-            }
-        }
-
-        if (Skill != null)
-        {
-            if (currentSkill != Skill)
-            {
-                Skill.GetComponent<ItemBase>().Get();
-                currentSkill = Skill;
-            }
-        }
-
-        if (Ultimate != null)
-        {
-            if (currentUltimate != Ultimate)
-            {
-                Ultimate.GetComponent<ItemBase>().Get();
-                currentUltimate = Ultimate;
             }
         }
     }
@@ -110,28 +86,6 @@ public class PlayerEquip : MonoBehaviour
                 itemBase.Out();
                 itemBase.Get();
                 currentBody = BodyEquip;
-            }
-        }
-
-        if (Skill != null)
-        {
-            if (currentSkill != Skill)
-            {
-                ItemBase itemBase = Skill.GetComponent<ItemBase>();
-                itemBase.Out();
-                itemBase.Get();
-                currentSkill = Skill;
-            }
-        }
-
-        if (Ultimate != null)
-        {
-            if (currentUltimate != Ultimate)
-            {
-                ItemBase itemBase = Ultimate.GetComponent<ItemBase>();
-                itemBase.Out();
-                itemBase.Get();
-                currentUltimate = Ultimate;
             }
         }
     }

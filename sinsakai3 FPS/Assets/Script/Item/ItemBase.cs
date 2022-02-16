@@ -56,10 +56,6 @@ public abstract class ItemBase : MonoBehaviour
                 break;
             case ItemPatern.weapon:
                 break;
-            case ItemPatern.skill:
-                break;
-            case ItemPatern.ultimate:
-                break;
         }
     }
 
@@ -97,12 +93,6 @@ public abstract class ItemBase : MonoBehaviour
                     break;
                 case ItemPatern.weapon:
                     WeaponItem();
-                    break;
-                case ItemPatern.skill:
-                    SkillItem();
-                    break;
-                case ItemPatern.ultimate:
-                    UltimateItem();
                     break;
             }
         }
@@ -165,28 +155,6 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
-    void SkillItem()
-    {
-        switch (GetState)
-        {
-            case GetPatern.pickup:
-                playerEquip.Skill = gameObject;
-                onAria = true;
-                break;
-        }
-    }
-
-    void UltimateItem()
-    {
-        switch (GetState)
-        {
-            case GetPatern.pickup:
-                playerEquip.Ultimate = gameObject;
-                onAria = true;
-                break;
-        }
-    }
-
     enum GetPatern
     {
         //触れたら入手する
@@ -206,9 +174,5 @@ public abstract class ItemBase : MonoBehaviour
         body,
         //武器
         weapon,
-        //スキル
-        skill,
-        //奥義
-        ultimate,
     }
 }

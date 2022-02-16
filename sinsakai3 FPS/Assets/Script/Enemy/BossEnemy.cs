@@ -44,18 +44,18 @@ public class BossEnemy : EnemyBase
     {
         while(isAttack)
         {
-            yield return new WaitForSeconds(shootingPlayer.rythm * attackTime);
+            yield return new WaitForSeconds(shootingPlayer.Rythm * attackTime);
             int currentAttackPatern = Random.Range(0, attackPatern);
 
             switch(currentAttackPatern)
             {
                 case 0: //遅い球を4回生成する
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(shootingPlayer.rythm * 2);
+                    yield return new WaitForSeconds(shootingPlayer.Rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(shootingPlayer.rythm * 2);
+                    yield return new WaitForSeconds(shootingPlayer.Rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
-                    yield return new WaitForSeconds(shootingPlayer.rythm * 2);
+                    yield return new WaitForSeconds(shootingPlayer.Rythm * 2);
                     Instantiate(lateBullet, muzzle.position, Quaternion.identity);
                     break;
                 case 1:　//速い球を生成する
@@ -79,7 +79,7 @@ public class BossEnemy : EnemyBase
     {
         while (isAttack)
         {
-            yield return new WaitForSeconds(shootingPlayer.rythm);
+            yield return new WaitForSeconds(shootingPlayer.Rythm);
             Instantiate(normalBullet, muzzle.position, Quaternion.identity);
         }
     }

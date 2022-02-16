@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour
     [SerializeField, Tooltip("Playerが今いるステージ")] int _nowStage = 0;
     [SerializeField, Tooltip("Playerがステージ移動するまでの時間")] float teleportTime = 0.1f;
     [SerializeField] Animator fadePanel;
+    [SerializeField, Tooltip("現在のステージを表示するテキスト")] Text stageText;
 
 
     [Tooltip("ゲーム内のステージを格納するList")]List<GameObject> inGameStages = new List<GameObject>();
@@ -38,7 +39,9 @@ public class StageManager : MonoBehaviour
         //その後のステージをshuffleStageに基づいて、50m間隔で生成
         for(int i = 0; i < shuffleStage.Length; i++)
         {
-            inGameStages.Add(Instantiate(shuffleStage[i], new Vector3(0, 0, 50 + 50 * i), Quaternion.identity, this.transform));
+            GameObject go = Instantiate(shuffleStage[i], new Vector3(0, 0, 50 + 50 * i), Quaternion.identity, this.transform);
+            go.SetActive(false);
+            inGameStages.Add(go);
             //最後にBossStageを生成する
             if(i == shuffleStage.Length - 1)
             {
@@ -58,6 +61,7 @@ public class StageManager : MonoBehaviour
         fadePanel.Play("FadeAnim");
 
         nowStage++;
+        StageText(nowStage + 1);
         inGameStages[nowStage - 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
         respawnPoint = inGameStages[nowStage].transform.Find("Respawn1").position;
@@ -72,10 +76,15 @@ public class StageManager : MonoBehaviour
         fadePanel.Play("FadeAnim");
 
         nowStage--;
+        StageText(nowStage + 1);
         inGameStages[nowStage + 1].SetActive(false);
         inGameStages[nowStage].SetActive(true);
         respawnPoint = inGameStages[nowStage].transform.Find("Respawn2").position;
         playerControler.PlayerTransform(respawnPoint);
     }
 
+    void StageText(int i)
+    {
+        stageText.text = i.ToString();
+    }
 }

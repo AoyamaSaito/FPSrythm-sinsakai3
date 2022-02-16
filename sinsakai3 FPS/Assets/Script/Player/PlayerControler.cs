@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 //[ToDo] Playerのステータスを構造体にする
@@ -175,6 +176,11 @@ public class PlayerControler : MonoBehaviour
     {
         damagePanel.Play("DamageAnim");
         SoundManager.Instance.UseSound(SoundType.Damage);
+
+        if (hp - damage <= 0)
+        {
+            SceneManager.LoadScene("MainScene 1");
+        }
 
         DOTween.To(() => hp, // 変化させる値
                 x => hp = x, // 変化させた値 x の処理

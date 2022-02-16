@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class ItemUIRotate : MonoBehaviour
 {
-    [SerializeField, Tooltip("PlayerのTag")] string playerTag = "Player";
-
     [Tooltip("ItemのRectTransform")] Transform myRectTransform;
     [Tooltip("Playerの座標を入れるための変数")] Vector3 playerPosition;
 

@@ -32,7 +32,7 @@ public class MiniNotesControler : MonoBehaviour
         myRectTr.localScale = new Vector3(orizin.localScale.x, orizin.localScale.y / 1.5f, orizin.localScale.z);
         startTime = Time.timeSinceLevelLoad;
         Destroy(this.gameObject, finishTimeMag);
-        finishTimeMag = shootingPlayer.rythm * finishTimeMag;
+        finishTimeMag = shootingPlayer.Rythm * finishTimeMag;
     }
 
     void Update()

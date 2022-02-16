@@ -15,13 +15,20 @@ public class NotesSystem : MonoBehaviour
     [SerializeField] ShootingPlayer sp;
 
     float count = 0;
+    float sum = 0;
+    float before = 0;
+    int countA = 0;
     bool mini = false;
 
-    void Start()
+    void Awake()
     {
         mini = false;
     }
 
+    private void Start()
+    {
+        Instantiate(miniNotes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
+    }
     void Update()
     {
         count += Time.deltaTime;
@@ -34,14 +41,22 @@ public class NotesSystem : MonoBehaviour
     {
         if (sp)
         {
-            if (sp.rythm <= count && !mini)
+            if (sp.Rythm <= count && !mini)
             {
+                countA++;
+                sum += count;
+                Debug.Log(sum / countA);
+
                 Instantiate(notes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
                 count = 0;
                 mini = true;
             }
-            else if(sp.rythm <= count && mini)
+            else if(sp.Rythm <= count && mini)
             {
+                countA++;
+                sum += count;
+                Debug.Log(sum / countA);
+
                 var notes = Instantiate(miniNotes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
                 count = 0;
                 mini = false;

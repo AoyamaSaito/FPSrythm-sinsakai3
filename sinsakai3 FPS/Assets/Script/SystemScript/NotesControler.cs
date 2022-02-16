@@ -32,7 +32,7 @@ public class NotesControler : MonoBehaviour
         myRectTr.localScale = orizin.localScale;
         startTime = Time.timeSinceLevelLoad;
         Destroy(this.gameObject, finishTimeMag);
-        finishTimeMag = shootingPlayer.rythm * finishTimeMag;
+        finishTimeMag = shootingPlayer.Rythm * finishTimeMag;
     }
 
     void Update()
