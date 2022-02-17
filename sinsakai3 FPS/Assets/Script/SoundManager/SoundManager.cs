@@ -111,7 +111,8 @@ public enum SoundType
     Shot,
     Reload,
     Dodge,
-    Damage
+    Damage,
+    Tambarin
 }
 
 /// <summary>SoundPoolParamのList</summary>

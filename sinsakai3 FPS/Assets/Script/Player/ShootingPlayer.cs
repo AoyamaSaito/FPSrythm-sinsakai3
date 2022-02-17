@@ -8,10 +8,10 @@ using UnityEngine.UI;
 /// </summary>
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] float _rythm = 0.4f;    //リズム
-    public float Rythm
+    [SerializeField] double _rythm = 0.4f;    //リズム
+    public double Rythm
     {
-        get { return _rythm - 0.0047f; }
+        get { return _rythm; }
     }
 
     [SerializeField, Tooltip("譜面の猶予時間")] float interval = 0.3f;
@@ -28,9 +28,16 @@ public class ShootingPlayer : MonoBehaviour
     bool isShot = true;
     bool isReload = true;
     bool isDodge = true;
+    double _metronomeStartDspTime;
+    double beatInterval;
 
     void Awake()
     {
+        //RythmUpdate();
+        beforeElapsedTime = AudioSettings.dspTime;
+
+        beatInterval = 60d / _rythm;
+
         Cursor.visible = false; //マウスカーソルを非表示に
 
         scoreMn = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
@@ -41,6 +48,11 @@ public class ShootingPlayer : MonoBehaviour
     void Update()
     {
         Fire();
+    }
+
+    private void FixedUpdate()
+    {
+        RythmUpdate();
     }
 
     /// <summary>
@@ -139,6 +151,28 @@ public class ShootingPlayer : MonoBehaviour
             isReload = true;
             isDodge = true;
         }       
+    }
+
+    double beforeElapsedTime;
+    bool first = true;
+
+    void RythmUpdate()
+    {
+        double aElapsedTime = AudioSettings.dspTime;
+        double elapsedDspTime = aElapsedTime - beforeElapsedTime;
+        double beats = System.Math.Floor(elapsedDspTime / beatInterval);
+
+        if(first)
+        {
+            first = false;
+        }
+        else if(!first && beats == 0)
+        {
+            _rythm = (beats + 1d) * beatInterval - elapsedDspTime + 0.02173913;
+        }
+
+        beforeElapsedTime = aElapsedTime;
+        Debug.Log(_rythm);
     }
 
     void MissText()

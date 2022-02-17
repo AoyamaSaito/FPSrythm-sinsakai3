@@ -19,10 +19,13 @@ public class NotesSystem : MonoBehaviour
     float before = 0;
     int countA = 0;
     bool mini = false;
+    double metronomeStartDspTime;
+    float bpm;
 
     void Awake()
     {
         mini = false;
+        metronomeStartDspTime = AudioSettings.dspTime;
     }
 
     private void Start()
@@ -34,6 +37,7 @@ public class NotesSystem : MonoBehaviour
         count += Time.deltaTime;
         NotesGenerator();
     }
+
     /// <summary>
     /// リズムごとにnotesを生成する
     /// </summary>
@@ -45,8 +49,8 @@ public class NotesSystem : MonoBehaviour
             {
                 countA++;
                 sum += count;
-                Debug.Log(sum / countA);
 
+                SoundManager.Instance.UseSound(SoundType.Tambarin);
                 Instantiate(notes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
                 count = 0;
                 mini = true;
@@ -55,13 +59,12 @@ public class NotesSystem : MonoBehaviour
             {
                 countA++;
                 sum += count;
-                Debug.Log(sum / countA);
 
+                SoundManager.Instance.UseSound(SoundType.Tambarin);
                 var notes = Instantiate(miniNotes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
                 count = 0;
                 mini = false;
             }
         }
     }
-
 }

@@ -90,10 +90,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3297982227713019624}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4405485404224791235
 MonoBehaviour:
@@ -112,6 +112,7 @@ MonoBehaviour:
   ItemUI:
   - {fileID: 4292143784391911316}
   changeColor: {r: 1, g: 0, b: 0, a: 1}
+  uiTag: ArmorUI
 --- !u!1 &4292143784391911316
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4751572944179494261
 RectTransform:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Armor
+  m_Text: Red Armor
 --- !u!1 &5814450930742736226
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,4 +303,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89288e51f2df4c445af3078b4e878d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: Player

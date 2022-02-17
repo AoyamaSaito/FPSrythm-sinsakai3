@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89288e51f2df4c445af3078b4e878d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: Player
 --- !u!1 &5575750226016765007
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3963505380896595630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -190,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Armor
+  m_Text: Blue Helm
 --- !u!1 &6572159312116772147
 GameObject:
   m_ObjectHideFlags: 0

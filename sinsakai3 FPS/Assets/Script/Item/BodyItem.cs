@@ -11,6 +11,7 @@ public class BodyItem : ItemBase
 
     public override void Get()
     {
+        Singleton.playerInstance.GetComponent<PlayerControler>().def = 5;
         armorUi = GameObject.FindGameObjectWithTag(uiTag).GetComponent<Image>();
         armorUi.color = changeColor;
         gameObject.SetActive(false);

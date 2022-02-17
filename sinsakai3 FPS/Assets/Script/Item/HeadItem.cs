@@ -10,6 +10,7 @@ public class HeadItem : ItemBase
 
     public override void Get()
     {
+        Singleton.playerInstance.GetComponent<PlayerControler>().def = 5;
         HelmUi = GameObject.FindGameObjectWithTag("HelmUI").GetComponent<Image>();
         HelmUi.color = changeColor;
         gameObject.SetActive(false);

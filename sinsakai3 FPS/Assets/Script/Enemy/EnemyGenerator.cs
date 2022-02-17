@@ -6,10 +6,11 @@ public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField] StageClearSystem stageClear = null;
     [SerializeField] bool isTrue = true;
+
     int isInstantiate = 0;
     void Awake()
     {
-        isInstantiate = Random.Range(0, 3);
+        isInstantiate = Random.Range(0, 1);
 
         if(isTrue == true)
         {
@@ -18,10 +19,12 @@ public class EnemyGenerator : MonoBehaviour
         }
         else if(isInstantiate == 0)
         {
+            Debug.Log("非生成");
             gameObject.SetActive(false);
         }
         else
         {
+            Debug.Log("生成");
             gameObject.SetActive(true);
             stageClear.Enemys.Add(gameObject);
         }

@@ -16,7 +16,7 @@ public class MiniNotesControler : MonoBehaviour
     RectTransform myRectTr;
 
     float startTime = 0;
-    float finishTimeMag = 4;
+    double finishTimeMag = 4;
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class MiniNotesControler : MonoBehaviour
         myRectTr = GetComponent<RectTransform>();
         myRectTr.localScale = new Vector3(orizin.localScale.x, orizin.localScale.y / 1.5f, orizin.localScale.z);
         startTime = Time.timeSinceLevelLoad;
-        Destroy(this.gameObject, finishTimeMag);
+        Destroy(this.gameObject, (float)finishTimeMag);
         finishTimeMag = shootingPlayer.Rythm * finishTimeMag;
     }
 
@@ -46,7 +46,7 @@ public class MiniNotesControler : MonoBehaviour
     public void NotesControl()
     {
         var diff = Time.timeSinceLevelLoad - startTime;
-        var rate = diff / finishTimeMag;
+        var rate = diff / (float)finishTimeMag;
 
         //orizinからtargetに向かってゆっくり進む
         myRectTr.position = Vector3.Lerp(orizin.position, target.position, rate); //targetに段々と向かう

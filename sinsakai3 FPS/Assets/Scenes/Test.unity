@@ -1517,6 +1517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantiatePosition: {fileID: 0}
   notes: {fileID: 6339656397306021109, guid: 3ec0497b3e1b07b4188a5bab1d7d6e82, type: 3}
+  miniNotes: {fileID: 0}
   sp: {fileID: 0}
 --- !u!4 &1340032621
 Transform:
@@ -12840,6 +12841,75 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3548917538014327048}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3704311675467687823
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4199428718521375913, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_Name
+      value: TambarinAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 281.15738
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 158.49298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199428718521376534, guid: c943675d0e9b573488e6508ab03e81b9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c943675d0e9b573488e6508ab03e81b9, type: 3}
 --- !u!1001 &4995880415504974988
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -38,9 +38,13 @@ public class PlayerControler : MonoBehaviour
     [Header("アニメーター")]
     [SerializeField, Tooltip("銃のアニメーター")] Animator gunAnim;
     [SerializeField, Tooltip("ダメージを受けた時のPanelのアニメーター")] Animator damagePanel;
+    [Header("各種参照")]
+    [SerializeField, Tooltip("GunManager")] GunManager gunMana;
+    [SerializeField, Tooltip("リロードテキスト")] GameObject[] reloadText;
 
     //初期値を保存
     float firstSpeed = 0;
+    public int def = 0;
     int firstHp = 0;
 
     GameObject[] enemy;
@@ -51,6 +55,7 @@ public class PlayerControler : MonoBehaviour
     Vector3 hitPoint;
     UIMove uiAnim;
     GameObject ui;
+
 
     public Animator GunAnim { get => gunAnim; set => gunAnim = value; }
     void Start()
@@ -120,6 +125,11 @@ public class PlayerControler : MonoBehaviour
     /// </summary>
     public void Shot()
     {
+        if(gunMana.currentBulletCount == 1)
+        {
+            StartCoroutine(ReloadTextCor());
+        }
+
         uiAnim.AnimPlay();
         GunAnim.SetTrigger("Shot");
 
@@ -184,7 +194,7 @@ public class PlayerControler : MonoBehaviour
 
         DOTween.To(() => hp, // 変化させる値
                 x => hp = x, // 変化させた値 x の処理
-                hp - damage, // x をどの値まで変化させるか
+                hp - (damage - def), // x をどの値まで変化させるか
                 0.05f)   // 何秒かけて変化させるか
                 .OnUpdate(() => currentHpText.text = hp.ToString());
     }
@@ -256,6 +266,15 @@ public class PlayerControler : MonoBehaviour
     public void PlayerTransform(Vector3 respawnPoint)
     {
         StartCoroutine(RespawnPlayer(respawnPoint));
+    }
+
+    IEnumerator ReloadTextCor()
+    {
+        reloadText[0].SetActive(true);
+        reloadText[1].SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        reloadText[0].SetActive(false);
+        reloadText[1].SetActive(false);
     }
 
     /// <summary>
