@@ -28,15 +28,15 @@ public class ShootingPlayer : MonoBehaviour
     bool isShot = true;
     bool isReload = true;
     bool isDodge = true;
-    double _metronomeStartDspTime;
     double beatInterval;
 
     void Awake()
     {
-        //RythmUpdate();
+        _rythm = 60d / _rythm;
+
         beforeElapsedTime = AudioSettings.dspTime;
 
-        beatInterval = 60d / _rythm;
+        beatInterval = _rythm;
 
         Cursor.visible = false; //マウスカーソルを非表示に
 
@@ -44,15 +44,16 @@ public class ShootingPlayer : MonoBehaviour
         mm = GameObject.Find("GunManager").GetComponent<GunManager>();
         pc = GetComponent<PlayerControler>();
     }
-
+        
     void Update()
     {
         Fire();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        RythmUpdate();
+        //RythmUpdate();
+        count += Time.deltaTime;
     }
 
     /// <summary>
@@ -60,8 +61,6 @@ public class ShootingPlayer : MonoBehaviour
     /// </summary>
     void Fire()
     {
-        count += Time.deltaTime;
-
         if (Input.GetButtonDown("Fire1") && mm.currentBulletCount != 0 && mm.currentReloadCount == 0 && isShot == true)　//リズムのインターバルの間だけ射撃できる
         {
             isReload = false;
@@ -140,6 +139,7 @@ public class ShootingPlayer : MonoBehaviour
         //リズムごとにカウントをリセットする
         if (count >= Rythm)
         {
+            Debug.Log(count);
             count = 0f;
         }
         else if (count >= interval / 2)
@@ -153,26 +153,33 @@ public class ShootingPlayer : MonoBehaviour
         }       
     }
 
-    double beforeElapsedTime;
+    [Tooltip("前回の拍の時間")]double beforeElapsedTime;
     bool first = true;
 
+    /// <summary>
+    /// 絶対に発生するズレを可能な限り抑えるために、RythmをdspTimeを用いて更新する
+    /// </summary>
     void RythmUpdate()
     {
-        double aElapsedTime = AudioSettings.dspTime;
-        double elapsedDspTime = aElapsedTime - beforeElapsedTime;
-        double beats = System.Math.Floor(elapsedDspTime / beatInterval);
+        //現在の経過時間を出す
+        double currentElapsedTime = AudioSettings.dspTime;
+        //現在の経過時間から前回の経過時間を引き、前回からの経過時間を割り出す
+        double elapsedDspTime = currentElapsedTime - beforeElapsedTime;
+        //これによって、現在リズムがどれだけずれているかを割り出す
 
-        if(first)
+        //最初は次の拍は決まっているので更新しない
+        if (first)
         {
             first = false;
         }
-        else if(!first && beats == 0)
+        else if (!first)
         {
-            _rythm = (beats + 1d) * beatInterval - elapsedDspTime + 0.02173913;
+            //現在の経過時間から、ずれている分だけ拍を縮める
+            _rythm = beatInterval - elapsedDspTime;
         }
-
-        beforeElapsedTime = aElapsedTime;
         Debug.Log(_rythm);
+        //今回の経過時間を保存する
+        beforeElapsedTime = currentElapsedTime;
     }
 
     void MissText()

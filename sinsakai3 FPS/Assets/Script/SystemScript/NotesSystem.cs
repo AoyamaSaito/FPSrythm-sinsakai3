@@ -14,7 +14,7 @@ public class NotesSystem : MonoBehaviour
     [SerializeField, Tooltip("生成するNotes 小さいほう")] GameObject miniNotes;
     [SerializeField] ShootingPlayer sp;
 
-    float count = 0;
+    double count = 0;
     float sum = 0;
     float before = 0;
     int countA = 0;
@@ -32,7 +32,7 @@ public class NotesSystem : MonoBehaviour
     {
         Instantiate(miniNotes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
     }
-    void Update()
+    void FixedUpdate()
     {
         count += Time.deltaTime;
         NotesGenerator();
@@ -47,8 +47,7 @@ public class NotesSystem : MonoBehaviour
         {
             if (sp.Rythm <= count && !mini)
             {
-                countA++;
-                sum += count;
+                Debug.Log(count);
 
                 SoundManager.Instance.UseSound(SoundType.Tambarin);
                 Instantiate(notes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
@@ -57,8 +56,7 @@ public class NotesSystem : MonoBehaviour
             }
             else if(sp.Rythm <= count && mini)
             {
-                countA++;
-                sum += count;
+                Debug.Log(count);
 
                 SoundManager.Instance.UseSound(SoundType.Tambarin);
                 var notes = Instantiate(miniNotes, instantiatePosition.transform.position, Quaternion.identity, this.transform);
