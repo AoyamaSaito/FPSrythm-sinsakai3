@@ -56,8 +56,9 @@ public class PlayerControler : MonoBehaviour
     UIMove uiAnim;
     GameObject ui;
 
-
+    
     public Animator GunAnim { get => gunAnim; set => gunAnim = value; }
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();

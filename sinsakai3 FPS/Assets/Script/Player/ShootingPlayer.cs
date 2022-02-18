@@ -8,7 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class ShootingPlayer : MonoBehaviour
 {
-    [SerializeField] double _rythm = 0.4f;    //リズム
+    [SerializeField, Tooltip("ゲーム全体のリズムはこの変数に基づく")] 
+    double _rythm = 0.4f;    //リズム
     public double Rythm
     {
         get { return _rythm; }
